@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
     #query_path = config["C4"]["QUERY_QUESTION_PATH"]
     #qrels_path = config["C4"]["QRELS_PATH"]
-    query_path = config["MISINFO"]["QUERY_PATH"]
+    query_path = config["MISINFO"]["QUERY_DESC_PATH"]
     qrels_path = config["MISINFO"]["QRELS_PATH"]
 
     # Load the custom data

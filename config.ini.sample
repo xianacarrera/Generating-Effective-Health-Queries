@@ -1,0 +1,9 @@
+[C4]
+QUERY_QUERY_PATH = /path_to_beir/TREC_2022_BEIR/automatic_query/queries.jsonl
+QUERY_QUESTION_PATH = /path_to_beir/TREC_2022_BEIR/automatic_question/queries.jsonl
+QRELS_PATH = /path_to_beir/TREC_2022_BEIR/qrels/misinfo-qrels.graded.tsv
+
+[MISINFO]
+QUERY_DESC_PATH = /path_to_beir/TREC_2020_BEIR/automatic_description/queries_desc.jsonl
+QUERY_TITLE_PATH = /path_to_beir/TREC_2020_BEIR/automatic_title/queries_title.jsonl
+QRELS_PATH = /path_to_beir/TREC_2020_BEIR/qrels/misinfo-qrels-graded.harmful-only.tsv
