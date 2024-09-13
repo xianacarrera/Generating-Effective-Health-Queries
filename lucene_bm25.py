@@ -50,19 +50,34 @@ def evaluate_bm25(
     # Retrieve pyserini results (format of results is identical to qrels)
     results = json.loads(requests.post(
         docker_beir_pyserini + "/lexical/batch_search/", json=payload).text)["results"]
-    
-    # print("Results: ", results)
-    
+
+    format_flag = -1
     # Remove the query_id from the results if it is present
     for query_id in results:
+        #print("Query_id: ", query_id)
+        #print("Results: ", results[query_id])
         if query_id in results[query_id]:
             results[query_id].pop(query_id, None)
 
+        # We check if any of the doc ids contain the string "uuid". If so, we adjust the format of all of them
+        # If not, we always keep the format as it is
+        if format_flag >=0: continue            # Check has already been done and no adjustment is needed
+
+        if format_flag == 1 or any("uuid" in doc_id for doc_id in results[query_id]):
+            # Adjust the format of the doc ids
+            results[query_id] = {doc_id.split(":")[2].rstrip('>'): results[query_id][doc_id] 
+                                for doc_id in results[query_id]}
+            format_flag = 1
+        else:   
+            format_flag = 0     # Set the flag to 0 to indicate that no adjustment is needed 
+
+    
+    # Add a dummy pair key-value to the results['1'] dictionary
+    # results['1']['11306fa1-07a3-454d-80ee-4450f291b4b2'] = 20.0
+
     # Evaluate the results
-    logging.info("Retriever evaluation for k in: {}".format(
-        retriever.k_values))
-    ndcg, _map, recall, precision = retriever.evaluate(
-        qrels, results, retriever.k_values)
+    logging.info("Retriever evaluation for k in: {}".format(retriever.k_values))
+    ndcg, _map, recall, precision = retriever.evaluate(qrels, results, retriever.k_values)
     return ndcg, _map, recall, precision
 
 
