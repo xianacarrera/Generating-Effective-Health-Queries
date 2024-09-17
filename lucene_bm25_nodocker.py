@@ -100,7 +100,6 @@ if __name__ == "__main__":
     query_path = config[option]["QUERY_DESC_PATH"]
     qrels_path = config[option]["QRELS_PATH"]
     index_path = config[option]["INDEX_PATH"]
-    dataset_name = config[option]["DATASET_NAME"]
 
     # Load the custom data
     corpus, queries, qrels = load_custom_data(            
