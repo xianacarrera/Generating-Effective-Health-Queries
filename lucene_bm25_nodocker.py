@@ -93,11 +93,14 @@ if __name__ == "__main__":
     config = configparser.ConfigParser()
     config.read("config.ini")
 
-    #query_path = config["C4"]["QUERY_QUESTION_PATH"]
-    #qrels_path = config["C4"]["QRELS_PATH"]
-    query_path = config["MISINFO"]["QUERY_DESC_PATH"]
-    qrels_path = config["MISINFO"]["QRELS_PATH"]
-    index_path = config["MISINFO"]["INDEX_PATH"]
+    dataset_name = config["META"]["DATASET_NAME"]
+    # We take the part before the first hyphen in uppercase
+    option = dataset_name.split("-")[0].upper()
+
+    query_path = config[option]["QUERY_DESC_PATH"]
+    qrels_path = config[option]["QRELS_PATH"]
+    index_path = config[option]["INDEX_PATH"]
+    dataset_name = config[option]["DATASET_NAME"]
 
     # Load the custom data
     corpus, queries, qrels = load_custom_data(            
@@ -108,7 +111,7 @@ if __name__ == "__main__":
     # Evaluate the BM25 model
     ndcg, _map, recall, precision = evaluate_bm25(queries, qrels, index_path)
 
-    row = ["bm25", _map["MAP@10"], _map["MAP@100"], _map["MAP@1000"], precision["P@10"], precision["P@100"], precision["P@1000"], recall["Recall@10"],
+    row = ["bm25", dataset_name, _map["MAP@10"], _map["MAP@100"], _map["MAP@1000"], precision["P@10"], precision["P@100"], precision["P@1000"], recall["Recall@10"],
            recall["Recall@100"], recall["Recall@1000"], ndcg["NDCG@10"], ndcg["NDCG@100"], ndcg["NDCG@1000"]]
 
     with open("../bm25_output.csv", 'a+', newline='') as f:

@@ -1,3 +1,6 @@
+[META]
+DATASET_NAME = misinfo-2020   # misinfo-2020, misinfo-test, c4
+
 [C4]
 QUERY_QUERY_PATH = /path_to_beir/TREC_2022_BEIR/automatic_query/queries.jsonl
 QUERY_QUESTION_PATH = /path_to_beir/TREC_2022_BEIR/automatic_question/queries.jsonl
