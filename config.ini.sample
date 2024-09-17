@@ -12,3 +12,6 @@ QUERY_DESC_PATH = /path_to_beir/TREC_2020_BEIR/automatic_description/queries_des
 QUERY_TITLE_PATH = /path_to_beir/TREC_2020_BEIR/automatic_title/queries_title.jsonl
 QRELS_PATH = /path_to_beir/TREC_2020_BEIR/qrels/misinfo-qrels-graded.harmful-only.tsv
 INDEX_PATH = /path_to_index/misinfo-2020
+
+[CROSS_ENCODER]
+MODEL = cross-encoder/ms-marco-electra-base
