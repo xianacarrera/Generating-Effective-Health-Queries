@@ -1,5 +1,7 @@
 [META]
 DATASET_NAME = misinfo-2020   # misinfo-2020, misinfo-test, c4
+INPUT_PATH = /input_path/
+RES_FILE = results_filename.csv
 
 [C4]
 QUERY_QUERY_PATH = /path_to_beir/TREC_2022_BEIR/automatic_query/queries.jsonl
@@ -13,5 +15,7 @@ QUERY_TITLE_PATH = /path_to_beir/TREC_2020_BEIR/automatic_title/queries_title.js
 QRELS_PATH = /path_to_beir/TREC_2020_BEIR/qrels/misinfo-qrels-graded.harmful-only.tsv
 INDEX_PATH = /path_to_index/misinfo-2020
 
-[CROSS_ENCODER]
-MODEL = cross-encoder/ms-marco-electra-base
+[RERANK]
+RERANKER = MonoT5    # MonoT5, cross-encoder
+TRAINING = castorini/monot5-base-msmarco  # cross-encoder/ms-marco-MiniLM-L-6-v2, cross-encoder/ms-marco-TinyBERT-L-6, etc.
+
