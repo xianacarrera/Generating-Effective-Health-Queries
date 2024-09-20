@@ -6,7 +6,7 @@ os.environ["JAVA_HOME"] = "/opt/citius/modules/software/Java/11.0.2"
 import xml.etree.ElementTree as ET
 from pyserini.search import SimpleSearcher
 
-def search(qid, query, searcher, out_dir):
+def search(qid, query, searcher):
     # text = topic.find(field).text
     # number = topic.find("number").text
     # stance = topic.find("stance").text
@@ -43,11 +43,14 @@ def main(field: str = 'description',
         for topic in root.findall('topic'):
             qid = topic.find("number").text
             query = topic.find(field).text
-            results.extend(search(qid, query, searcher, out_dir))
+            results.extend(search(qid, query, searcher))
 
     df = pd.DataFrame(results)
     df.set_index("qid", inplace=True)
-    df.to_csv(f'{out_dir}/baseline_pyserini_results.csv')
+    index_name = index.split("/")[-1]
+    method = "bm25"
+    df.to_csv(f'{out_dir}/res_baseline_{index_name}_{method}_{field}.csv', sep=' ', header=False)
+
 
 
 if __name__ == "__main__":
