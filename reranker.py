@@ -65,7 +65,7 @@ def rerank(
     queries: object,
     corpus: object,
     results: object,
-    top_k: int = 100,
+    top_k: int = 1000,
     model: str = "cross-encoder",
     training: str = "cross-encoder/ms-marco-electra-base"
 ):
@@ -109,9 +109,12 @@ if __name__ == "__main__":
     index_path = config[option]["INDEX_PATH"]
     rerank_model = config["RERANK"]["RERANKER"]    # Cross-encoder, monot5, etc.
     rerank_model_training = config["RERANK"]["TRAINING"]
+    abbrev = config["META"]["ABBREV"]
 
     input_path = config["META"]["INPUT_PATH"]
     res_file = config["META"]["RES_FILE"]
+
+    print("Starting...")
 
     start = time.time()
 
@@ -138,8 +141,8 @@ if __name__ == "__main__":
     print(f"Logging results for rerank_bm25+{rerank_model}_{rerank_model_training}")
     print(f"Time taken: {timedelta(seconds=time_taken)}")
 
-    # Results: model, dataset, query type, qrels type, time taken (formatted in minutes and seconds), BEIR metrics
-    row = [f"rerank_bm25+{rerank_model}_{rerank_model_training}", dataset_name, query_file, qrels_file, str(timedelta(seconds=time_taken)),
+    # Results: full_model, abbrev, dataset, query type, qrels type, time taken (formatted in minutes and seconds), BEIR metrics
+    row = [f"rerank_bm25+{rerank_model}_{rerank_model_training}", abbrev, dataset_name, query_file, qrels_file, str(timedelta(seconds=time_taken)),
            _map["MAP@10"], _map["MAP@100"], _map["MAP@1000"],
            precision["P@10"], precision["P@100"], precision["P@1000"],
            recall["Recall@10"], recall["Recall@100"], recall["Recall@1000"],
