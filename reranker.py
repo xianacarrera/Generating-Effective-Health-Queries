@@ -57,7 +57,6 @@ def load_BM25_corpus(
                 with open(f"{input_path}/query_{qid}/doc_{i+1}.txt", 'r') as f:
                     text = f.read()
                     corpus[docno] = {"text": text}
-                    # TODO: title??
     
     return corpus, results
 
@@ -136,8 +135,11 @@ if __name__ == "__main__":
     # Name of the file containing the qrels
     qrels_file = qrels_path.split("/")[-1]
 
+    print(f"Logging results for rerank_bm25+{rerank_model}_{rerank_model_training}")
+    print(f"Time taken: {timedelta(seconds=time_taken)}")
+
     # Results: model, dataset, query type, qrels type, time taken (formatted in minutes and seconds), BEIR metrics
-    row = ["rerank_bm25+ce", dataset_name, query_file, qrels_file, str(timedelta(seconds=time_taken)),
+    row = [f"rerank_bm25+{rerank_model}_{rerank_model_training}", dataset_name, query_file, qrels_file, str(timedelta(seconds=time_taken)),
            _map["MAP@10"], _map["MAP@100"], _map["MAP@1000"],
            precision["P@10"], precision["P@100"], precision["P@1000"],
            recall["Recall@10"], recall["Recall@100"], recall["Recall@1000"],
