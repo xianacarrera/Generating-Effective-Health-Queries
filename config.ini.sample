@@ -15,7 +15,13 @@ QUERY_TITLE_PATH = /path_to_beir/TREC_2020_BEIR/automatic_title/queries_title.js
 QRELS_PATH = /path_to_beir/TREC_2020_BEIR/qrels/misinfo-qrels-graded.harmful-only.tsv
 INDEX_PATH = /path_to_index/misinfo-2020
 
+[DENSE]
+MODEL_NAME = msmarco-roberta-base-ance-firstp
+SCORE_FUNCTION = dot
+ABBREV = sentenceBERT_roberta-base-ance-firstp_dot
+
 [RERANK]
 RERANKER = MonoT5    # MonoT5, cross-encoder
 TRAINING = castorini/monot5-base-msmarco  # cross-encoder/ms-marco-MiniLM-L-6-v2, cross-encoder/ms-marco-TinyBERT-L-6, etc.
 ABBREV = monoT5-base-msmarco
+
