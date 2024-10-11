@@ -1,6 +1,5 @@
 from beir import LoggingHandler
 from beir.retrieval import models
-from beir.datasets.data_loader import GenericDataLoader
 from beir.retrieval.evaluation import EvaluateRetrieval
 from beir.retrieval.search.sparse import SparseSearch
 from bs4 import BeautifulSoup
@@ -8,40 +7,20 @@ from beir.retrieval.search.dense import DenseRetrievalExactSearch as DRES
 from huggingface_hub import login as hflogin
 from beir.generation.models import QGenModel
 from tqdm.autonotebook import trange
-from pyserini.search import SimpleSearcher
 
 import logging
 import csv
-import configparser
 import time
+import beir_helper as bh
 from datetime import timedelta
+import argparse
 
 
-def load_custom_data(
-    corpus_path: str = "",
-    query_path: str = "",
-    qrels_path: str = "",
-):
-    if corpus_path == "":
-        use_corpus = False
-    else:
-        use_corpus = True
-
-    print("Corpus used?: ", use_corpus)
-
-    corpus, queries, qrels = GenericDataLoader(
-        corpus_file=corpus_path,
-        query_file=query_path,
-        qrels_file=qrels_path,
-        use_corpus=use_corpus).load_custom()
-
-    return corpus, queries, qrels
-
-
-def load_BM25_corpus(
+def load_sparse_BM25_corpus(
     queries: object,
     input_path: str,
-    res_file: str = "res"
+    res_file: str = "res",
+    use_title: bool = True
 ):
     corpus = {}
     results = {}
@@ -62,14 +41,17 @@ def load_BM25_corpus(
                 # Load the raw text of the document
                 with open(f"{input_path}/query_{qid}/doc_{i+1}.txt", 'r') as f:
                     text = f.read()
+                    
+                    if use_title:
+                        # Parse the content of the document
+                        soup = BeautifulSoup(text, "html.parser")
+                        # Get the title of the document
+                        title = soup.title.string if soup.title else " "
 
-                    # Parse the content of the document
-                    soup = BeautifulSoup(text, "html.parser")
-                    # Get the title of the document
-                    title = soup.title.string if soup.title else " "
-
-                    # Check if the type of title is NoneType
-                    if type(title) == type(None):
+                        # Check if the type of title is NoneType
+                        if type(title) == type(None):
+                            title = " "
+                    else:
                         title = " "
 
                     corpus[docno] = {"title": title, "text": text}
@@ -77,14 +59,15 @@ def load_BM25_corpus(
     return corpus, results
 
 
-def doc_T5_query_generate_questions(corpus, queries):
+def generate_queries_docT5query(corpus, queries):
     corpus_list = [corpus[doc_id] for doc_id in corpus]
 
     model_path = "castorini/docT5query-msmarco-passage"
     qgen_model = QGenModel(model_path, use_fast=False)
 
     gen_queries = {}
-    num_return_sequences = 3   # Number of questions generated for each doc (try 3-5)
+    # Number of questions generated for each doc (try 3-5)
+    num_return_sequences = 3
     batch_size = 80         # The bigger, the faster the generation
 
     for start_idx in trange(0, len(queries), batch_size, desc="question-generation"):
@@ -106,29 +89,17 @@ def doc_T5_query_generate_questions(corpus, queries):
 
     return gen_queries
 
-def search(qid, query, searcher):
-    print(query)
-    hits = searcher.search(query, 1000)
 
-    results = []
-    count = 1
-    # The first thousand hits:
-    for i in range(0, len(hits)):
-        #json_doc = json.loads(hits[i].raw)
-        docno = hits[i].docid
-        if "uuid" in docno:
-            docno = docno.split(":")[2].rstrip('>')
+def expand_corpus(corpus, gen_queries):
+    expanded_corpus = {}
+    for doc_id in corpus:
+        expanded_queries = " ".join(gen_queries[doc_id])
+        expanded_corpus[doc_id] = {
+            "title": corpus[doc_id]["title"],
+            "text": corpus[doc_id]["text"] + " " + expanded_queries
+        }
 
-        dd = {"qid": qid, "Q0": "Q0", "docno": docno, "rank": count, "score": hits[i].score, "tag": "BM25"}
-        results.append(dd)
-        count +=1
-
-    return results
-
-def doc_T5_query_bm25_retrieval(corpus, gen_queries, index_path):
-    searcher = SimpleSearcher(index_path)
-    qids = list(gen_queries.keys())
-    pass
+    return expanded_corpus
 
 
 def evaluate_sparse(
@@ -156,16 +127,14 @@ def evaluate_sparse(
         model = DRES(models.SPLADE(model_path), batch_size=128)
         retriever = EvaluateRetrieval(model, score_function="dot")
         results = retriever.retrieve(corpus, queries)
-    elif model_name == "docT5query":
-        gen_queries = doc_T5_query_generate_questions(corpus, queries)
-        results = 
+
 
     logging.info("Retriever evaluation for k in: {}".format(
         retriever.k_values))
     ndcg, _map, recall, precision = retriever.evaluate(
         qrels, results, retriever.k_values)
 
-    return ndcg, _map, recall, precision
+    return ndcg, _map, recall, precision, results
 
 
 if __name__ == "__main__":
@@ -174,60 +143,45 @@ if __name__ == "__main__":
                         level=logging.INFO,
                         handlers=[LoggingHandler()])
 
-    config = configparser.ConfigParser()
-    config.read("config.ini")
+    
 
-    dataset_name = config["META"]["DATASET_NAME"]
-    # We take the part before the first hyphen in uppercase
-    option = dataset_name.split("-")[0].upper()
-
-    query_path = config[option]["QUERY_DESC_PATH"]
-    qrels_path = config[option]["QRELS_PATH"]
-    index_path = config[option]["INDEX_PATH"]
-
-    model_name = config["SPARSE"]["MODEL_NAME"]
-    abbrev = config["SPARSE"]["ABBREV"]
-
-    input_path = config["META"]["INPUT_PATH"]
-    res_file = config["META"]["RES_FILE"]
+    program = "sparse"
+    conf = bh.load_config(program)
+    model_name = conf[program]["model_name"]
 
     start = time.time()
 
     # Load the custom data
-    corpus, queries, qrels = load_custom_data(
-        query_path=query_path,
-        qrels_path=qrels_path
+    corpus, queries, qrels = bh.load_custom_data(
+        query_path=conf["query_path"],
+        qrels_path=conf["qrels_path"],
     )
 
     # Load the pre-built corpus and BM25 results
-    corpus, results = load_BM25_corpus(queries, input_path, res_file)
+    corpus, results = load_sparse_BM25_corpus(queries, conf["input_path"], conf["res_file"],
+                                                use_title=conf[program]["use_title"])
 
     # Evaluate using a dense model on top of the BM25 results
-    ndcg, _map, recall, precision = evaluate_sparse(
+    ndcg, _map, recall, precision, results = evaluate_sparse(
         queries, corpus, results, model_name)
 
     end = time.time()
     time_taken = end - start
 
-    # Name of the file containing the queries
-    query_file = query_path.split("/")[-1]
-    # Name of the file containing the qrels
-    qrels_file = qrels_path.split("/")[-1]
+    full_name = f"sparse_bm25+{model_name}"
+    if conf["clean"]:
+        full_name += "_cleanhtml"
+        conf["abbrev"] += "-clean"
+    
+    if conf[program]["use_title"]:
+        full_name += "_title"
+        conf["abbrev"] += "-title"
 
-    print(
-        f"Logging results for dense_bm25+sparse_{model_name}")
+    print(f"Logging results for {full_name}")
     print(f"Time taken: {timedelta(seconds=time_taken)}")
 
-    # Results: model, abbrev, dataset, query type, qrels type, time taken (formatted in minutes and seconds), BEIR metrics
-    row = [f"dense_bm25+sparse_{model_name}", abbrev,
-           dataset_name, query_file, qrels_file, str(
-               timedelta(seconds=time_taken)),
-           _map["MAP@10"], _map["MAP@100"], _map["MAP@1000"],
-           precision["P@10"], precision["P@100"], precision["P@1000"],
-           recall["Recall@10"], recall["Recall@100"], recall["Recall@1000"],
-           ndcg["NDCG@10"], ndcg["NDCG@100"], ndcg["NDCG@1000"]]
-
-    with open("../beir_sparse_stats_output.csv", 'a+', newline='') as f:
-        writer = csv.writer(f)
-        writer.writerow(row)
-        f.close()
+    # Results: full_model, abbrev, dataset, query type, qrels type, time taken 
+    # (formatted in minutes and seconds), BEIR metrics
+    bh.log_results(
+        conf, full_name, time_taken, _map, precision, recall, ndcg, results
+    )

@@ -1,27 +1,24 @@
 [META]
-DATASET_NAME = misinfo-2020   # misinfo-2020, misinfo-test, c4
-INPUT_PATH = /input_path/
-RES_FILE = results_filename.csv
+DATASET_NAME = misinfo-2020    #C4, misinfo-2020
+RES_FILE = res_misinfo-2020_bm25_description.csv
+OUTPUT_PATH = /path_to_output/
+ABBREV = monoT5-base-msmarco
+CLEAN_HTML = True
 
-[C4]
-QUERY_QUERY_PATH = /path_to_beir/TREC_2022_BEIR/automatic_query/queries.jsonl
-QUERY_QUESTION_PATH = /path_to_beir/TREC_2022_BEIR/automatic_question/queries.jsonl
-QRELS_PATH = /path_to_beir/TREC_2022_BEIR/qrels/misinfo-qrels.graded.tsv
-INDEX_PATH = /path_to_index/C4
+[INDEX]    # question / description - full, query / title - keywords
+QUERY_PATH = /query_path/queries.jsonl
+QRELS_PATH = /qrels_path/misinfo-qrels.binary-useful-correct.tsv
+INPUT_PATH = /path_to_bm25_top1k/method_bm25
 
-[MISINFO]
-QUERY_DESC_PATH = /path_to_beir/TREC_2020_BhpcEIR/automatic_description/queries_desc.jsonl
-QUERY_TITLE_PATH = /path_to_beir/TREC_2020_BEIR/automatic_title/queries_title.jsonl
-QRELS_PATH = /path_to_beir/TREC_2020_BEIR/qrels/misinfo-qrels-graded.harmful-only.tsv
-INDEX_PATH = /path_to_index/misinfo-2020
+[SPARSE]
+MODEL_NAME = SPARTA
+HUGGINGFACE_TOKEN = access_token
+USE_TITLE = False
 
 [DENSE]
 MODEL_NAME = msmarco-roberta-base-ance-firstp
 SCORE_FUNCTION = dot
-ABBREV = sentenceBERT_roberta-base-ance-firstp_dot
 
-[RERANK]
-RERANKER = MonoT5    # MonoT5, cross-encoder
-TRAINING = castorini/monot5-base-msmarco  # cross-encoder/ms-marco-MiniLM-L-6-v2, cross-encoder/ms-marco-TinyBERT-L-6, etc.
-ABBREV = monoT5-base-msmarco
-
+[RERANKER]
+MODEL_NAME = MonoT5    
+TRAINING = castorini/monot5-base-msmarco  
