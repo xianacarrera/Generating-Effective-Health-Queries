@@ -50,7 +50,7 @@ if __name__ == "__main__":
                         handlers=[LoggingHandler()])
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("index", type=str, default="Index to load configuration from")
+    parser.add_argument("index", type=str, help="Index to load configuration from")
     args = parser.parse_args()
 
     program = "reranker"

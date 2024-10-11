@@ -101,6 +101,8 @@ def load_config(
         print("Type of program not recognized")
         return
 
+    print(f"Loading config from {file_path}")
+
     parser = configparser.ConfigParser()
     parser.read(file_path)
 

@@ -143,10 +143,12 @@ if __name__ == "__main__":
                         level=logging.INFO,
                         handlers=[LoggingHandler()])
 
-    
+    parser = argparse.ArgumentParser()
+    parser.add_argument("index", type=str, help="Index to load configuration from")
+    args = parser.parse_args()
 
     program = "sparse"
-    conf = bh.load_config(program)
+    conf = bh.load_config(args.index, program)
     model_name = conf[program]["model_name"]
 
     start = time.time()
