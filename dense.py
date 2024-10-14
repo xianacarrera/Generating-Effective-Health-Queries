@@ -88,7 +88,8 @@ if __name__ == "__main__":
     # Load the pre-built corpus and BM25 results
     corpus, results = bh.load_BM25_corpus(queries, conf["input_path"], conf["res_file"])
 
-    start = time.time()
+    if conf["clean"]:
+        bh.clean_html(corpus)
 
     # Evaluate using a dense model on top of the BM25 results
     ndcg, _map, recall, precision, mrr, recall_cap, hole, results = evaluate_dense(
