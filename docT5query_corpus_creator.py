@@ -86,11 +86,11 @@ def main():
     print("Loaded BM25 corpus")
 
     if conf["clean"]:
-        bh.clean_html(corpus, conf[program]["use_title"])
+        bh.clean_html(corpus, conf["use_title"])
         path_save_index += "_clean"
 
-    if conf[program]["use_title"] == "empty" or conf[program]["use_title"] == "repeat":
-        path_save_index += f"_{conf[program]['use_title']}"
+    if conf["use_title"] == "empty" or conf["use_title"] == "repeat":
+        path_save_index += f"_{conf['use_title']}"
 
     # Expand the corpus with docT5query
     gen_queries = generate_queries_docT5query(corpus, num_return_sequences)
