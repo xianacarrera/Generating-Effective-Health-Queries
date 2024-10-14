@@ -73,10 +73,9 @@ if __name__ == "__main__":
     parser.add_argument("index", type=str, help="Index to load configuration from")
     args = parser.parse_args()
 
-    program = "dense"
-    conf = bh.load_config(args.index, program)
-    model_name = conf[program]["model_name"]
-    score_function = conf[program]["score_function"]    
+    conf = bh.load_config(args.index, "DENSE")
+    model_name = conf["model_name"]
+    score_function = conf["score_function"]    
 
     start = time.time()
 

@@ -53,10 +53,9 @@ if __name__ == "__main__":
     parser.add_argument("index", type=str, help="Index to load configuration from")
     args = parser.parse_args()
 
-    program = "reranker"
-    conf = bh.load_config(args.index, program)
-    rerank_model = conf[program]["model_name"]
-    rerank_model_training = conf[program]["model_training"]    
+    conf = bh.load_config(args.index, "RERANKER")
+    rerank_model = conf["model_name"]
+    rerank_model_training = conf["model_training"]    
 
     start = time.time()
 

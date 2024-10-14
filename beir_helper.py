@@ -105,9 +105,6 @@ def load_config(
     pr: str = "reranker"
 ):
     program = pr.upper()
-    if program not in ["RERANKER", "DENSE", "SPARSE"]:
-        print("Type of program not recognized")
-        return
 
     print(f"Loading config from {file_path}")
 
@@ -116,27 +113,33 @@ def load_config(
 
     conf = {}
 
+    conf["model_name"] = parser[program]["MODEL_NAME"]
+    conf["abbrev"] = parser[program]["MODEL_NAME"]
+    if program == "RERANKER":
+        conf["model_training"] = parser["RERANKER"]["TRAINING"]
+        conf["abbrev"] += f"_{parser['RERANKER']['TRAINING']}"
+    elif program == "DENSE":
+        conf["score_function"] = parser["DENSE"]["SCORE_FUNCTION"]
+    elif program == "SPARSE":
+        conf["use_title"] = parser["SPARSE"]["USE_TITLE"]
+        if conf["use_title"] not in ["empty", "repeat", "none"]:
+            print("Use_title not recognized")
+            exit()
+        conf["splade_training"] = parser["SPARSE"]["SPLADE_TRAINING"]
+        conf["abbrev"] += f"_{parser['SPARSE']['SPLADE_TRAINING']}"
+    else:
+        print("Type of program not recognized")
+        exit()
+
     conf["dataset_name"] = parser["META"]["DATASET_NAME"]
+    conf["output_path"] = parser["META"]["OUTPUT_PATH"]
+    conf["clean"] = True if parser["META"]["CLEAN_HTML"].upper() == "TRUE" else False
+    
     conf["query_path"] = parser["INDEX"]["QUERY_PATH"]
     conf["qrels_path"] = parser["INDEX"]["QRELS_PATH"]
     conf["index_path"] = parser["INDEX"]["INDEX_PATH"]
-
-    conf["abbrev"] = parser["META"]["ABBREV"]
-    conf["clean"] = True if parser["META"]["CLEAN_HTML"].upper() == "TRUE" else False
-    
-    conf[pr] = {}
-    conf[pr]["model_name"] = parser[program]["MODEL_NAME"]
-    if program == "RERANKER":
-        conf[pr]["model_training"] = parser["RERANKER"]["TRAINING"]
-    elif program == "DENSE":
-        conf[pr]["score_function"] = parser["DENSE"]["SCORE_FUNCTION"]
-    elif program == "SPARSE":
-        conf[pr]["token"] = parser["SPARSE"]["HUGGINGFACE_TOKEN"]
-        conf[pr]["use_title"] = parser["SPARSE"]["USE_TITLE"]
-
     conf["input_path"] = parser["INDEX"]["INPUT_PATH"]
-    conf["res_file"] = parser["META"]["RES_FILE"]
-    conf["output_path"] = parser["META"]["OUTPUT_PATH"]
+    conf["res_file"] = parser["INDEX"]["RES_FILE"]
 
     print("Config loaded")
     return conf

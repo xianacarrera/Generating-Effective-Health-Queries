@@ -107,7 +107,7 @@ def evaluate_sparse(
     corpus: object,
     results: object,
     model_name: str = "SPARTA",
-    access_token: str = ""
+    splade_path: str = "naver/splade_v2_distil"
 ):
     if model_name == "SPARTA":
         model_path = "BeIR/sparta-msmarco-distilbert-base-v1"
@@ -120,9 +120,8 @@ def evaluate_sparse(
         retriever = EvaluateRetrieval(sparse_model, score_function="dot")
         results = retriever.retrieve(corpus, queries, query_weights=True)
     elif model_name == "SPLADE":
-        model_path = "naver/splade_v2_distil"
         # Only works with agg="max"
-        model = DRES(models.SPLADE(model_path), batch_size=128)
+        model = DRES(models.SPLADE(splade_path), batch_size=128)
         retriever = EvaluateRetrieval(model, score_function="dot")
         results = retriever.retrieve(corpus, queries)
 
@@ -145,9 +144,8 @@ if __name__ == "__main__":
     parser.add_argument("index", type=str, help="Index to load configuration from")
     args = parser.parse_args()
 
-    program = "sparse"
-    conf = bh.load_config(args.index, program)
-    model_name = conf[program]["model_name"]
+    conf = bh.load_config(args.index, "SPARSE")
+    model_name = conf["model_name"]
 
     start = time.time()
 
@@ -157,14 +155,14 @@ if __name__ == "__main__":
         qrels_path=conf["qrels_path"],
     )
 
-    print(f"Use_title before loading: {conf[program]['use_title']}")
+    print(f"Use_title before loading: {conf['use_title']}")
     # Load the pre-built corpus and BM25 results
     corpus, results = load_sparse_BM25_corpus(queries, conf["input_path"], conf["res_file"],
-                                                use_title=conf[program]["use_title"])
+                                                use_title=conf["use_title"])
 
     # Evaluate using a dense model on top of the BM25 results
     ndcg, _map, recall, precision, results = evaluate_sparse(
-        queries, corpus, results, model_name)
+        queries, corpus, results, model_name, conf["splade_training"])
 
     end = time.time()
     time_taken = end - start
@@ -175,10 +173,10 @@ if __name__ == "__main__":
         conf["abbrev"] += "-clean"
     
 
-    print(f"Use_title after loading: {conf[program]['use_title']}")
-    if conf[program]["use_title"] == "empty" or conf[program]["use_title"] == "repeat":
-        full_name += f"_{conf[program]['use_title']}"
-        conf["abbrev"] += f"-{conf[program]['use_title']}"
+    print(f"Use_title after loading: {conf['use_title']}")
+    if conf["use_title"] == "empty" or conf["use_title"] == "repeat":
+        full_name += f"_{conf['use_title']}"
+        conf["abbrev"] += f"-{conf['use_title']}"
 
     print(f"Logging results for {full_name}")
     print(f"Time taken: {timedelta(seconds=time_taken)}")
