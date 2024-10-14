@@ -13,7 +13,7 @@ INPUT_PATH = /path_to_bm25_top1k/method_bm25
 [SPARSE]
 MODEL_NAME = SPARTA
 HUGGINGFACE_TOKEN = access_token
-USE_TITLE = False
+USE_TITLE = empty
 
 [DENSE]
 MODEL_NAME = msmarco-roberta-base-ance-firstp
