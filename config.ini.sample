@@ -1,24 +1,25 @@
 [META]
-DATASET_NAME = misinfo-2020    #C4, misinfo-2020
-RES_FILE = res_misinfo-2020_bm25_description.csv
-OUTPUT_PATH = /path_to_output/
-ABBREV = monoT5-base-msmarco
-CLEAN_HTML = True
+DATASET_NAME = misinfo-2020                               # Dataset to use: c4, misinfo-2020
+OUTPUT_PATH = /path_to_output/                            # Path to save the results
+CLEAN_HTML = True                                         # Remove HTML tags from the documents (True/False)
 
-[INDEX]    # question / description - full, query / title - keywords
-QUERY_PATH = /query_path/queries.jsonl
-QRELS_PATH = /qrels_path/misinfo-qrels.binary-useful-correct.tsv
-INPUT_PATH = /path_to_bm25_top1k/method_bm25
+[INDEX]    # Question - full, Query - keywords
+QUERY_PATH = /query_path/queries.jsonl                                   # Path to the queries
+QRELS_PATH = /qrels_path/misinfo-qrels.binary-useful-correct.tsv         # Path to the qrels
+INPUT_PATH = /path_to_bm25_top1k/method_bm25                             # Path to the folder with the files of the top 1K documents for each query
+RES_FILE = res_misinfo-2020_bm25_description.csv                         # Name of the files that contain the top 1K documents for each query (retrieved by BM25, BM25+RM3, etc.)
+INDEX_PATH = /path_to_index/misinfo-2020                                 # Path to the index (used for direct search in the full index)
 
 [SPARSE]
-MODEL_NAME = SPARTA
-HUGGINGFACE_TOKEN = access_token
-USE_TITLE = empty
+MODEL_NAME = SPARTA                                                     # Name of the model
+SPLADE_TRAINING = naver/splade_v2_distil                                # Training data if the model is SPLADE (try naver/splade_v2_distil, naver/splade_v2_max)
+USE_TITLE = empty                                                       # repeat - extract the title and add it separately, empty - add an empty title, none - do not add a title
 
 [DENSE]
-MODEL_NAME = msmarco-roberta-base-ance-firstp
-SCORE_FUNCTION = dot
+MODEL_NAME = msmarco-roberta-base-ance-firstp                           # Name of the model
+SCORE_FUNCTION = dot                                                    # cosine or dot
 
 [RERANKER]
-MODEL_NAME = MonoT5    
-TRAINING = castorini/monot5-base-msmarco  
+MODEL_NAME = MonoT5                                                     # Name of the model             
+TRAINING = castorini/monot5-base-msmarco                                # Training data
+
