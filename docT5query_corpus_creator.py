@@ -17,7 +17,7 @@ def generate_queries_docT5query(
     corpus_list = [corpus[doc_id] for doc_id in corpus]
     corpus_ids = list(corpus.keys())
 
-    model_path = "castorini/doc2query-msmarco-passage"
+    model_path = "castorini/doc2query-t5-base-msmarco"
     qgen_model = QGenModel(model_path, use_fast=False)
 
     gen_queries = {}
@@ -69,25 +69,28 @@ def main():
     parser.add_argument("index", type=str, help="Index to load configuration from")
     args = parser.parse_args()
 
-    program = "reranker"
+    program = "sparse"
     conf = bh.load_config(args.index, program)
 
     num_return_sequences = 3
-    path_save_index = conf["META"]["OUTPUT_PATH"] + "/docT5query_" + num_return_sequences + "q"  
+    path_save_index = conf["output_path"] + "/docT5query_" + str(num_return_sequences) + "q"  
 
     # Load the custom data
     corpus, queries, _ = bh.load_custom_data(
-        query_path=conf["INDEX"]["QUERY_PATH"],
-        qrels_path=conf["INDEX"]["QRELS_PATH"],
+        query_path=conf["query_path"],
+        qrels_path=conf["qrels_path"],
     )
 
     # Load the pre-built corpus and BM25 results
-    corpus, _ = bh.load_BM25_corpus(queries, conf["META"]["INPUT_PATH"], conf["META"]["RES_FILE"])
+    corpus, _ = bh.load_BM25_corpus(queries, conf["input_path"], conf["res_file"])
     print("Loaded BM25 corpus")
 
     if conf["clean"]:
-        bh.clean_html(corpus)
+        bh.clean_html(corpus, conf[program]["use_title"])
         path_save_index += "_clean"
+
+    if conf[program]["use_title"] == "empty" or conf[program]["use_title"] == "repeat":
+        path_save_index += f"_{conf[program]['use_title']}"
 
     # Expand the corpus with docT5query
     gen_queries = generate_queries_docT5query(corpus, num_return_sequences)

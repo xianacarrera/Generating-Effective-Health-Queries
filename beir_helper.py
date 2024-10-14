@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import csv
 import configparser
 from datetime import timedelta
+from pathlib import Path
 
 
 def load_custom_data(
@@ -58,7 +59,8 @@ def load_BM25_corpus(
 
 
 def clean_html(
-    corpus: object
+    corpus: object,
+    use_title: str = "no"
 ):
     for docno in corpus:
         text = corpus[docno]["text"]
@@ -88,16 +90,22 @@ def clean_html(
         text = text.encode("utf-8", errors="ignore").decode("utf-8", errors="ignore")
         text = text.strip()
 
-        corpus[docno] = {"text": text}
+        if use_title == "empty":
+            corpus[docno] = {"title": " ", "text": text}
+        elif use_title == "repeat":
+            corpus[docno] = {"title": title, "text": text}
+        else:
+            corpus[docno] = {"text": text}
 
     print("HTML cleaned")
 
 
 def load_config(
     file_path: str = "config.ini",
-    program: str = "reranker"
+    pr: str = "reranker"
 ):
-    if program not in ["reranker", "dense", "sparse"]:
+    program = pr.upper()
+    if program not in ["RERANKER", "DENSE", "SPARSE"]:
         print("Type of program not recognized")
         return
 
@@ -114,19 +122,19 @@ def load_config(
     conf["index_path"] = parser["INDEX"]["INDEX_PATH"]
 
     conf["abbrev"] = parser["META"]["ABBREV"]
-    conf["clean"] = parser["META"]["CLEAN_HTML"]
+    conf["clean"] = True if parser["META"]["CLEAN_HTML"].upper() == "TRUE" else False
     
-    conf[program] = {}
-    conf[program]["model_name"] = parser["SPARSE"]["MODEL_NAME"]
-    if program == "reranker":
-        conf[program]["model_training"] = parser["RERANKER"]["TRAINING"]
-    elif program == "dense":
-        conf[program]["score_function"] = parser["DENSE"]["SCORE_FUNCTION"]
-    elif program == "sparse":
-        conf[program]["token"] = parser["SPARSE"]["HUGGINGFACE_TOKEN"]
-        conf[program]["use_title"] = parser["SPARSE"]["USE_TITLE"]
+    conf[pr] = {}
+    conf[pr]["model_name"] = parser[program]["MODEL_NAME"]
+    if program == "RERANKER":
+        conf[pr]["model_training"] = parser["RERANKER"]["TRAINING"]
+    elif program == "DENSE":
+        conf[pr]["score_function"] = parser["DENSE"]["SCORE_FUNCTION"]
+    elif program == "SPARSE":
+        conf[pr]["token"] = parser["SPARSE"]["HUGGINGFACE_TOKEN"]
+        conf[pr]["use_title"] = parser["SPARSE"]["USE_TITLE"]
 
-    conf["input_path"] = parser["META"]["INPUT_PATH"]
+    conf["input_path"] = parser["INDEX"]["INPUT_PATH"]
     conf["res_file"] = parser["META"]["RES_FILE"]
     conf["output_path"] = parser["META"]["OUTPUT_PATH"]
 
@@ -142,7 +150,11 @@ def save_final_ranking(
 ):
     # Save with format
     # qid Q0 docno rank score model
-    with open(f"{output_path}/{file_name}.txt", 'w') as f:
+
+    # Create path if it doesn't exist
+    Path(f"{output_path}/results").mkdir(parents=True, exist_ok=True)
+
+    with open(f"{output_path}/results/{file_name}.txt", 'w') as f:
         for qid in results:
             for rank, docno in enumerate(results[qid]):
                 f.write(f"{qid} Q0 {docno} {rank+1} {results[qid][docno]} {abbrev}\n")

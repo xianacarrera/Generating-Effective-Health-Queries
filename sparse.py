@@ -4,7 +4,6 @@ from beir.retrieval.evaluation import EvaluateRetrieval
 from beir.retrieval.search.sparse import SparseSearch
 from bs4 import BeautifulSoup
 from beir.retrieval.search.dense import DenseRetrievalExactSearch as DRES
-from huggingface_hub import login as hflogin
 from beir.generation.models import QGenModel
 from tqdm.autonotebook import trange
 
@@ -56,6 +55,7 @@ def load_sparse_BM25_corpus(
 
                     corpus[docno] = {"title": title, "text": text}
 
+    print(f"Use title?: {use_title}")
     return corpus, results
 
 
@@ -120,8 +120,6 @@ def evaluate_sparse(
         retriever = EvaluateRetrieval(sparse_model, score_function="dot")
         results = retriever.retrieve(corpus, queries, query_weights=True)
     elif model_name == "SPLADE":
-        hflogin(access_token=access_token)
-
         model_path = "naver/splade_v2_distil"
         # Only works with agg="max"
         model = DRES(models.SPLADE(model_path), batch_size=128)
@@ -159,6 +157,7 @@ if __name__ == "__main__":
         qrels_path=conf["qrels_path"],
     )
 
+    print(f"Use_title before loading: {conf[program]['use_title']}")
     # Load the pre-built corpus and BM25 results
     corpus, results = load_sparse_BM25_corpus(queries, conf["input_path"], conf["res_file"],
                                                 use_title=conf[program]["use_title"])
@@ -175,9 +174,11 @@ if __name__ == "__main__":
         full_name += "_cleanhtml"
         conf["abbrev"] += "-clean"
     
-    if conf[program]["use_title"]:
-        full_name += "_title"
-        conf["abbrev"] += "-title"
+
+    print(f"Use_title after loading: {conf[program]['use_title']}")
+    if conf[program]["use_title"] == "empty" or conf[program]["use_title"] == "repeat":
+        full_name += f"_{conf[program]['use_title']}"
+        conf["abbrev"] += f"-{conf[program]['use_title']}"
 
     print(f"Logging results for {full_name}")
     print(f"Time taken: {timedelta(seconds=time_taken)}")
