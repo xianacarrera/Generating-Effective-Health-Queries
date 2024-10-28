@@ -61,7 +61,7 @@ def get_prompt_evaluation(description, role=False, narrative = None, chain_of_th
         prompt += f"Consider the underlying intent of the search.\n"
 
     if chain_of_thought == 2:
-        prompt += f"Measure how prone the original query is to retrieve useful documents (U).\n"
+        # prompt += f"Measure how prone the original query is to retrieve useful documents (U).\n"
         prompt += f"Measure how prone the original query is to retrieve supportive documents for the correct treatment of the query's question (S).\n"
         prompt += f"Measure how prone the original query is to retrieve credible documents (C).\n"
         prompt += f"Consider the aspects above and the relative importance of each, and decide"
@@ -72,7 +72,7 @@ def get_prompt_evaluation(description, role=False, narrative = None, chain_of_th
 
     prompt += f"Produce a JSON score without providing any reasoning. Example: "
     if chain_of_thought == 2:
-        prompt += f"{{\"U\": 2, \"S\": 2, \"C\": 2, \"H\": 0}}"
+        prompt += f"{{\"S\": 0, \"C\": 2, \"H\": 0}}"
     else:
         prompt += f"{{\"H\": 1}}"
 
@@ -118,27 +118,6 @@ def fetch_topics():
             "narrative": topic.find('narrative').text
         }
     return topics
-
-
-def plot_responses(scores):
-    fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-    plt.subplots_adjust(wspace=0.3)
-    
-    # Bar Chart: Topic vs. Score
-    sns.barplot(ax=axes[0], x=list(range(1, len(scores)+1)), y=scores, zorder = 2, palette="muted")
-    axes[0].set_title('ChatGPT-4o score para cada query')
-    axes[0].set_xlabel('Query')
-    axes[0].set_ylabel('Score (0, 1, 2)')
-    axes[0].tick_params(axis='x', rotation=90)
-
-    # Pie Chart: Distribution of Scores
-    score_counts = {"0": scores.count(0), "1": scores.count(1), "2": scores.count(2)}
-    axes[1].pie(score_counts.values(), labels=score_counts.keys(), autopct='%1.1f%%', startangle=90, colors=sns.color_palette("muted"), wedgeprops={'edgecolor': 'black'})
-    axes[1].set_title('Distribución de scores')
-    
-    sns.despine()
-    
-    plt.show()
 
 
 def save_xml(topics, variants, filename):
@@ -198,24 +177,53 @@ def generate_query_variants(topics, role = True, narrative=True, chain_of_though
     save_jsonl(variants, filename)
 
 
+def save_scores(scores, filename):
+    with open(f'{filename}.json', 'w') as f:
+        json.dump(scores, f)
 
-def evaluate_queries(topics):
-    scores = []
+
+def evaluate_queries(topics, role = True, narrative=True, chain_of_thought = 2):
+    scores = {}
     for topic_id in topics:
-        prompt = get_prompt_evaluation(topics[topic_id]['description'], role=True, narrative=topics[topic_id]['narrative'], chain_of_thought=2)
+        prompt = get_prompt_evaluation(topics[topic_id]['description'], role=role, 
+                                       narrative=topics[topic_id]['narrative'] if narrative else None,
+                                       chain_of_thought=chain_of_thought)
         print(prompt)
         response = chat_with_gpt4(client, prompt)
         print(response["response"] + "\n")
         # Parse the response to JSON checking for errors
         try:
             json_response = json.loads(response["response"])
+            scores[topic_id] = json_response
+
         except Exception as e:
             print(f"An error occurred: {str(e)}")
             continue
 
-        scores.append(int(json_response["H"]))
+    filename = f'query_scores/query_scores_{"role" if role else "norole"}_{"narrative" if narrative else "nonarrative"}_chainofth{chain_of_thought}'
+    save_scores(scores, filename)
 
-    plot_responses(scores)
+
+def print_prompts():
+    user_input = input("Enter the prompt type: [evaluate/variants]")
+    user_role = input("Enter the role: [True/False]")
+    user_narrative = input("Enter the narrative: [True/False]")
+    user_chain_of_thought = input("Enter the chain of thought: [0/1/2]")
+
+    if user_input.lower() not in ["evaluate", "variants"] or user_role.lower() not in ["true", "false"] or user_narrative.lower() not in ["true", "false"] or user_chain_of_thought not in ["0", "1", "2"]:
+        print("Invalid input. Please try again.")
+        return
+
+    parsed_role = True if user_role.lower() == "true" else False
+    parsed_narrative = "query_narrative" if user_narrative.lower() == "true" else None
+    parsed_chain_of_thought = int(user_chain_of_thought)
+
+    if user_input.lower() in ["evaluate"]:
+        prompt = get_prompt_evaluation("query_description", role=parsed_role, narrative = parsed_narrative, chain_of_thought=parsed_chain_of_thought)
+    elif user_input.lower() in ["variants"]:
+        prompt = get_prompt_variants("query_description", role=parsed_role, narrative = parsed_narrative, chain_of_thought = parsed_chain_of_thought, n = 5)
+
+    print(prompt)
 
 
 # Main program loop
@@ -233,17 +241,12 @@ if __name__ == "__main__":
         if user_input.lower() in ["quit", "exit", "bye"]:
             print("Assistant: Goodbye!")
             break
-        elif user_input.lower() in ["v1"]: evaluate_queries(topics, 1)
-        elif user_input.lower() in ["v2"]: evaluate_queries(topics, 2)
+        elif user_input.lower() in ["evaluate", "evaluate queries", "eval"]:
+            evaluate_queries(topics, role=False, narrative=True, chain_of_thought=1)
         elif user_input.lower() in ["variants", "query variants"]: 
             generate_query_variants(topics, role=False, narrative=False, chain_of_thought=1)
         elif user_input.lower() in ["print"]:
-            prompt = get_prompt_evaluation("query_description", role=True, narrative = "query_narrative", chain_of_thought=2)
-            print(prompt)
-            print("\n")
-            prompt = get_prompt_variants("query_description", role=False, narrative = "query_narrative", chain_of_thought = 2, n = 5)
-            print(prompt)
-
+            print_prompts()
         
 
 
