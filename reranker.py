@@ -11,6 +11,15 @@ from datetime import timedelta
 import argparse
 
 
+def order_results(
+   results:dict
+):
+   sorted_results = {}
+   for qid, res in results.items():
+       sorted_results[qid] = dict(sorted(res.items(), key=lambda item: item[1],reverse=True))
+   return sorted_results
+
+
 def rerank(
     queries: object,
     corpus: object,
@@ -33,14 +42,28 @@ def rerank(
     # Re-rank the top 100 results using the reranker
     print(f"Reranking top {top_k} results")
     reranked_results = reranker.rerank(corpus, queries, results, top_k=top_k)
+    sorted_reranked_results = order_results(reranked_results)
+    final_results = {}
+    # Concatenate the reranked results with the full rank to get a list of 1000 results
+    for qid, res in sorted_reranked_results.items():
+        full_rank = list(results[qid].items())[top_k:]
+        ll = list(res.items()) + full_rank
+        dd = dict(ll)
+        global_dd = {}
+        count =1000
+        for key in dd.keys():
+            global_dd[key] = count
+            count-=1
+        final_results[qid] = global_dd
 
     # Evaluate the results
     logging.info("Retriever evaluation for k in: {}".format(
         retriever.k_values))
     ndcg, _map, recall, precision = retriever.evaluate(
-        qrels, reranked_results, retriever.k_values)
-    return ndcg, _map, recall, precision, reranked_results
+        qrels, final_results, retriever.k_values)
+    print("Longitud", len(final_results['1']))
 
+    return ndcg, _map, recall, precision, final_results
 
 
 if __name__ == "__main__":

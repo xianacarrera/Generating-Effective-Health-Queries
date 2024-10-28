@@ -13,7 +13,7 @@ def get_prompt_variants(description, role=False, narrative = None, chain_of_thou
     if role:
         prompt += f"You are a search engineer trying to improve the relevance, correctness and credibility of search results for health-related queries. "
 
-    prompt += f"Given a query, you must provide a list of {n} alternative queries that express the same information need as the original query, but "
+    prompt += f"Given a query, you must provide a list of {n} alternative queries that express the same information need as the original one, but that "
     prompt += f"are phrased in such a way that they are more likely to retrieve relevant, correct and credible documents.\n"
 
     prompt += f"Query\n"
@@ -21,7 +21,7 @@ def get_prompt_variants(description, role=False, narrative = None, chain_of_thou
     if narrative:
         prompt += f"They were looking for: {narrative}\n"
 
-    if chain_of_thought > 1:
+    if chain_of_thought > 0:
         prompt += f"Instructions\n"
         prompt += f"Let's think step by step:\n"
         prompt += f"Consider the underlying intent of the search.\n"
@@ -55,7 +55,7 @@ def get_prompt_evaluation(description, role=False, narrative = None, chain_of_th
     if narrative:
         prompt += f"They were looking for: {narrative}\n"
 
-    if chain_of_thought > 1:
+    if chain_of_thought > 0:
         prompt += f"Instructions\n"
         prompt += f"Let's think step by step:\n"
         prompt += f"Consider the underlying intent of the search.\n"
@@ -141,29 +141,10 @@ def plot_responses(scores):
     plt.show()
 
 
-def generate_query_variants(topics, aspects = True, n = 5):
-    variants = {}
-    for topic_id in topics:
-        # original query variantions:
-        #prompt = get_query_variants(topics[topic_id]['description'], role=True, aspects=aspects, n=5, narrative=topics[topic_id]['narrative'])
-        prompt = get_prompt_variants(topics[topic_id]['description'], role=True, aspects=aspects, n=5, narrative=None)
-        response = chat_with_gpt4(client, prompt)
-        print(response["response"])
-
-        # Parse the response to JSON checking for errors
-        try:
-            json_response = json.loads(response["response"])
-
-            # Store the variants in the dictionary
-            variants[topic_id] = json_response["variants"] if aspects else json_response
-
-        except Exception as e:
-            print(f"An error occurred: {str(e)}")
-            continue
-
-    # Save the variants to an xml file in the format expected by the BEIR framework
+def save_xml(topics, variants, filename):
+    # Save the variants to an xml file 
     for i in range(1, 6):
-        with open(f'query_variants_{i}_nonarrative.xml', 'w') as f:
+        with open(f'{filename}_{i}.xml', 'w') as f:
             f.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
             f.write("<topics>\n")
             for topic_id in topics:
@@ -177,12 +158,54 @@ def generate_query_variants(topics, aspects = True, n = 5):
             f.write("</topics>\n")
 
 
+def save_jsonl(variants, filename):
+    for i in range(1, 6):
+        with open(f'{filename}_{i}.jsonl', 'w') as f:
+            for topic_id in variants:
+                json_line = {"_id": topic_id, "text": variants[topic_id][i-1]} 
+                f.write(json.dumps(json_line) + "\n")
+
+
+def generate_query_variants(topics, role = True, narrative=True, chain_of_thought = 2, n = 5):
+    variants = {}
+    for topic_id in topics:
+        retry = 0
+        while retry < 2:
+            # original query variantions:
+            prompt = get_prompt_variants(topics[topic_id]['description'], role=role, 
+                                        narrative=topics[topic_id]['narrative'] if narrative else None,
+                                        chain_of_thought=chain_of_thought, n = n)
+            if retry == 1:
+                prompt += "\nUse a list format, as in the example: [\"query variant 1\", \"query variant 2\", ...]"
+            print(prompt)
+            response = chat_with_gpt4(client, prompt)
+            print(response["response"] + "\n")
+
+            # Parse the response to JSON checking for errors
+            try:
+                # Store the variants in the dictionary
+                variants[topic_id] = json.loads(response["response"])
+                retry = 2   # Exit the loop
+
+            except Exception as e:
+                print(f"An error occurred: {str(e)}")
+                if retry == 0:
+                    print("Retrying...\n")
+                retry += 1
+
+    filename = f'query_variants/query_variants_{"role" if role else "norole"}_{"narrative" if narrative else "nonarrative"}_chainofth{chain_of_thought}'
+    save_xml(topics, variants, filename)
+    save_jsonl(variants, filename)
+
+
+
 def evaluate_queries(topics):
     scores = []
     for topic_id in topics:
         prompt = get_prompt_evaluation(topics[topic_id]['description'], role=True, narrative=topics[topic_id]['narrative'], chain_of_thought=2)
+        print(prompt)
         response = chat_with_gpt4(client, prompt)
-        print(response["response"])
+        print(response["response"] + "\n")
         # Parse the response to JSON checking for errors
         try:
             json_response = json.loads(response["response"])
@@ -212,7 +235,8 @@ if __name__ == "__main__":
             break
         elif user_input.lower() in ["v1"]: evaluate_queries(topics, 1)
         elif user_input.lower() in ["v2"]: evaluate_queries(topics, 2)
-        elif user_input.lower() in ["variants", "query variants"]: generate_query_variants(topics)
+        elif user_input.lower() in ["variants", "query variants"]: 
+            generate_query_variants(topics, role=False, narrative=False, chain_of_thought=1)
         elif user_input.lower() in ["print"]:
             prompt = get_prompt_evaluation("query_description", role=True, narrative = "query_narrative", chain_of_thought=2)
             print(prompt)
