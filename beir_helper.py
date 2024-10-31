@@ -56,7 +56,36 @@ def load_BM25_corpus(
     print("Corpus loaded")
     return corpus, results
 
+def clean_html_page(
+    text: str,
+):
+    # Parse the content of the document
+    soup = BeautifulSoup(text, "html.parser")
+    # Get the title of the document
+    title = soup.title.string if soup.title else " "
 
+    # Check if the type of title is NoneType
+    if type(title) == type(None):
+        title = " "
+
+    # Remove all script and style elements
+    for script_or_style in soup(["script", "style", "meta",
+                                    "head", "title", "header", 
+                                    "footer", "nav", "noscript", "link"]):
+        script_or_style.decompose()
+
+    # Get the text of the document
+    text = soup.get_text(separator="\n")
+
+    # Concatenate the title and text
+    text = str(title + " " + text)
+
+    # Encode the text to utf-8 and ignore any errors
+    text = text.encode("utf-8", errors="ignore").decode("utf-8", errors="ignore")
+    text = text.strip()
+
+    return text, title
+    
 
 def clean_html(
     corpus: object,
@@ -65,37 +94,14 @@ def clean_html(
     for docno in corpus:
         text = corpus[docno]["text"]
 
-        # Parse the content of the document
-        soup = BeautifulSoup(text, "html.parser")
-        # Get the title of the document
-        title = soup.title.string if soup.title else " "
-
-        # Check if the type of title is NoneType
-        if type(title) == type(None):
-            title = " "
-
-        # Remove all script and style elements
-        for script_or_style in soup(["script", "style", "meta",
-                                     "head", "title", "header", 
-                                     "footer", "nav", "noscript", "link"]):
-            script_or_style.decompose()
-
-        # Get the text of the document
-        text = soup.get_text(separator="\n")
-
-        # Concatenate the title and text
-        text = str(title + " " + text)
-
-        # Encode the text to utf-8 and ignore any errors
-        text = text.encode("utf-8", errors="ignore").decode("utf-8", errors="ignore")
-        text = text.strip()
+        clean_text, title = clean_html_page(text)
 
         if use_title == "empty":
-            corpus[docno] = {"title": " ", "text": text}
+            corpus[docno] = {"title": " ", "text": clean_text}
         elif use_title == "repeat":
-            corpus[docno] = {"title": title, "text": text}
+            corpus[docno] = {"title": title, "text": clean_text}
         else:
-            corpus[docno] = {"text": text}
+            corpus[docno] = {"text": clean_text}
 
     print("HTML cleaned")
 
@@ -127,6 +133,10 @@ def load_config(
             exit()
         conf["splade_training"] = parser["SPARSE"]["SPLADE_TRAINING"]
         conf["abbrev"] += f"_{parser['SPARSE']['SPLADE_TRAINING']}"
+    elif program == "CORPUS_CREATOR":
+        conf["method"] = parser["CORPUS_CREATOR"]["METHOD"]
+        conf["index_path"] = parser["CORPUS_CREATOR"]["index_path"]
+        conf["use_rm3"] = True if parser["CORPUS_CREATOR"]["USE_RM3"].upper() == "TRUE" else False
     else:
         print("Type of program not recognized")
         exit()
@@ -137,8 +147,9 @@ def load_config(
     
     conf["query_path"] = parser["INDEX"]["QUERY_PATH"]
     conf["qrels_path"] = parser["INDEX"]["QRELS_PATH"]
-    conf["index_path"] = parser["INDEX"]["INDEX_PATH"]
+    # conf["index_path"] = parser["INDEX"]["INDEX_PATH"]
     conf["input_path"] = parser["INDEX"]["INPUT_PATH"]
+    conf["topics_path"] = parser["INDEX"]["TOPICS_PATH"]
     conf["res_file"] = parser["INDEX"]["RES_FILE"]
 
     print("Config loaded")
@@ -199,4 +210,5 @@ def log_results(
     full_name = full_name.replace("/", "-")
     full_name = full_name.replace("+", "-")
     save_final_ranking(results, conf["output_path"], full_name, conf["abbrev"])
+
 

@@ -2,15 +2,29 @@ from operator import indexOf
 import os
 import pandas as pd
 from pathlib import Path
+import argparse
 
 os.environ["JAVA_HOME"] = "/opt/citius/modules/software/Java/11.0.2"
 import xml.etree.ElementTree as ET
 from pyserini.search import SimpleSearcher
+import beir_helper as bh
+import time
+from datetime import timedelta
 
-def create_corpus(qid, query, searcher, write_dir):
+def create_corpus(qid, query, searcher, write_dir, use_rm3 = False, tag = "BM25"):
     # text = topic.find(field).text
     # number = topic.find("number").text
     # stance = topic.find("stance").text
+    if use_rm3:
+        searcher.set_rm3(10, 10, 0.5)
+
+        # Check that rm3 is being used
+        is_using_rm3 = searcher.is_using_rm3()
+        print(f'Using RM3: {is_using_rm3}')
+        if not is_using_rm3:
+            # Cancel the program
+            exit()
+
     print(query)
     hits = searcher.search(query, 1000)
 
@@ -22,7 +36,7 @@ def create_corpus(qid, query, searcher, write_dir):
         if "uuid" in docno:
             docno = docno.split(":")[2].rstrip('>')
 
-        dd = {"qid": qid, "Q0": "Q0", "docno": docno, "rank": count, "score": hits[i].score, "tag": "BM25"}
+        dd = {"qid": qid, "Q0": "Q0", "docno": docno, "rank": count, "score": hits[i].score, "tag": tag}
         results.append(dd)
 
         # Write the raw text of the document to a file
@@ -35,31 +49,55 @@ def create_corpus(qid, query, searcher, write_dir):
     return results
 
 
-def main(field: str = 'description',
-         index: str = '/mnt/beegfs/groups/irgroup/indexes/misinfo-2020',
-         topics_file: str = '/mnt/beegfs/home/xiana.carrera/BEIR/TREC_2020_BEIR/original-misinfo-resources-2020/topics/misinfo-2020-topics.xml',
-         out_dir: str = '/mnt/beegfs/home/xiana.carrera/BEIR'):
-    searcher = SimpleSearcher(index)
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("index", type=str, help="Index to load configuration from")
+    args = parser.parse_args()
+
+    config = bh.load_config(args.index, "CORPUS_CREATOR")
+
+    method = config["method"]
+    use_rm3 = config["use_rm3"]
+
+    output_path = config["output_path"]
+    topics_path = config["topics_path"]
+    dataset_name = config["dataset_name"]
+    field = "description" if dataset_name == "misinfo-2020" else "question"
+
+    start_time = time.time()
+
+    searcher = SimpleSearcher(config["index_path"])
     print("Index loaded")
     print("=============")
     
-    method = "bm25"
-    index_name = index.split("/")[-1]
-    write_dir = f'{out_dir}/index_{index_name}/field_{field}/method_{method}'
 
-    with open(topics_file) as f:
-        root = ET.parse(topics_file).getroot()
+    write_dir = f'{output_path}/index_{dataset_name}/field_{field}/method_{method}'
+
+    all_results = []    
+    with open(topics_path) as f:
+        root = ET.parse(topics_path).getroot()
         for topic in root.findall('topic'):
             qid = topic.find("number").text
             query = topic.find(field).text
             Path(f'{write_dir}/query_{qid}').mkdir(parents=True, exist_ok=True)
 
-            results = create_corpus(qid, query, searcher, write_dir)
+            results = create_corpus(qid, query, searcher, write_dir, use_rm3, method)
+            all_results.extend(results)
 
             df = pd.DataFrame(results)
             df.set_index('qid', inplace=True)
-            df.to_csv(f'{write_dir}/query_{qid}/res_{index_name}_{method}_{field}.csv', sep=' ', header=False)
-            print(f'Wrote res_{index_name}_{method}_{field}.csv')
+            df.to_csv(f'{write_dir}/query_{qid}/res_{dataset_name}_{method}_{field}.csv', sep=' ', header=False)
+            print(f'Query {qid}: finished. Wrote res_{dataset_name}_{method}_{field}.csv')
+
+    df_all = pd.DataFrame(all_results)
+    df_all.set_index('qid', inplace=True)
+    df_all.to_csv(f'{write_dir}/all_res_{dataset_name}_{method}_{field}.csv', sep=' ', header=False)
+    print(f'Wrote combined results as all_res_{dataset_name}_{method}_{field}.csv')
+
+    end_time = time.time()
+    time_taken = end_time - start_time
+
+    print(f"Time taken: {timedelta(seconds=time_taken)}")
 
 
 if __name__ == "__main__":
