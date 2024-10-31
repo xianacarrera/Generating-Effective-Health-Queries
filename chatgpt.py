@@ -191,6 +191,7 @@ def evaluate_queries(topics, role = True, narrative=True, chain_of_thought = 2):
         print(prompt)
         response = chat_with_gpt4(client, prompt)
         print(response["response"] + "\n")
+
         # Parse the response to JSON checking for errors
         try:
             json_response = json.loads(response["response"])
@@ -205,10 +206,10 @@ def evaluate_queries(topics, role = True, narrative=True, chain_of_thought = 2):
 
 
 def print_prompts():
-    user_input = input("Enter the prompt type: [evaluate/variants]")
-    user_role = input("Enter the role: [True/False]")
-    user_narrative = input("Enter the narrative: [True/False]")
-    user_chain_of_thought = input("Enter the chain of thought: [0/1/2]")
+    user_input = input("Enter the prompt type: [evaluate/variants] ")
+    user_role = input("Enter the role: [True/False] ")
+    user_narrative = input("Enter the narrative: [True/False] ")
+    user_chain_of_thought = input("Enter the chain of thought: [0/1/2] ")
 
     if user_input.lower() not in ["evaluate", "variants"] or user_role.lower() not in ["true", "false"] or user_narrative.lower() not in ["true", "false"] or user_chain_of_thought not in ["0", "1", "2"]:
         print("Invalid input. Please try again.")
@@ -242,11 +243,15 @@ if __name__ == "__main__":
             print("Assistant: Goodbye!")
             break
         elif user_input.lower() in ["evaluate", "evaluate queries", "eval"]:
-            evaluate_queries(topics, role=False, narrative=True, chain_of_thought=1)
+            evaluate_queries(topics, role=True, narrative=False, chain_of_thought=0)
         elif user_input.lower() in ["variants", "query variants"]: 
             generate_query_variants(topics, role=False, narrative=False, chain_of_thought=1)
         elif user_input.lower() in ["print"]:
             print_prompts()
+        elif user_input.lower() in ["talk"]:
+            user_prompt = input("Enter your prompt: ")
+            response = chat_with_gpt4(client, user_prompt)
+            print(response["response"])
         
 
 
