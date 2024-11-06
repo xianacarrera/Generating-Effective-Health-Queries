@@ -39,6 +39,45 @@ def get_prompt_variants(description, role=False, narrative = None, chain_of_thou
 
     return prompt
 
+def write_narrative_from_examples(query):
+    # https://trec-health-misinfo.github.io/docs/TREC-2021-Health-Misinformation-Track-Assessing-Guidelines_Version-2.pdf
+    prompt = f"Given the query [{query}], write a narrative that describes its information need in more detail "
+    prompt += f"and provides a specific explanation of what is considered to be very-useful or useful information for the query.\n"
+    # Topic 105 (2021)   
+    prompt += "For example, if the query is [Should I apply ice to a burn?], a good narrative could be: "
+    prompt += "'Many people commonly put on ice on burns in an attempt to stop the burning and pain. A very useful document would discuss the effectiveness of using ice to treat burns. "
+    prompt += "A useful document would help a user decide if putting ice on burns is a recommended treatment by providing information on recommended treatments for burns and may not discuss "
+    prompt += "ice as a treatment, or a useful document may discuss benefits or concerns for application of ice to skin.'\n"
+    # Topic 107 (2021) 
+    prompt += "Another example: if the query is [Does yoga improve the management of asthma?], a good narrative could be: "
+    prompt += "'Asthma is a condition that causes shortness of breath or chest pains due to narrowing airways. Yoga is an increasingly popular low-impact exercise --- claiming relaxation, strength "
+    prompt += "improvements and overall health benefits. A very useful document would discuss the effectiveness of yoga in managing asthma symptoms. A useful document would help a user make a decision "
+    prompt += "about use of yoga to help manage asthma by providing information on recommended treatments for asthma management, or medical benefits of practicing yoga, or both.'\n"
+    prompt += "Write just the narrative using a similar format as in the examples above. Do not include any other information and do not repeat the query in your answer.\n"
+    return prompt
+
+def write_narrative_from_style_description(query):
+    prompt = f"Given the query [{query}], write a narrative that describes its information need in more detail. Use the standard TREC format for narratives, with the following style guidelines:\n"
+    prompt += "* The narrative should have the following structure:\n"
+    prompt += "    - Begin by describing a specific health claim or rumor, such as health remedies or conspiracy theories.\n"
+    prompt += "    - Then, provide context, such as sources of misinformation or typical misconceptions.\n"
+    prompt += "    - Finally, outline specific criteria for helpful documents (those providing truthful and safe instructions) and harmful documents (those that mislead or fail to clarify risks).\n"
+    prompt += "* The voice should be:\n"
+    prompt += "    - Objective and neutral, delivering information without bias or emotional language. Focus on a clear presentation of facts.\n"
+    prompt += "    - Authoritative and factual, providing scientifically grounded statements, particularly when clarifying health misinformation.\n"
+    prompt += "    - Instructional, offering guidance on what readers should consider reliable information versus misleading information.\n"
+    # prompt += "* The tone should be:\n"
+    # prompt += "    - Informative and cautious, in a way that prevents misinformation by carefully explaining what constitutes helpful versus harmful information.\n"
+    # prompt += "    - Calm and reassuring, addressing potentially anxiety-inducing topics in a composed manner to reduce panic or confusion.\n"
+    # prompt += "    - Clear-cut and decisive, distinguishing between helpful and harmful documents in a straightforward, definitive way to reduce ambiguity.\n"
+    # prompt += "* Use a language style that is:\n"
+    # prompt += "    - Plain and accessible, with simple language that makes the content understandable to a wide audience.\n"
+    # prompt += "    - Concise and direct. Each narrative should avoid unnecessary detail, focusing on the essentials of what is helpful or harmful.\n"
+    # prompt += "    - Predictable. It should follow a consistent pattern that helps readers quickly differentiate between reliable and unreliable information.\n"
+    prompt += "Write a complete narrative for the query in a single paragraph. Do not include any other information and do not repeat the query in your answer.\n"
+    return prompt
+
+
 
 def get_prompt_evaluation(description, role=False, narrative = None, chain_of_thought = 1):
     prompt = ""
@@ -102,8 +141,8 @@ def chat_with_gpt4(client, prompt):
         return f"An error occurred: {str(e)}"
 
 
-def fetch_topics():
-    tree = ET.parse('../TREC_2020_BEIR/original-misinfo-resources-2020/topics/misinfo-2020-topics.xml')
+def fetch_topics(path = '../TREC_2020_BEIR/original-misinfo-resources-2020/topics/misinfo-2020-topics.xml'):
+    tree = ET.parse(path)
     root = tree.getroot()
     topics_xml = root.findall('topic')
 
@@ -111,7 +150,7 @@ def fetch_topics():
     for topic in topics_xml:
         topics[topic.find('number').text] = {
             "number": topic.find('number').text,
-            "title": topic.find('title').text,
+            "title": "" if topic.find('title') is None else topic.find('title').text,
             "description": topic.find('description').text,
             "answer": topic.find('answer').text,
             "evidence": topic.find('evidence').text,
@@ -172,7 +211,7 @@ def generate_query_variants(topics, role = True, narrative=True, chain_of_though
                     print("Retrying...\n")
                 retry += 1
 
-    filename = f'query_variants/query_variants_{"role" if role else "norole"}_{"narrative" if narrative else "nonarrative"}_chainofth{chain_of_thought}'
+    filename = f'query_variants/gen_narrative_examples_query_variants_{"role" if role else "norole"}_{"narrative" if narrative else "nonarrative"}_chainofth{chain_of_thought}'
     save_xml(topics, variants, filename)
     save_jsonl(variants, filename)
 
@@ -205,31 +244,80 @@ def evaluate_queries(topics, role = True, narrative=True, chain_of_thought = 2):
     save_scores(scores, filename)
 
 
-def print_prompts():
-    user_input = input("Enter the prompt type: [evaluate/variants] ")
-    user_role = input("Enter the role: [True/False] ")
-    user_narrative = input("Enter the narrative: [True/False] ")
-    user_chain_of_thought = input("Enter the chain of thought: [0/1/2] ")
 
-    if user_input.lower() not in ["evaluate", "variants"] or user_role.lower() not in ["true", "false"] or user_narrative.lower() not in ["true", "false"] or user_chain_of_thought not in ["0", "1", "2"]:
+
+def print_prompts():
+    user_input = input("Enter the prompt type: [evaluate/variants/narrative] ")
+    if user_input.lower() not in ["evaluate", "variants", "narrative"]: 
         print("Invalid input. Please try again.")
         return
+    
+    if user_input.lower() in ["evaluate", "variants"]:
+        user_role = input("Enter the role: [True/False] ")
+        user_narrative = input("Enter the narrative: [True/False] ")
+        user_chain_of_thought = input("Enter the chain of thought: [0/1/2] ")
 
-    parsed_role = True if user_role.lower() == "true" else False
-    parsed_narrative = "query_narrative" if user_narrative.lower() == "true" else None
-    parsed_chain_of_thought = int(user_chain_of_thought)
+        if user_role.lower() not in ["true", "false"] or user_narrative.lower() not in ["true", "false"] or user_chain_of_thought not in ["0", "1", "2"]:
+            print("Invalid input. Please try again.")
+            return
+
+        parsed_role = True if user_role.lower() == "true" else False
+        parsed_narrative = "query_narrative" if user_narrative.lower() == "true" else None
+        parsed_chain_of_thought = int(user_chain_of_thought)
 
     if user_input.lower() in ["evaluate"]:
         prompt = get_prompt_evaluation("query_description", role=parsed_role, narrative = parsed_narrative, chain_of_thought=parsed_chain_of_thought)
     elif user_input.lower() in ["variants"]:
         prompt = get_prompt_variants("query_description", role=parsed_role, narrative = parsed_narrative, chain_of_thought = parsed_chain_of_thought, n = 5)
+    elif user_input.lower() in ["narrative"]:
+        user_narrative = input("Should the narrative be written from examples or from style description? [examples/style] ")
+        if user_narrative.lower() in ["examples"]:
+            prompt = write_narrative_from_examples("query_description")
+        elif user_narrative.lower() in ["style"]:
+            prompt = write_narrative_from_style_description("query_description")
+        else:
+            print("Invalid input. Please try again.")
+            return
 
     print(prompt)
 
 
+def write_all_narratives(topics, func):
+    responses = {}
+    for topic_id in topics:
+        if int(topic_id) < 26:
+            continue
+        prompt = func(topics[topic_id]['description'])
+        print(prompt)
+        response = chat_with_gpt4(client, prompt)
+        responses[topic_id] = response["response"]
+
+        # If the response is not complete (i.e., it does not end with a period), retry
+        while not response["response"].endswith("."):
+            print("Retrying...")
+            response = chat_with_gpt4(client, prompt)
+            responses[topic_id] = response["response"]
+
+        print(response["response"] + "\n")
+        topics[topic_id]['narrative'] = response["response"]
+
+    with open(f'topics_with_generated_narratives.xml', 'w') as f:
+        f.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+        f.write("<topics>\n")
+        for topic_id in topics:
+            f.write(f"\t<topic>\n")
+            f.write(f"\t\t<number>{topic_id}</number>\n")
+            f.write(f"\t\t<description>{topics[topic_id]['description']}</description>\n")
+            f.write(f"\t\t<answer>{topics[topic_id]['answer']}</answer>\n")
+            f.write(f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
+            f.write(f"\t\t<narrative>{topics[topic_id]['narrative']}</narrative>\n")
+            f.write(f"\t</topic>\n")
+        f.write("</topics>\n")
+
 # Main program loop
 if __name__ == "__main__":
-    topics = fetch_topics()
+    topics = fetch_topics("./topics_with_generated_narratives_from_examples.xml")
+    #topics = fetch_topics()
     
     parser = configparser.ConfigParser()
     parser.read("config.ini")  
@@ -245,10 +333,24 @@ if __name__ == "__main__":
         elif user_input.lower() in ["evaluate", "evaluate queries", "eval"]:
             evaluate_queries(topics, role=True, narrative=False, chain_of_thought=0)
         elif user_input.lower() in ["variants", "query variants"]: 
-            generate_query_variants(topics, role=False, narrative=False, chain_of_thought=1)
+            generate_query_variants(topics, role=True, narrative=True, chain_of_thought=2)
+        elif user_input.lower() in ["narrative examples"]:
+            user_input = input("Enter the query description: ")
+            prompt = write_narrative_from_examples(user_input)
+            response = chat_with_gpt4(client, prompt)
+            print(response["response"])
+        elif user_input.lower() in ["all narratives examples"]:
+            write_all_narratives(topics, write_narrative_from_examples)
+        elif user_input.lower() in ["narrative style"]:
+            user_input = input("Enter the query description: ")
+            prompt = write_narrative_from_style_description(user_input)
+            response = chat_with_gpt4(client, prompt)
+            print(response["response"])
+        elif user_input.lower() in ["all narratives style"]:
+            write_all_narratives(topics, write_narrative_from_style_description)
         elif user_input.lower() in ["print"]:
             print_prompts()
-        elif user_input.lower() in ["talk"]:
+        elif user_input.lower() in ["talk", "ask"]:
             user_prompt = input("Enter your prompt: ")
             response = chat_with_gpt4(client, user_prompt)
             print(response["response"])
