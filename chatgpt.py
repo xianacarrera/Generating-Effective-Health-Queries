@@ -7,7 +7,6 @@ import json
 import configparser
 
 
-
 def get_prompt_variants(description, role=False, narrative = None, chain_of_thought = 1, n = 5):
     prompt = ""
     if role:
@@ -39,6 +38,7 @@ def get_prompt_variants(description, role=False, narrative = None, chain_of_thou
 
     return prompt
 
+
 def write_narrative_from_examples(query):
     # https://trec-health-misinfo.github.io/docs/TREC-2021-Health-Misinformation-Track-Assessing-Guidelines_Version-2.pdf
     prompt = f"Given the query [{query}], write a narrative that describes its information need in more detail "
@@ -66,17 +66,22 @@ def write_narrative_from_style_description(query):
     prompt += "    - Objective and neutral, delivering information without bias or emotional language. Focus on a clear presentation of facts.\n"
     prompt += "    - Authoritative and factual, providing scientifically grounded statements, particularly when clarifying health misinformation.\n"
     prompt += "    - Instructional, offering guidance on what readers should consider reliable information versus misleading information.\n"
-    # prompt += "* The tone should be:\n"
-    # prompt += "    - Informative and cautious, in a way that prevents misinformation by carefully explaining what constitutes helpful versus harmful information.\n"
-    # prompt += "    - Calm and reassuring, addressing potentially anxiety-inducing topics in a composed manner to reduce panic or confusion.\n"
-    # prompt += "    - Clear-cut and decisive, distinguishing between helpful and harmful documents in a straightforward, definitive way to reduce ambiguity.\n"
-    # prompt += "* Use a language style that is:\n"
-    # prompt += "    - Plain and accessible, with simple language that makes the content understandable to a wide audience.\n"
-    # prompt += "    - Concise and direct. Each narrative should avoid unnecessary detail, focusing on the essentials of what is helpful or harmful.\n"
-    # prompt += "    - Predictable. It should follow a consistent pattern that helps readers quickly differentiate between reliable and unreliable information.\n"
+    prompt += "* The tone should be:\n"
+    prompt += "    - Informative and cautious, in a way that prevents misinformation by carefully explaining what constitutes helpful versus harmful information.\n"
+    prompt += "    - Calm and reassuring, addressing potentially anxiety-inducing topics in a composed manner to reduce panic or confusion.\n"
+    prompt += "    - Clear-cut and decisive, distinguishing between helpful and harmful documents in a straightforward, definitive way to reduce ambiguity.\n"
+    prompt += "* Use a language style that is:\n"
+    prompt += "    - Plain and accessible, with simple language that makes the content understandable to a wide audience.\n"
+    prompt += "    - Concise and direct. Each narrative should avoid unnecessary detail, focusing on the essentials of what is helpful or harmful.\n"
+    prompt += "    - Predictable. It should follow a consistent pattern that helps readers quickly differentiate between reliable and unreliable information.\n"
     prompt += "Write a complete narrative for the query in a single paragraph. Do not include any other information and do not repeat the query in your answer.\n"
     return prompt
 
+
+def write_narrative_basic_prompt(query):
+    prompt = f"Given the query [{query}], write a narrative detailing the information need and describing the characteristics of helpful and \n"
+    prompt += "harmful documents. Write one paragraph and do not repeat the query in your answer."
+    return prompt
 
 
 def get_prompt_evaluation(description, role=False, narrative = None, chain_of_thought = 1):
@@ -128,7 +133,7 @@ def chat_with_gpt4(client, prompt):
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=150,
+            max_tokens=300,
             temperature=0.2,
             frequency_penalty=0.0
         )
@@ -211,7 +216,7 @@ def generate_query_variants(topics, role = True, narrative=True, chain_of_though
                     print("Retrying...\n")
                 retry += 1
 
-    filename = f'query_variants/gen_narrative_examples_query_variants_{"role" if role else "norole"}_{"narrative" if narrative else "nonarrative"}_chainofth{chain_of_thought}'
+    filename = f'query_variants/gen_narrative_style_query_variants_{"role" if role else "norole"}_{"narrative" if narrative else "nonarrative"}_chainofth{chain_of_thought}'
     save_xml(topics, variants, filename)
     save_jsonl(variants, filename)
 
@@ -285,8 +290,6 @@ def print_prompts():
 def write_all_narratives(topics, func):
     responses = {}
     for topic_id in topics:
-        if int(topic_id) < 26:
-            continue
         prompt = func(topics[topic_id]['description'])
         print(prompt)
         response = chat_with_gpt4(client, prompt)
@@ -314,47 +317,87 @@ def write_all_narratives(topics, func):
             f.write(f"\t</topic>\n")
         f.write("</topics>\n")
 
-# Main program loop
-if __name__ == "__main__":
-    topics = fetch_topics("./topics_with_generated_narratives_from_examples.xml")
-    #topics = fetch_topics()
+def print_menu():
+    print("\nAvailable commands:")
+    print("1. evaluate - Evaluate queries")
+    print("2. variants - Generate query variants")
+    print("3. narrative - Write narrative (examples or style)")
+    print("4. all narratives - Write all narratives (examples or style)")
+    print("5. print - Print prompts")
+    print("6. chat - Chat with GPT-4")
+    print("7. quit - Exit the program")
+
+def get_narrative_type():
+    while True:
+        narrative_type = input("Choose narrative type (examples/style): ").lower()
+        if narrative_type in ["examples", "style"]:
+            return narrative_type
+        print("Invalid choice. Please enter 'examples' or 'style'.")
+
+
+def main():
+    #topics = fetch_topics("./topics_with_generated_narratives_from_style_v2.xml")
+    topics = fetch_topics()
     
     parser = configparser.ConfigParser()
     parser.read("config.ini")  
 
-    api_key = parser.get("OPENAI", "API_KEY")
-    client = OpenAI(api_key=api_key)
-
+    
     while True:
+        print_menu()
+
         user_input = input("Give instructions: ")
-        if user_input.lower() in ["quit", "exit", "bye"]:
-            print("Assistant: Goodbye!")
-            break
-        elif user_input.lower() in ["evaluate", "evaluate queries", "eval"]:
+        if user_input.lower() in ["1", "evaluate"]:
             evaluate_queries(topics, role=True, narrative=False, chain_of_thought=0)
-        elif user_input.lower() in ["variants", "query variants"]: 
+        elif user_input.lower() in ["2", "variants"]: 
             generate_query_variants(topics, role=True, narrative=True, chain_of_thought=2)
         elif user_input.lower() in ["narrative examples"]:
             user_input = input("Enter the query description: ")
             prompt = write_narrative_from_examples(user_input)
             response = chat_with_gpt4(client, prompt)
             print(response["response"])
-        elif user_input.lower() in ["all narratives examples"]:
-            write_all_narratives(topics, write_narrative_from_examples)
-        elif user_input.lower() in ["narrative style"]:
-            user_input = input("Enter the query description: ")
-            prompt = write_narrative_from_style_description(user_input)
+        
+        elif user_input in ["3", "narrative"]:
+            narrative_type = get_narrative_type()
+            query_description = input("Enter the query description: ")
+            
+            if narrative_type == "examples":
+                prompt = write_narrative_from_examples(query_description)
+            else:  # style
+                prompt = write_narrative_from_style_description(query_description)
+            
             response = chat_with_gpt4(client, prompt)
             print(response["response"])
-        elif user_input.lower() in ["all narratives style"]:
-            write_all_narratives(topics, write_narrative_from_style_description)
-        elif user_input.lower() in ["print"]:
+        elif user_input in ["all narratives", "4"]:
+            narrative_type = get_narrative_type()
+            
+            if narrative_type == "examples":
+                write_all_narratives(topics, write_narrative_from_examples)
+            else:  # style
+                write_all_narratives(topics, write_narrative_from_style_description)
+        elif user_input.lower() in ["5", "print"]:
             print_prompts()
-        elif user_input.lower() in ["talk", "ask"]:
+        elif user_input.lower() in ["6", "chat"]:
             user_prompt = input("Enter your prompt: ")
             response = chat_with_gpt4(client, user_prompt)
             print(response["response"])
+        elif user_input.lower() in ["7", "quit"]:
+            print("Assistant: Goodbye!")
+            break
+        else:
+            print("Invalid command. Please try again.")
         
 
 
+
+
+# Main program loop
+if __name__ == "__main__":    
+    parser = configparser.ConfigParser()
+    parser.read("config.ini")  
+
+    api_key = parser.get("OPENAI", "API_KEY")
+    client = OpenAI(api_key=api_key)
+
+    main()
             
