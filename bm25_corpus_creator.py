@@ -62,14 +62,13 @@ def main():
     output_path = config["output_path"]
     topics_path = config["topics_path"]
     dataset_name = config["dataset_name"]
-    field = "description" if dataset_name == "misinfo-2020" else "question"
+    field = "question" if dataset_name == "C4-2022" else "description"
 
     start_time = time.time()
 
     searcher = SimpleSearcher(config["index_path"])
     print("Index loaded")
     print("=============")
-    
 
     write_dir = f'{output_path}/index_{dataset_name}/field_{field}/method_{method}'
 
