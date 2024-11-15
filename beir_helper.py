@@ -119,15 +119,20 @@ def load_config(
 
     conf = {}
 
-    conf["model_name"] = parser[program]["MODEL_NAME"]
-    conf["abbrev"] = parser[program]["MODEL_NAME"]
     if program == "RERANKER":
+        conf["model_name"] = parser[program]["MODEL_NAME"]
+        conf["abbrev"] = parser[program]["MODEL_NAME"]
         conf["model_training"] = parser["RERANKER"]["TRAINING"]
         conf["abbrev"] += f"_{parser['RERANKER']['TRAINING']}"
     elif program == "DENSE":
+        conf["model_name"] = parser[program]["MODEL_NAME"]
+        conf["abbrev"] = parser[program]["MODEL_NAME"]
         conf["score_function"] = parser["DENSE"]["SCORE_FUNCTION"]
     elif program == "SPARSE":
+        conf["model_name"] = parser[program]["MODEL_NAME"]
+        conf["abbrev"] = parser[program]["MODEL_NAME"]
         conf["use_title"] = parser["SPARSE"]["USE_TITLE"]
+        conf["use_rm3"] = True if parser["SPARSE"]["USE_RM3"].upper() == "TRUE" else False
         if conf["use_title"] not in ["empty", "repeat", "none"]:
             print("Use_title not recognized")
             exit()
@@ -135,7 +140,7 @@ def load_config(
         conf["abbrev"] += f"_{parser['SPARSE']['SPLADE_TRAINING']}"
     elif program == "CORPUS_CREATOR":
         conf["method"] = parser["CORPUS_CREATOR"]["METHOD"]
-        conf["index_path"] = parser["CORPUS_CREATOR"]["index_path"]
+        conf["index_path"] = parser["CORPUS_CREATOR"]["INDEX_PATH"]
         conf["use_rm3"] = True if parser["CORPUS_CREATOR"]["USE_RM3"].upper() == "TRUE" else False
     else:
         print("Type of program not recognized")
@@ -144,7 +149,7 @@ def load_config(
     conf["dataset_name"] = parser["META"]["DATASET_NAME"]
     conf["output_path"] = parser["META"]["OUTPUT_PATH"]
     conf["clean"] = True if parser["META"]["CLEAN_HTML"].upper() == "TRUE" else False
-    
+
     conf["query_path"] = parser["INDEX"]["QUERY_PATH"]
     conf["qrels_path"] = parser["INDEX"]["QRELS_PATH"]
     # conf["index_path"] = parser["INDEX"]["INDEX_PATH"]

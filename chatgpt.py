@@ -267,7 +267,8 @@ def generate_query_variants(topics, role = True, narrative=True, chain_of_though
                 retry += 1
 
     # Create path if it does not exist
-    classification = f'gen_narr_{topics_type}_{"role" if role else "norole"}_{"narrative" if narrative else "nonarrative"}_chainofth{chain_of_thought}'
+    beginning = "" if topics_type == "original" else "gen_narr_"
+    classification = f'{beginning}{topics_type}_{"role" if role else "norole"}_{"narrative" if narrative else "nonarrative"}_chainofth{chain_of_thought}'
     path = f'query_variants/{year}/{classification}'
     if not os.path.exists(path):
         os.makedirs(path)
@@ -331,11 +332,15 @@ def print_prompts():
     elif user_input.lower() in ["variants"]:
         prompt = get_prompt_variants("query_description", role=parsed_role, narrative = parsed_narrative, chain_of_thought = parsed_chain_of_thought, n = 5)
     elif user_input.lower() in ["narrative"]:
-        user_narrative = input("Should the narrative be written from examples or from style description? [examples/style] ")
+        user_narrative = input("Which type of narrative? [examples/style/basic/trec] ")
         if user_narrative.lower() in ["examples"]:
             prompt = write_narrative_from_examples("query_description")
         elif user_narrative.lower() in ["style"]:
             prompt = write_narrative_from_style_description("query_description")
+        elif user_narrative.lower() in ["basic"]:
+            prompt = write_narrative_basic_prompt("query_description")
+        elif user_narrative.lower() in ["trec"]:
+            prompt = write_narrative_from_TREC("query_description")
         else:
             print("Invalid input. Please try again.")
             return
@@ -459,10 +464,10 @@ def main():
 
         user_input = input("Give instructions: ")
         if user_input.lower() in ["1", "evaluate"]:
-            evaluate_queries(topics, role=True, narrative=False, chain_of_thought=0)
+            evaluate_queries(topics, role=True, narrative=True, chain_of_thought=0)
         
         elif user_input.lower() in ["2", "variants"]: 
-            generate_query_variants(topics, role=True, narrative=True, chain_of_thought=2)
+            generate_query_variants(topics, role=True, narrative=True, chain_of_thought=0)
         
         elif user_input in ["3", "narrative"]:
             narrative_type = get_narrative_type()
