@@ -151,14 +151,19 @@ def chat_with_gpt4(client, prompt):
         return f"An error occurred: {str(e)}"
 
 
-def fetch_topics(path = '../TREC_2020_BEIR/original-misinfo-resources-2020/topics/misinfo-2020-topics.xml', year="2020"):
+def fetch_topics(path = '../TREC_2020_BEIR/original-misinfo-resources-2020/topics/misinfo-2020-topics.xml', corpus="2020"):
     tree = ET.parse(path)
     root = tree.getroot()
-    topics_xml = root.findall('topic')
+    topics_xml = root.findall('query') if corpus == "clef" else root.findall('topic') 
 
     topics = {}
     for topic in topics_xml:
-        if year == "2022":
+        if corpus == "clef":
+            topics[topic.find('id').text] = {
+                "number": topic.find('id').text,
+                "description": topic.find('description').text
+            }
+        elif corpus == "2022":
             topics[topic.find('number').text] = {
                 "number": topic.find('number').text,
                 "title": "" if topic.find('query') is None else topic.find('query').text,
@@ -168,7 +173,7 @@ def fetch_topics(path = '../TREC_2020_BEIR/original-misinfo-resources-2020/topic
                 "evidence": topic.find('evidence').text,
                 "narrative": topic.find('background').text
             }
-        elif year == "2021":
+        elif corpus == "2021":
             topics[topic.find('number').text] = {
                 "number": topic.find('number').text,
                 "title": "" if topic.find('query') is None else topic.find('query').text,
@@ -197,7 +202,7 @@ def save_xml(topics, variants, filename):
             f.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
             f.write("<topics>\n")
             for topic_id in topics:
-                if year == "2022":
+                if corpus == "2022":
                     f.write(f"\t<topic>\n")
                     f.write(f"\t\t<number>{topic_id}</number>\n")
                     f.write(f"\t\t<question>{variants[topic_id][i-1]}</question>\n")
@@ -208,7 +213,7 @@ def save_xml(topics, variants, filename):
                     f.write(f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
                     f.write(f"\t</topic>\n")
 
-                elif year == "2021":
+                elif corpus == "2021":
                     f.write(f"\t<topic>\n")
                     f.write(f"\t\t<number>{topic_id}</number>\n")
                     f.write(f"\t\t<query>{topics[topic_id]['title']}</query>\n")
@@ -269,7 +274,7 @@ def generate_query_variants(topics, role = True, narrative=True, chain_of_though
     # Create path if it does not exist
     beginning = "" if topics_type == "original" else "gen_narr_"
     classification = f'{beginning}{topics_type}_{"role" if role else "norole"}_{"narrative" if narrative else "nonarrative"}_chainofth{chain_of_thought}'
-    path = f'query_variants/{year}/{classification}'
+    path = f'query_variants/{corpus}/{classification}'
     if not os.path.exists(path):
         os.makedirs(path)
 
@@ -358,7 +363,7 @@ def write_all_narratives(topics, narrative_type):
     else:  # basic
         func = write_narrative_basic_prompt
 
-    xml_filename = f"topics_with_generated_narratives_from_{narrative_type}_{year}.xml"
+    xml_filename = f"topics_with_generated_narratives_from_{narrative_type}_{corpus}.xml"
 
     responses = {}
     for topic_id in topics:
@@ -380,7 +385,13 @@ def write_all_narratives(topics, narrative_type):
         f.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
         f.write("<topics>\n")
         for topic_id in topics:
-            if year == "2022":
+            if corpus == "clef":
+                f.write(f"<query>\n")
+                f.write(f"\t\t<id>{topic_id}</id>\n")
+                f.write(f"\t\t<title>{topics[topic_id]['description']}</title>\n")
+                f.write(f"</query>\n")
+                
+            elif corpus == "2022":
                 f.write(f"\t<topic>\n")
                 f.write(f"\t\t<number>{topic_id}</number>\n")
                 f.write(f"\t\t<question>{topics[topic_id]['description']}</question>\n")
@@ -391,7 +402,7 @@ def write_all_narratives(topics, narrative_type):
                 f.write(f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
                 f.write(f"\t</topic>\n")
 
-            elif year == "2021":
+            elif corpus == "2021":
                 f.write(f"\t<topic>\n")
                 f.write(f"\t\t<number>{topic_id}</number>\n")
                 f.write(f"\t\t<query>{topics[topic_id]['title']}</query>\n")
@@ -435,22 +446,24 @@ def get_narrative_type():
 
 def get_topics_filename():
     while True:
-        year = input("Choose year (2020/2021/2022): ").lower()
-        if year not in ["2020", "2021", "2022"]:
+        corpus = input("Choose corpus (2020/2021/2022/CLEF): ").lower()
+        if corpus not in ["2020", "2021", "2022", "clef"]:
             print("Invalid choice. Please enter '2020', '2021' or '2022'.")
             continue
 
         topics_type = input("Choose topics type (original/examples/style/basic/trec): ").lower()
         if topics_type == "original":
-            return year, topics_type, f'../TREC_{year}_BEIR/original-misinfo-resources-{year}/topics/misinfo-{year}-topics.xml'
+            if corpus == "clef":
+                return corpus, topics_type, f'../CLEF/queries2016_corregidas.xml'
+            return corpus, topics_type, f'../TREC_{corpus}_BEIR/original-misinfo-resources-{corpus}/topics/misinfo-{corpus}-topics.xml'
         elif topics_type == "examples":
-            return year, topics_type, f'./topics_with_generated_narratives_from_examples_{year}.xml'
+            return corpus, topics_type, f'./topics_with_generated_narratives_from_examples_{corpus}.xml'
         elif topics_type == "style":
-            return year, topics_type, f'./topics_with_generated_narratives_from_style_{year}.xml'
+            return corpus, topics_type, f'./topics_with_generated_narratives_from_style_{corpus}.xml'
         elif topics_type == "basic":
-            return year, topics_type, f'./topics_with_generated_narratives_from_basic_{year}.xml'
+            return corpus, topics_type, f'./topics_with_generated_narratives_from_basic_{corpus}.xml'
         elif topics_type == "trec":
-            return year, topics_type, f'./topics_with_generated_narratives_from_trec_{year}.xml'
+            return corpus, topics_type, f'./topics_with_generated_narratives_from_trec_{corpus}.xml'
         else:
             print("Invalid choice. Please enter 'original', 'examples', 'style', 'basic' or 'trec'.")
 
@@ -515,8 +528,8 @@ if __name__ == "__main__":
     api_key = parser.get("OPENAI", "API_KEY")
     client = OpenAI(api_key=api_key)
 
-    year, topics_type, topics_filename = get_topics_filename()
-    topics = fetch_topics(topics_filename, year)
+    corpus, topics_type, topics_filename = get_topics_filename()
+    topics = fetch_topics(topics_filename, corpus)
 
     main()
             
