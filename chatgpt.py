@@ -161,7 +161,7 @@ def fetch_topics(path = '../TREC_2020_BEIR/original-misinfo-resources-2020/topic
         if corpus == "clef":
             topics[topic.find('id').text] = {
                 "number": topic.find('id').text,
-                "description": topic.find('description').text
+                "description": topic.find('title').text
             }
         elif corpus == "2022":
             topics[topic.find('number').text] = {
@@ -390,7 +390,7 @@ def write_all_narratives(topics, narrative_type):
                 f.write(f"\t\t<id>{topic_id}</id>\n")
                 f.write(f"\t\t<title>{topics[topic_id]['description']}</title>\n")
                 f.write(f"</query>\n")
-                
+
             elif corpus == "2022":
                 f.write(f"\t<topic>\n")
                 f.write(f"\t\t<number>{topic_id}</number>\n")
@@ -448,7 +448,7 @@ def get_topics_filename():
     while True:
         corpus = input("Choose corpus (2020/2021/2022/CLEF): ").lower()
         if corpus not in ["2020", "2021", "2022", "clef"]:
-            print("Invalid choice. Please enter '2020', '2021' or '2022'.")
+            print("Invalid choice. Please enter '2020', '2021', '2022' or 'CLEF'.")
             continue
 
         topics_type = input("Choose topics type (original/examples/style/basic/trec): ").lower()
