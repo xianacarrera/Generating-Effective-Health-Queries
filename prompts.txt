@@ -1,0 +1,76 @@
+
+*********************************************************
+****************** GPT & LLAMA PROMPTS ******************
+*********************************************************
+
+
+****************** For narrative generation
+
+i) Concise prompt:
+
+"Given the query [query], write a narrative detailing the information need and describing the characteristics of helpful and harmful documents. Write one paragraph and do not repeat the query in your answer."
+
+
+
+ii) With the standard TREC format for narratives (the one used for the final results):
+
+"Given the query [query], write a narrative detailing the information need and describing the characteristics of helpful and harmful documents. Write one paragraph and do not repeat the query in your answer."
+
+
+
+iii) Elaborated prompt that indicates the required style characteristics:
+
+"Given the query [query], write a description that:
+1. Identifies the key terms and concepts in the query.
+2. Provides brief definitions or explanations for each term.
+3. Rephrases the query to highlight its underlying concern or focus.
+4. Adds relevant context to connect the terms meaningfully, if needed.
+5. Maintains an explanatory and neutral tone.
+Write just the description. Do not include any other information and do not repeat the query in your answer."
+
+
+
+
+
+****************** For query variants generation
+
+Only one prompt was used to generate the query variants, although the structure of the prompt (specifically, the addition, omission, or modification of certain clauses) depended on whether a role, a narrative and/or a chain of thought indication were included.
+
+The optional components were:
+
+* Role: 
+"You are a search engineer trying to improve the relevance, correctness and credibility of search results for health-related queries."
+
+* Narrative: 
+"They were looking for: [narrative]"
+
+* Chain of thought - basic: 
+"Instructions
+Let's think step by step:
+Consider the underlying intent of the search."
+
+* Chain of thought - complete:
+"Instructions
+Let's think step by step:
+Consider the underlying intent of the search.
+Measure how prone the original query is to retrieve useful documents.
+Measure how prone the original query is to retrieve supportive documents for the correct treatment of the query's question.
+Measure how prone the original query is to retrieve credible documents.
+Consider the aspects above and the relative importance of each, and " 
+
+
+The inclusion of role, sentence and chain of thought was optional. When the chain of thought component was included, either the basic or the complete version was used. Spelling, such as the use of uppercase and lowercase letters, was adapted as needed.
+
+The full prompt would be structured as follows:
+
+"[Role component]
+Given a query, you must provide a list of 5 alternative queries that express the same information need as the original one, but that are phrased in such a way that they are more likely to retrieve relevant, correct and credible documents.
+Query
+A person has typed [query] into a search engine.
+[Narrative component]
+[Chain of thought component]
+Produce an array of variant queries without providing any reasoning. Example: ['query variant 1', 'query variant 2', ...]"
+
+
+
+
