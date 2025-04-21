@@ -4,6 +4,7 @@ This is the public code release for the **ACM SIGIR 2025** short paper **"Genera
 
 Our project introduces a novel method that leverages Large Language Models (LLMs) to generate alternative formulations of health-related search queries, with the aim of reducing the prevalence of misinformation in search results. Specifically, we generate synthetic narratives that guide the creation of these alternative queries, which are designed to retrieve more helpful and fewer hamrful documents compared to the original user queries.
 
+![](figs/architecture.png)
 
 ## Installation
 
