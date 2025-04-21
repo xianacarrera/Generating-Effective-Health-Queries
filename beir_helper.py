@@ -29,6 +29,7 @@ def load_custom_data(
     return corpus, queries, qrels
 
 
+
 def load_BM25_corpus(
     queries: object,
     input_path: str,
@@ -55,6 +56,8 @@ def load_BM25_corpus(
 
     print("Corpus loaded")
     return corpus, results
+
+
 
 def clean_html_page(
     text: str,
@@ -86,6 +89,7 @@ def clean_html_page(
 
     return text, title
     
+
 
 def clean_html(
     corpus: object,
@@ -152,13 +156,13 @@ def load_config(
 
     conf["query_path"] = parser["INDEX"]["QUERY_PATH"]
     conf["qrels_path"] = parser["INDEX"]["QRELS_PATH"]
-    # conf["index_path"] = parser["INDEX"]["INDEX_PATH"]
     conf["input_path"] = parser["INDEX"]["INPUT_PATH"]
     conf["topics_path"] = parser["INDEX"]["TOPICS_PATH"]
     conf["res_file"] = parser["INDEX"]["RES_FILE"]
 
     print("Config loaded")
     return conf
+
 
 
 def save_final_ranking(
