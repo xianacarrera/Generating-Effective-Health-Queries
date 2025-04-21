@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<topics>
+	<topic>
+		<number>1</number>
+		<title>Vitamin D COVID-19</title>
+		<description>Can vitamin D cure COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.thelancet.com/journals/landia/article/PIIS2213-8587(20)30183-2/fulltext</evidence>
+		<narrative>The information need involves understanding the relationship between vitamin D and COVID-19, including any potential benefits or risks associated with vitamin D supplementation in the context of the disease. Helpful documents will provide scientific evidence or expert opinions on how vitamin D levels might influence COVID-19 outcomes, including studies that explore the role of vitamin D in immune function or its impact on the severity of COVID-19 symptoms. These documents should be based on credible research, such as peer-reviewed journal articles, systematic reviews, or guidelines from reputable health organizations. Harmful documents, on the other hand, may include unsubstantiated claims, misinformation, or anecdotal evidence that lacks scientific backing. These could be articles that exaggerate the benefits of vitamin D without proper evidence or those that dismiss its potential role without considering existing research. Documents that fail to cite reliable sources or that promote vitamin D as a cure without acknowledging the complexity of COVID-19 would also be considered harmful.</narrative>
+	</topic>
+	<topic>
+		<number>2</number>
+		<title>Vitamin C COVID-19</title>
+		<description>Can vitamin C cure COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.health.harvard.edu/diseases-and-conditions/treatments-for-covid-19</evidence>
+		<narrative>The information need is to understand the role and effectiveness of Vitamin C in the prevention or treatment of COVID-19. Helpful documents will provide scientifically-backed information, such as results from clinical trials, meta-analyses, or reviews from reputable medical journals that discuss the impact of Vitamin C on COVID-19 symptoms or outcomes. These documents should include data on dosage, administration methods, and any observed benefits or side effects. Additionally, expert opinions from healthcare professionals or organizations like the World Health Organization or Centers for Disease Control and Prevention that discuss Vitamin C in the context of COVID-19 would be valuable. Harmful documents, on the other hand, are those that make unsubstantiated claims, lack credible sources, or promote Vitamin C as a cure without evidence. Documents that spread misinformation, such as anecdotal evidence or conspiracy theories, or those that discourage following established medical guidelines in favor of unproven treatments, would also be considered harmful.</narrative>
+	</topic>
+	<topic>
+		<number>3</number>
+		<title>BCG vaccine COVID-19</title>
+		<description>Can BCG vaccine prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.nature.com/articles/s41577-020-0337-y</evidence>
+		<narrative>The information need is to understand the relationship between the BCG vaccine and COVID-19, including any potential protective effects, scientific studies, and public health implications. Helpful documents will provide evidence-based information, such as peer-reviewed studies or authoritative reports from health organizations, that explore the correlation between the BCG vaccine and COVID-19 outcomes. These documents should include data on clinical trials, epidemiological studies, and expert analyses that discuss the biological plausibility, statistical significance, and limitations of any findings. Harmful documents are those that present unverified claims, lack scientific rigor, or spread misinformation, such as anecdotal evidence or conspiracy theories, which could mislead readers about the vaccine's efficacy or role in COVID-19 prevention. Documents that fail to cite credible sources or misinterpret scientific data would also be considered harmful.</narrative>
+	</topic>
+	<topic>
+		<number>4</number>
+		<title>Ibuprofen COVID-19</title>
+		<description>Can ibuprofen worsen COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.who.int/news-room/commentaries/detail/bacille-calmette-gu%C3%A9rin-(bcg)-vaccination-and-covid-19</evidence>
+		<narrative>The user is seeking information on the relationship between ibuprofen and COVID-19, specifically whether ibuprofen affects the severity or progression of the disease. Helpful documents will provide evidence-based information, such as scientific studies, expert opinions, or official health organization guidelines, that discuss the effects of ibuprofen on COVID-19 symptoms or outcomes. These documents should be current, given the evolving nature of COVID-19 research, and should clearly indicate the source of their information, such as peer-reviewed journals or reputable health agencies. Harmful documents might include those that spread misinformation, lack credible sources, or present anecdotal evidence without scientific backing. Documents that are outdated or fail to consider the latest research developments may also be misleading or unhelpful.</narrative>
+	</topic>
+	<topic>
+		<number>5</number>
+		<title>Salt water COVID-19</title>
+		<description>Can gargling salt water prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters</evidence>
+		<narrative>The information need is to understand the relationship, if any, between salt water and COVID-19, including any scientific evidence or health guidelines regarding the use of salt water as a treatment or preventive measure for the virus. Helpful documents will provide credible, evidence-based information from reliable sources such as health organizations, scientific studies, or expert opinions that discuss the efficacy and safety of using salt water in the context of COVID-19. These documents should clearly differentiate between scientifically supported facts and myths or misinformation. Harmful documents, on the other hand, may contain unverified claims, pseudoscience, or misinformation suggesting that salt water can cure or prevent COVID-19 without any scientific backing. Such documents may also fail to cite reputable sources or misinterpret scientific data, potentially leading to dangerous health practices.</narrative>
+	</topic>
+	<topic>
+		<number>6</number>
+		<title>Ginger COVID-19</title>
+		<description>Can Ginger cure COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://sites.nationalacademies.org/basedonscience/covid-ginger/index.htm</evidence>
+		<narrative>The information need is to understand the relationship between ginger and COVID-19, including any scientific evidence or studies that explore ginger's effects on the virus, its symptoms, or its prevention. Helpful documents will provide credible, scientifically-backed information on how ginger might influence COVID-19, such as peer-reviewed studies, expert opinions from health professionals, or official health guidelines discussing the use of ginger in relation to the virus. These documents should clearly distinguish between scientifically validated information and anecdotal or speculative claims. Harmful documents are those that present unverified or misleading information, such as claims that ginger can cure COVID-19 without scientific support, or those that promote ginger as a substitute for proven medical treatments or vaccines. Such documents may contribute to misinformation and potentially harmful health practices.</narrative>
+	</topic>
+	<topic>
+		<number>7</number>
+		<title>5G COVID-19</title>
+		<description>Can 5G antennas cause COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters?gclid=CjwKCAjwwYP2BRBGEiwAkoBpAmLePsHPKLvpqjYB2NxDHES0WEr7ovqGSh_tSjFfhdlvyrKtGAMQxBoCDfAQAvD_BwE</evidence>
+		<narrative>The information need involves understanding the relationship, if any, between the fifth generation of mobile network technology and the COVID-19 pandemic. Helpful documents will provide scientifically backed information, including studies or expert opinions from reputable sources such as health organizations or academic institutions, that clarify whether there is a connection between the two. These documents should offer clear explanations, debunk myths, and present evidence-based conclusions. Harmful documents, on the other hand, may spread misinformation or conspiracy theories, lacking credible sources or scientific validation. Such documents might sensationalize the topic or present anecdotal evidence without proper context, potentially leading to public misunderstanding or fear.</narrative>
+	</topic>
+	<topic>
+		<number>8</number>
+		<title>Herbal tea COVID-19</title>
+		<description>Can herbal tea prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://time.com/5840148/coronavirus-cure-covid-organic-madagascar/</evidence>
+		<narrative>The information need is to explore the relationship between herbal tea and COVID-19, specifically looking for evidence-based information on whether herbal tea can prevent, treat, or alleviate symptoms of the virus. Helpful documents will provide scientifically supported information, such as clinical studies, expert opinions from healthcare professionals, or guidance from reputable health organizations that discuss the effects of herbal tea on COVID-19. These documents should clearly distinguish between anecdotal claims and verified research, offering a balanced view of any potential benefits or risks. Harmful documents, on the other hand, will include those that make unsubstantiated claims about herbal tea curing or preventing COVID-19 without scientific backing, potentially misleading readers. Such documents may rely on anecdotal evidence, lack citations from credible sources, or promote herbal tea as a replacement for proven medical treatments, which could endanger public health by encouraging individuals to forgo necessary medical care.</narrative>
+	</topic>
+	<topic>
+		<number>9</number>
+		<title>Convalescent plasma COVID-19</title>
+		<description>Can convalescent plasma cure COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.cochrane.org/CD013600/plasma-people-who-have-recovered-covid-19-treat-individuals-covid-19</evidence>
+		<narrative>The information need is to understand the role, effectiveness, and current research status of using plasma from recovered COVID-19 patients as a treatment option. Helpful documents will provide detailed information on clinical trials, scientific studies, and expert opinions regarding the efficacy and safety of this treatment. They should include data on patient outcomes, potential side effects, and comparisons with other treatments. Additionally, documents that discuss regulatory approvals or guidelines from health organizations would be beneficial. Harmful documents are those that present anecdotal evidence without scientific backing, spread misinformation, or lack credibility, such as opinion pieces without references to scientific data or studies. Documents that are outdated or do not reflect the latest research findings could also be misleading and unhelpful.</narrative>
+	</topic>
+	<topic>
+		<number>10</number>
+		<title>Pneumococcal vaccine COVID-19</title>
+		<description>Can pneumococcal vaccine prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters?gclid=CjwKCAjwwYP2BRBGEiwAkoBpAmLePsHPKLvpqjYB2NxDHES0WEr7ovqGSh_tSjFfhdlvyrKtGAMQxBoCDfAQAvD_BwE</evidence>
+		<narrative>The information need involves understanding the relationship, if any, between the pneumococcal vaccine and COVID-19. Helpful documents will provide clear, evidence-based information on whether the pneumococcal vaccine offers any protection against COVID-19, details on any studies or clinical trials that have investigated this relationship, and guidance from health organizations or experts on the topic. They may also discuss the differences between pneumococcal infections and COVID-19, and why vaccines for one might or might not affect the other. Harmful documents would include those that spread misinformation or unverified claims about the effectiveness of the pneumococcal vaccine against COVID-19, lack credible sources, or misinterpret scientific data. Documents that conflate unrelated medical information or promote unproven treatments would also be considered harmful.</narrative>
+	</topic>
+	<topic>
+		<number>11</number>
+		<title>Female sex hormones COVID-19</title>
+		<description>Can female sex hormones prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7298487/</evidence>
+		<narrative>The information need focuses on understanding the role and impact of female sex hormones in relation to COVID-19. Helpful documents would provide scientific insights into how hormones such as estrogen and progesterone might influence susceptibility to the virus, severity of symptoms, or outcomes of the disease. They should include clinical studies, research findings, or expert analyses that explore potential mechanisms, correlations, or therapeutic implications. Additionally, documents that discuss ongoing research or trials investigating hormone-related treatments for COVID-19 would be valuable. Conversely, harmful documents would include those that offer anecdotal evidence without scientific backing, spread misinformation or unverified claims about hormone treatments, or lack credible sources. Documents that are overly technical without clear explanations or that fail to address the specific intersection of hormones and COVID-19 would also be less useful.</narrative>
+	</topic>
+	<topic>
+		<number>12</number>
+		<title>dextromethorphan COVID-19</title>
+		<description>Can dextromethorphan worsen COVID-19?</description>
+		<answer>yes</answer>
+		<evidence>https://www.nature.com/articles/s41586-020-2286-9</evidence>
+		<narrative>The information need involves understanding the relationship between a common cough suppressant and the COVID-19 virus. Helpful documents will provide scientific studies, clinical trials, or expert analyses that explore the effects, efficacy, and safety of using this medication in the context of COVID-19. These documents should include data on how the drug interacts with the virus, any potential therapeutic benefits, or adverse effects observed in patients. Additionally, credible sources such as peer-reviewed journals, official health organization reports, or expert commentary from virologists or pharmacologists would be valuable. Harmful documents, on the other hand, might include anecdotal evidence, unverified claims, or misinformation spread through non-expert sources such as personal blogs or social media posts. These could lead to misunderstandings about the drug's effectiveness or safety, potentially resulting in misuse or avoidance of proper medical treatment.</narrative>
+	</topic>
+	<topic>
+		<number>13</number>
+		<title>Masks COVID-19</title>
+		<description>Can wearing masks prevent COVID-19?</description>
+		<answer>yes</answer>
+		<evidence>https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks</evidence>
+		<narrative>The user is seeking comprehensive information on the use of face masks in relation to the COVID-19 pandemic. Helpful documents will provide evidence-based insights on the effectiveness of different types of masks in preventing the spread of the virus, guidelines from health organizations on mask usage, and updates on mask mandates or recommendations in various regions. These documents should be current, scientifically accurate, and may include studies, expert opinions, or official health advisories. Harmful documents, on the other hand, would include those that spread misinformation or unverified claims about masks, such as conspiracy theories, outdated information, or content that misrepresents scientific consensus. Documents that lack credible sources or fail to provide a balanced view of the topic would also be considered unhelpful.</narrative>
+	</topic>
+	<topic>
+		<number>14</number>
+		<title>Drinking cow urine COVID-19</title>
+		<description>Can drinking cow urine cure COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.cbc.ca/news/canada/edmonton/false-advertising-covid-19-fake-medical-advice-1.5520301</evidence>
+		<narrative>The information need is to understand the claims, potential benefits, and risks associated with consuming cow urine as a treatment or preventive measure for COVID-19. Helpful documents will provide scientifically-backed information, including studies or expert opinions from reputable health organizations or medical professionals that address the efficacy and safety of such practices. They should also include context on cultural or traditional beliefs related to this practice, while clearly distinguishing between anecdotal evidence and scientifically validated information. Harmful documents are those that promote the consumption of cow urine without scientific evidence, potentially spreading misinformation or false claims about its effectiveness against COVID-19. Such documents may lack credible sources, fail to mention potential health risks, or ignore guidance from health authorities, thereby misleading individuals seeking reliable health information.</narrative>
+	</topic>
+	<topic>
+		<number>15</number>
+		<title>Social Distancing COVID-19</title>
+		<description>Can social distancing prevent COVID-19?</description>
+		<answer>yes</answer>
+		<evidence>https://www.canada.ca/en/public-health/services/publications/diseases-conditions/social-distancing.html</evidence>
+		<narrative>The information need is to understand the concept, implementation, and effects of maintaining physical distance between individuals to prevent the spread of COVID-19. Helpful documents will provide clear explanations of what social distancing entails, guidelines issued by health organizations, scientific studies on its effectiveness, and real-world examples of its impact on controlling the virus. These documents should be current, authoritative, and based on credible sources such as government health departments or reputable scientific journals. Harmful documents would include those that spread misinformation, lack scientific backing, or present outdated or incorrect guidelines. Such documents might downplay the importance of social distancing or present conspiracy theories, which could mislead individuals and undermine public health efforts.</narrative>
+	</topic>
+	<topic>
+		<number>16</number>
+		<title>Vinegar COVID-19</title>
+		<description>Can vinegar prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://globalnews.ca/news/6703882/coronavirus-covid-19-cleaning-vinegar/</evidence>
+		<narrative>The information need is to understand the relationship between vinegar and COVID-19, specifically whether vinegar has any effects on preventing, treating, or mitigating the virus. Helpful documents will provide scientifically-backed information on the efficacy of vinegar in relation to COVID-19, including studies, expert opinions, or official health guidelines. These documents should clearly distinguish between evidence-based findings and anecdotal claims, and they should be authored by credible sources such as health organizations, research institutions, or medical professionals. Harmful documents, on the other hand, may spread misinformation or unverified claims about vinegar's ability to cure or prevent COVID-19, potentially leading to unsafe practices. Such documents might lack citations, rely on personal testimonies without scientific backing, or come from non-credible sources. It is crucial that the information is current and reflects the latest understanding of COVID-19 and its treatments.</narrative>
+	</topic>
+	<topic>
+		<number>17</number>
+		<title>Convalescent plasma COVID-19</title>
+		<description>Can convalescent plasma cure COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.cochrane.org/CD013600/plasma-people-who-have-recovered-covid-19-treat-individuals-covid-19</evidence>
+		<narrative>The information need focuses on understanding the role, effectiveness, and current research status of using plasma from recovered COVID-19 patients as a treatment option. Helpful documents will provide detailed information on clinical trials, scientific studies, and expert opinions regarding the efficacy and safety of this treatment. They should include data on patient outcomes, potential risks, and comparisons with other treatment methods. Additionally, helpful sources may discuss regulatory approvals, guidelines from health organizations, and recent advancements or findings in the field. Harmful documents, on the other hand, would include those that present outdated or inaccurate information, lack scientific backing, or promote unverified claims. Documents that are overly technical without explanation or context, or those that fail to differentiate between preliminary findings and established research, may also be less useful.</narrative>
+	</topic>
+	<topic>
+		<number>18</number>
+		<title>Lopinavir-ritonavir COVID-19</title>
+		<description>Can lopinavir-ritonavir cure COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.nature.com/articles/s41591-020-0849-9</evidence>
+		<narrative>The information need is to understand the role, efficacy, and outcomes of using the combination drug in the treatment of COVID-19. Helpful documents will provide clinical trial results, studies, or expert reviews that discuss the effectiveness, safety, and potential side effects of this treatment in COVID-19 patients. They should include data on patient outcomes, comparisons with other treatments, and any official guidelines or recommendations from health organizations. Additionally, helpful documents may cover the mechanism of action of the drug combination and any relevant historical context regarding its use in other viral infections. Harmful documents, on the other hand, would include those that present anecdotal evidence without scientific backing, outdated information that does not reflect current research or guidelines, or misinformation that exaggerates or downplays the drug's effectiveness without credible sources. Documents that lack proper citations or are opinion-based without empirical support would also be considered harmful.</narrative>
+	</topic>
+	<topic>
+		<number>19</number>
+		<title>Ayurveda COVID-19</title>
+		<description>Can ayurveda cure COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7204691/</evidence>
+		<narrative>The user is seeking information on the role and efficacy of traditional Ayurvedic practices in the prevention, treatment, or management of COVID-19. Helpful documents will provide evidence-based insights, including clinical studies, expert opinions, or government guidelines that discuss the integration of Ayurveda with conventional medical approaches for COVID-19. These documents should clearly differentiate between scientifically validated information and anecdotal claims, offering a balanced view of potential benefits and limitations. Additionally, they should address safety concerns and regulatory perspectives on using Ayurvedic remedies during the pandemic. Harmful documents, on the other hand, may promote unverified or misleading claims about Ayurveda as a sole cure for COVID-19, potentially discouraging the use of proven medical treatments. Such documents might lack credible sources, fail to provide scientific backing, or ignore the importance of consulting healthcare professionals, thereby posing a risk to public health.</narrative>
+	</topic>
+	<topic>
+		<number>20</number>
+		<title>UV light COVID-19</title>
+		<description>Can exposure to UV light prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters?gclid=CjwKCAjwxLH3BRApEiwAqX9arax-kTtiS7vFPdM5A59K4SCwn9WhBkFAcDrKE6VTdNbwZOnJCQhxDRoCQu8QAvD_BwE#medicines</evidence>
+		<narrative>The information need is to understand the relationship between ultraviolet light and COVID-19, including its effectiveness in inactivating the virus, safety considerations, and any scientific studies or expert opinions on the topic. Helpful documents will provide evidence-based information, such as peer-reviewed studies or authoritative health organization guidelines, detailing how UV light can be used to disinfect surfaces or air, its limitations, and safety protocols to prevent harm to humans. These documents should also discuss the different types of UV light (e.g., UVA, UVB, UVC) and their specific applications or risks. Harmful documents may include those that promote unverified or pseudoscientific claims about UV light as a cure for COVID-19, lack credible sources, or fail to address safety concerns, potentially leading to misuse or harm.</narrative>
+	</topic>
+	<topic>
+		<number>21</number>
+		<title>Black seed oil COVID-19</title>
+		<description>Can black seed oil treat COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.ftc.gov/system/files/warning-letters/covid-19-letter_to_naturments.pdf</evidence>
+		<narrative>The information need is to understand the potential effects, benefits, and risks of using black seed oil in relation to COVID-19. Helpful documents will provide scientifically-backed information, including clinical studies or expert opinions, about the efficacy and safety of black seed oil for preventing or treating COVID-19. These documents should include details on the active compounds in black seed oil, their mechanisms of action, and any relevant research findings. Additionally, helpful sources may discuss the historical use of black seed oil in traditional medicine and its general health benefits, while clearly distinguishing between anecdotal evidence and scientifically validated data. Harmful documents, on the other hand, may promote black seed oil as a cure or preventive measure for COVID-19 without credible evidence, potentially leading to misinformation. Such documents might rely on anecdotal claims, lack citations from reputable sources, or misinterpret scientific data, thereby misleading individuals about the oil's effectiveness and safety.</narrative>
+	</topic>
+	<topic>
+		<number>22</number>
+		<title>Tamiflu COVID-19</title>
+		<description>Can Tamiflu help COVID-19?</description>
+		<answer>no</answer>
+		<evidence>http://www.bccdc.ca/health-info/diseases-conditions/covid-19/about-covid-19/treatments</evidence>
+		<narrative>The information need is to understand the relationship between the antiviral medication Tamiflu and COVID-19, including any potential effectiveness, usage, or research findings related to treating or preventing COVID-19 with Tamiflu. Helpful documents will provide scientific studies, clinical trial results, expert opinions, or official health guidelines that discuss Tamiflu's role, if any, in the context of COVID-19. These documents should be current, credible, and sourced from reputable medical or scientific organizations. They may also include comparisons with other treatments or insights into the mechanisms of action relevant to COVID-19. Harmful documents would include those that spread misinformation, lack scientific backing, or make unsubstantiated claims about Tamiflu's efficacy against COVID-19. Such documents might include anecdotal evidence, personal testimonials without scientific support, or outdated information that does not reflect the latest research or guidelines.</narrative>
+	</topic>
+	<topic>
+		<number>23</number>
+		<title>Burning neem leaves COVID-19</title>
+		<description>Can burning neem leaves treat COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://factcheck.afp.com/no-scientific-evidence-neem-leaves-can-cure-covid-19-and-its-symptoms-doctors-say</evidence>
+		<narrative>The information need focuses on understanding the potential effects and implications of burning neem leaves in relation to COVID-19. Helpful documents will provide scientifically-backed information or expert opinions on the efficacy and safety of using neem leaves as a treatment or preventive measure against COVID-19. They should include studies, clinical trials, or authoritative health guidelines that discuss the properties of neem leaves and their impact on viral infections, particularly COVID-19. Additionally, helpful documents may explore traditional uses of neem and any relevant cultural practices, while clearly distinguishing between anecdotal evidence and scientifically validated information. Harmful documents, on the other hand, would include those that promote unverified claims or misinformation about neem leaves curing or preventing COVID-19 without scientific evidence. Such documents might exaggerate benefits, ignore potential risks, or fail to provide a balanced view, potentially leading to unsafe practices or a false sense of security regarding COVID-19 prevention or treatment.</narrative>
+	</topic>
+	<topic>
+		<number>24</number>
+		<title>Alcohol COVID-19</title>
+		<description>Can drinking alcohol worsen COVID-19?</description>
+		<answer>yes</answer>
+		<evidence>https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters?gclid=CjwKCAjwxLH3BRApEiwAqX9arax-kTtiS7vFPdM5A59K4SCwn9WhBkFAcDrKE6VTdNbwZOnJCQhxDRoCQu8QAvD_BwE#medicines</evidence>
+		<narrative>The information need involves understanding the relationship between alcohol consumption and COVID-19, including any effects alcohol might have on susceptibility to the virus, the severity of symptoms, or interactions with COVID-19 treatments or vaccines. Helpful documents will provide scientifically-backed information, such as studies or reports from reputable health organizations, that explore how alcohol affects the immune system in the context of COVID-19, or guidelines on alcohol consumption during the pandemic. They may also include expert opinions or analyses that synthesize current research findings. Harmful documents, on the other hand, might include unverified claims, misinformation, or anecdotal evidence that lacks scientific support, such as suggestions that alcohol can prevent or cure COVID-19, or documents that downplay the risks associated with excessive alcohol consumption during the pandemic without evidence.</narrative>
+	</topic>
+	<topic>
+		<number>25</number>
+		<title>High temperatures and humidity COVID-19</title>
+		<description>Can high temperatures and humidity prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters?gclid=CjwKCAjwxLH3BRApEiwAqX9arax-kTtiS7vFPdM5A59K4SCwn9WhBkFAcDrKE6VTdNbwZOnJCQhxDRoCQu8QAvD_BwE#medicines</evidence>
+		<narrative>The information need is to understand the relationship between environmental factors, specifically high temperatures and humidity, and the transmission or severity of COVID-19. Helpful documents will provide scientific studies, expert analyses, or credible data that explore how these climatic conditions might influence the spread or impact of the virus. They should include empirical evidence, such as statistical analyses or case studies, and be published by reputable sources like academic journals, health organizations, or government agencies. Documents that discuss the mechanisms by which temperature and humidity could affect viral transmission or provide insights into regional variations in COVID-19 cases related to climate would also be valuable. Conversely, harmful documents would include those that offer anecdotal evidence without scientific backing, spread misinformation, or come from unreliable sources. These might include opinion pieces without expert input, articles that misinterpret data, or sources known for disseminating false information.</narrative>
+	</topic>
+	<topic>
+		<number>26</number>
+		<title>Remdesivir COVID-19</title>
+		<description>Can remdesivir cure COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.health.harvard.edu/diseases-and-conditions/treatments-for-covid-19</evidence>
+		<narrative>The information need is to understand the role, effectiveness, and safety of Remdesivir in the treatment of COVID-19. Helpful documents will provide comprehensive and up-to-date information on clinical trials, studies, and expert analyses regarding the use of Remdesivir for COVID-19 patients. These documents should include data on its efficacy, dosage, side effects, and any regulatory approvals or guidelines from health organizations. Additionally, helpful sources may offer insights into the drug's mechanism of action and comparisons with other treatments. Harmful documents, on the other hand, may contain outdated, misleading, or unverified information, such as anecdotal evidence without scientific backing, or they may exaggerate benefits or downplay risks without proper context. Documents that lack citations from reputable medical sources or that present biased opinions without evidence should also be considered harmful.</narrative>
+	</topic>
+	<topic>
+		<number>27</number>
+		<title>Turmeric COVID-19</title>
+		<description>Can turmeric treat COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://africacheck.org/fbcheck/ginger-turmeric-wont-cure-coronavirus-or-other-diseases/</evidence>
+		<narrative>The information need is to understand the relationship between turmeric and COVID-19, including any potential benefits or risks associated with using turmeric in the context of the disease. Helpful documents will provide scientifically-backed information on how turmeric might affect COVID-19, such as studies on its anti-inflammatory properties or its impact on immune response. They may also include expert opinions from healthcare professionals or findings from clinical trials. Additionally, documents that discuss the safety and efficacy of using turmeric as a supplement during the pandemic would be valuable. Harmful documents are those that make unsubstantiated claims about turmeric curing or preventing COVID-19 without credible evidence. Documents that promote turmeric as a sole treatment for the virus, dismissing the importance of vaccines or other proven medical interventions, are also considered harmful. Furthermore, sources that provide misleading or false information about the dosage and potential side effects of turmeric in the context of COVID-19 should be avoided.</narrative>
+	</topic>
+	<topic>
+		<number>28</number>
+		<title>Vegetarian diet COVID-19</title>
+		<description>Can a vegetarian diet prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.snopes.com/fact-check/vegetarians-safe-from-covid19/</evidence>
+		<narrative>The information need involves understanding the relationship between plant-based diets and COVID-19, including any potential benefits or risks. Helpful documents will provide evidence-based information on how such diets might affect immune function, susceptibility to the virus, or recovery outcomes. They should include scientific studies, expert opinions, or guidelines from reputable health organizations. Additionally, helpful documents might explore nutritional aspects of vegetarian diets that could influence health during the pandemic. Harmful documents are those that offer anecdotal evidence without scientific backing, promote misinformation about diet and COVID-19, or make unfounded claims about the ability of vegetarian diets to prevent or cure the virus. Documents that lack credibility, such as those from non-expert sources or those that misinterpret scientific data, would also be considered harmful.</narrative>
+	</topic>
+	<topic>
+		<number>29</number>
+		<title>Flu shot COVID-19</title>
+		<description>Can getting a flu shot prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.reuters.com/article/uk-factcheck-flu-shot-contains-covid19/false-claim-the-flu-shot-contains-covid-19-idUSKBN22V29N</evidence>
+		<narrative>The user is seeking information on the relationship between influenza vaccinations and COVID-19, potentially including whether receiving a flu shot affects susceptibility to COVID-19, any interactions between the two vaccines, or public health recommendations regarding getting both vaccines. Helpful documents will provide scientifically backed information, such as studies or expert guidelines, on the safety and efficacy of receiving both vaccines, any potential interactions, and recommendations from health organizations. They may also include data on co-administration of the vaccines and any observed effects on COVID-19 infection rates or severity. Harmful documents would include those that spread misinformation, such as unverified claims about negative interactions between the vaccines, conspiracy theories, or anecdotal evidence lacking scientific support. Documents that fail to provide clear, evidence-based information or that misrepresent health guidelines would also be considered unhelpful.</narrative>
+	</topic>
+	<topic>
+		<number>30</number>
+		<title>ACE and ARBs COVID-19</title>
+		<description>Can ACE and ARBs worsen COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.who.int/news-room/commentaries/detail/covid-19-and-the-use-of-angiotensin-converting-enzyme-inhibitors-and-receptor-blockers</evidence>
+		<narrative>The information need involves understanding the relationship between certain medications and the COVID-19 virus, specifically focusing on angiotensin-converting enzyme inhibitors (ACE inhibitors) and angiotensin receptor blockers (ARBs). Helpful documents will provide scientific evidence or expert analysis on how these medications affect COVID-19 outcomes, including any potential benefits or risks associated with their use in patients with the virus. These documents should ideally include clinical studies, guidelines from health organizations, or expert opinions that discuss the mechanisms by which these drugs interact with the virus or influence the disease's progression. Harmful documents would be those that offer anecdotal evidence without scientific backing, contain misinformation, or lack credibility, such as opinion pieces without references to scientific studies or documents that misinterpret data, leading to incorrect conclusions about the safety or efficacy of these medications in the context of COVID-19.</narrative>
+	</topic>
+	<topic>
+		<number>31</number>
+		<title>Smoking COVID-19</title>
+		<description>Can smoking prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.who.int/news-room/q-a-detail/q-a-on-tobacco-and-covid-19</evidence>
+		<narrative>The information need is to understand the relationship between smoking and COVID-19, including how smoking might affect the risk of contracting the virus, the severity of the disease, and outcomes for smokers who become infected. Helpful documents will provide scientific studies, expert analyses, or official health guidelines that explore the impact of smoking on COVID-19 susceptibility, progression, and recovery. These documents should include data or expert opinions from reputable sources such as health organizations, research institutions, or peer-reviewed journals. They should also discuss any potential biological mechanisms that explain the interaction between smoking and COVID-19. Harmful documents are those that offer anecdotal evidence, unverified claims, or misinformation about smoking and COVID-19, especially if they downplay the risks associated with smoking or promote unproven treatments. Documents that lack credible sources or fail to provide a balanced view of the scientific consensus are also considered harmful.</narrative>
+	</topic>
+	<topic>
+		<number>32</number>
+		<title>Type O blood COVID-19</title>
+		<description>Can having type O blood prevent COVID-19</description>
+		<answer>no</answer>
+		<evidence>https://www.snopes.com/fact-check/blood-type-covid-19/</evidence>
+		<narrative>The information need is to understand the relationship between a specific blood type and COVID-19, including any scientific studies, statistical data, or expert opinions that explore how this blood type may affect susceptibility, severity, or outcomes of the disease. Helpful documents will provide evidence-based information, such as peer-reviewed research articles, reports from reputable health organizations, or expert analyses that discuss the correlation between this blood type and COVID-19. These documents should include data, study methodologies, and conclusions that are clearly presented and supported by credible sources. Harmful documents would include those that offer anecdotal evidence, unverified claims, or misinformation, such as personal blogs, opinion pieces without scientific backing, or articles from non-credible sources that may spread false or misleading information about the relationship between this blood type and COVID-19.</narrative>
+	</topic>
+	<topic>
+		<number>33</number>
+		<title>Methanol COVID-19</title>
+		<description>Can methanol prevent COVID-19</description>
+		<answer>no</answer>
+		<evidence>https://www.methanol.org/wp-content/uploads/2020/04/Methanol-Safety-During-the-COVID-19-Pandemic-3.pdf</evidence>
+		<narrative>The information need involves understanding the relationship between methanol and COVID-19, specifically focusing on the effects, risks, and any potential uses or misinformation related to methanol in the context of the pandemic. Helpful documents will provide accurate, evidence-based information about methanol's chemical properties, its potential toxic effects if ingested or misused, and any relevant public health advisories or incidents related to methanol poisoning during the COVID-19 pandemic. They may also discuss any myths or misinformation that circulated about methanol as a treatment or preventive measure for COVID-19, along with authoritative guidance from health organizations. Harmful documents, on the other hand, may contain misinformation or unverified claims about methanol being a cure or preventive measure for COVID-19, lack credible sources, or fail to highlight the dangers of methanol ingestion. Such documents might also downplay the health risks associated with methanol, potentially leading to public harm.</narrative>
+	</topic>
+	<topic>
+		<number>34</number>
+		<title>Handwashing COVID-19</title>
+		<description>Can handwashing prevent COVID-19?</description>
+		<answer>yes</answer>
+		<evidence>https://www.canada.ca/en/public-health/services/publications/diseases-conditions/reduce-spread-covid-19-wash-your-hands.html</evidence>
+		<narrative>The information need focuses on understanding the importance, techniques, and guidelines for effective handwashing to prevent the spread of COVID-19. Helpful documents will provide detailed explanations on the role of handwashing in reducing transmission, including scientific studies, expert recommendations, and step-by-step guides from reputable health organizations like the CDC or WHO. These documents should also address the frequency and duration of handwashing, the use of soap and water versus hand sanitizers, and any updates on best practices as new information about the virus emerges. Harmful documents may include misinformation or outdated practices that contradict current health guidelines, lack scientific backing, or promote ineffective or unsafe methods. Additionally, documents that downplay the significance of handwashing in controlling the spread of COVID-19 would also be considered harmful.</narrative>
+	</topic>
+	<topic>
+		<number>35</number>
+		<title>Nicotine patches COVID-19</title>
+		<description>Can Nicotine help COVID-19?</description>
+		<answer>yes</answer>
+		<evidence>https://www.cebm.net/covid-19/nicotine-replacement-therapy/</evidence>
+		<narrative>The information need focuses on understanding the relationship between nicotine patches and COVID-19, including any potential therapeutic effects, risks, or interactions. Helpful documents will provide scientific studies, clinical trial results, or expert analyses that explore how nicotine patches might influence COVID-19 outcomes, either positively or negatively. These documents should be from reputable sources such as peer-reviewed journals, health organizations, or authoritative news outlets, and should clearly present evidence, methodologies, and conclusions. Additionally, helpful documents may discuss the biological mechanisms by which nicotine could affect the virus or the immune response. Harmful documents, on the other hand, might include unverified claims, anecdotal evidence, or misinformation that lacks scientific backing. These could be found in non-credible sources, such as personal blogs or forums, and may exaggerate benefits or downplay risks without proper evidence. Documents that fail to differentiate between nicotine patches and other forms of nicotine consumption, or those that do not consider the broader context of COVID-19 treatment and prevention strategies, would also be considered unhelpful.</narrative>
+	</topic>
+	<topic>
+		<number>36</number>
+		<title>Cannabis COVID-19</title>
+		<description>Can Cannabis help COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.ccsa.ca/covid-19-and-cannabis-smoking-and-vaping-four-things-you-should-know-report</evidence>
+		<narrative>The information need involves understanding the relationship between cannabis and COVID-19, specifically focusing on any potential therapeutic effects, risks, or interactions. Helpful documents will provide scientifically-backed information, such as peer-reviewed studies or expert analyses, detailing how cannabis might affect COVID-19 symptoms, its impact on the immune system, or any contraindications. These documents should be current, given the evolving nature of COVID-19 research, and should clearly distinguish between anecdotal evidence and scientifically validated findings. Harmful documents, on the other hand, might include unverified claims, misinformation, or promotional content from sources lacking credibility, such as non-expert blogs or advertisements, which could mislead readers about the efficacy or safety of cannabis in the context of COVID-19.</narrative>
+	</topic>
+	<topic>
+		<number>37</number>
+		<title>Hydroxychloroquine COVID-19</title>
+		<description>Can Hydroxychloroquine worsen COVID-19?</description>
+		<answer>yes</answer>
+		<evidence>https://www.fda.gov/drugs/drug-safety-and-availability/fda-cautions-against-use-hydroxychloroquine-or-chloroquine-covid-19-outside-hospital-setting-or</evidence>
+		<narrative>The information need involves understanding the role, effectiveness, and safety of hydroxychloroquine in the treatment or prevention of COVID-19. Helpful documents will provide evidence-based information, including results from clinical trials, meta-analyses, or systematic reviews that evaluate the efficacy and safety of hydroxychloroquine for COVID-19 patients. These documents should be from reputable sources such as peer-reviewed medical journals, health organizations, or government health agencies. They should present clear data, discuss potential benefits and risks, and offer conclusions based on scientific evidence. Harmful documents, on the other hand, may include anecdotal reports, opinion pieces, or unverified claims that lack scientific backing. These documents might exaggerate benefits or downplay risks without supporting data, potentially leading to misinformation. Documents that fail to cite credible sources or that misinterpret scientific findings would also be considered harmful.</narrative>
+	</topic>
+	<topic>
+		<number>38</number>
+		<title>Monoclonal Antibodies COVID-19</title>
+		<description>Can monoclonal antibodies cure COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://jamanetwork.com/journals/jama/fullarticle/2767383</evidence>
+		<narrative>The information need is to understand the role, effectiveness, and availability of monoclonal antibodies in the treatment and prevention of COVID-19. Helpful documents will provide detailed information on how these antibodies work, their approval status by health authorities, clinical trial results, and their use in various patient populations. They should also discuss any side effects, cost considerations, and logistical aspects of distribution and administration. Additionally, helpful documents may include expert opinions, guidelines from health organizations, and comparisons with other COVID-19 treatments. Harmful documents are those that contain outdated or inaccurate information, lack scientific backing, or present biased views without evidence. Documents that spread misinformation about the safety or efficacy of monoclonal antibodies, or those that fail to distinguish between different types of treatments, would also be considered harmful.</narrative>
+	</topic>
+	<topic>
+		<number>39</number>
+		<title>Bleach COVID-19</title>
+		<description>Can bleach prevent COVID-19?</description>
+		<answer>yes</answer>
+		<evidence>https://www.canr.msu.edu/news/covid-19-disinfecting-with-bleach</evidence>
+		<narrative>The information need involves understanding the relationship between bleach and COVID-19, specifically focusing on the safe and effective use of bleach as a disinfectant against the virus. Helpful documents will provide authoritative guidance from reputable health organizations, such as the CDC or WHO, on how to properly use bleach to disinfect surfaces to prevent the spread of COVID-19. These documents should include clear instructions on dilution ratios, application methods, and safety precautions to avoid harmful exposure. Additionally, they may discuss the efficacy of bleach against the virus and any relevant scientific studies supporting its use. Harmful documents, on the other hand, may contain misinformation or dangerous advice, such as ingesting bleach or using it in ways that pose health risks. They might also include unverified claims or pseudoscientific information that could lead to improper use or misunderstanding of bleach's role in combating COVID-19.</narrative>
+	</topic>
+	<topic>
+		<number>40</number>
+		<title>Breast milk COVID-19</title>
+		<description>Can breast milk prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.cbsnews.com/news/coronavirus-breast-milk-cannot-prevent-cure-covid19/</evidence>
+		<narrative>The information need is to understand the relationship between breastfeeding and COVID-19, specifically whether the virus can be transmitted through breast milk and if breastfeeding is safe for mothers who have COVID-19. Helpful documents will provide scientific studies, expert guidelines, or official health organization recommendations on breastfeeding practices during the pandemic. They should address the safety of breast milk, potential transmission risks, and any protective benefits it might offer against the virus. Additionally, they should include up-to-date information reflecting the latest research findings and public health advice. Harmful documents would contain misinformation, lack credible sources, or spread unfounded claims about the dangers of breastfeeding in the context of COVID-19. Such documents may cause unnecessary fear or lead to incorrect health practices by not relying on evidence-based information.</narrative>
+	</topic>
+	<topic>
+		<number>41</number>
+		<title>Hib vaccine COVID-19</title>
+		<description>Can Hib vaccine prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://kidsboostimmunity.com/coronavirus-covid-19-myths-be-aware</evidence>
+		<narrative>The information need involves understanding the relationship, if any, between the Haemophilus influenzae type b (Hib) vaccine and COVID-19. Helpful documents would provide scientific evidence or expert opinions on whether the Hib vaccine offers any protection against COVID-19, details on any research studies conducted on this topic, or information on how the immune response from the Hib vaccine might interact with COVID-19. Additionally, documents that explain the differences in the pathogens targeted by each vaccine and any public health recommendations regarding their use would be beneficial. Harmful documents would include those that spread misinformation, such as unfounded claims that the Hib vaccine can prevent COVID-19 without scientific backing, or those that conflate unrelated medical information, leading to confusion. Documents that lack credibility, such as those from non-expert sources or those that do not cite reputable studies, would also be considered harmful.</narrative>
+	</topic>
+	<topic>
+		<number>42</number>
+		<title>Inhalers COVID-19</title>
+		<description>Can inhalers help COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://erj.ersjournals.com/content/early/2020/04/20/13993003.01009-2020</evidence>
+		<narrative>The information need is to understand the role and effectiveness of inhalers in the context of COVID-19, including their use for treatment or symptom management, potential benefits, risks, and any clinical guidelines or studies related to their application. Helpful documents will provide evidence-based information, such as clinical studies, expert guidelines, or authoritative health resources that discuss the use of inhalers for COVID-19 patients, detailing their impact on respiratory symptoms, safety considerations, and any specific recommendations for patients with pre-existing respiratory conditions like asthma or COPD. These documents should be current, reflecting the latest research and medical consensus. Harmful documents would include those that offer anecdotal or unverified claims about inhalers, lack scientific backing, or spread misinformation about their efficacy or safety in treating COVID-19. Documents that are outdated or do not distinguish between different types of inhalers and their specific uses in the context of COVID-19 would also be considered unhelpful.</narrative>
+	</topic>
+	<topic>
+		<number>43</number>
+		<title>Omega-3 COVID-19</title>
+		<description>Can Omega-3 prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.sciencedirect.com/science/article/abs/pii/S0891584920311412</evidence>
+		<narrative>The user is seeking information on the relationship between omega-3 fatty acids and COVID-19, including any potential benefits, risks, or effects these nutrients may have on the prevention, treatment, or progression of the disease. Helpful documents will provide scientific studies, clinical trial results, or expert analyses that explore how omega-3 fatty acids might influence COVID-19 outcomes, supported by credible sources such as peer-reviewed journals or reputable health organizations. These documents should offer clear explanations, evidence-based conclusions, and, if applicable, dosage recommendations or safety considerations. Harmful documents would include those that make unsubstantiated claims, lack scientific backing, or promote omega-3 as a cure without evidence. Additionally, documents that misrepresent data, rely on anecdotal evidence, or originate from non-credible sources would not meet the user's information need effectively.</narrative>
+	</topic>
+	<topic>
+		<number>44</number>
+		<title>IVIG COVID-19</title>
+		<description>Can IVIG cure COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://professionaleducation.blood.ca/en/transfusion/covid-19-and-transfusion-medicine</evidence>
+		<narrative>The information need is to understand the relationship between intravenous immunoglobulin (IVIG) therapy and COVID-19, including its potential uses, effectiveness, and any associated risks or benefits in the context of treating or managing COVID-19. Helpful documents will provide detailed information on clinical studies, trials, or expert reviews that discuss the use of IVIG in COVID-19 patients, including outcomes, dosage, and patient selection criteria. They may also include guidelines from health organizations or expert opinions on the role of IVIG in COVID-19 treatment protocols. Harmful documents would be those that provide anecdotal evidence without scientific backing, contain outdated or inaccurate information, or promote IVIG as a cure without evidence. Additionally, documents that fail to distinguish between IVIG and other treatments or that misrepresent the findings of scientific studies would also be considered unhelpful.</narrative>
+	</topic>
+	<topic>
+		<number>45</number>
+		<title>Remestemcel-l COVID-19</title>
+		<description>Can remestemcel-l cure COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.forbes.com/sites/alexknapp/2020/05/02/large-scale-clinical-trials-of-mesoblasts-stem-cell-treatment-for-covid-19-coronavirus-set-to-begin-soon</evidence>
+		<narrative>The information need is to understand the role and effectiveness of Remestemcel-L in the treatment of COVID-19. Helpful documents will provide detailed information on clinical trials, studies, or expert reviews discussing the use of Remestemcel-L for COVID-19, including its mechanism of action, efficacy, safety, and regulatory status. They may also include data on patient outcomes, side effects, and comparisons with other treatments. Harmful documents would include those that offer unsubstantiated claims, lack scientific backing, or present outdated or inaccurate information about the treatment. Additionally, documents that focus on unrelated uses of Remestemcel-L or COVID-19 treatments without mentioning the specific context of this therapy would also be considered unhelpful.</narrative>
+	</topic>
+	<topic>
+		<number>46</number>
+		<title>Mosquito COVID-19</title>
+		<description>Can mosquitos cause COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters#mosquito-bites</evidence>
+		<narrative>The information need is to determine whether mosquitoes can transmit the COVID-19 virus, as well as to understand any related scientific findings or public health guidelines. Helpful documents will provide authoritative information from credible sources such as the World Health Organization, Centers for Disease Control and Prevention, or peer-reviewed scientific studies that address the transmission of COVID-19, specifically in relation to mosquitoes. These documents should clearly explain the mechanisms of virus transmission and provide evidence-based conclusions. Harmful documents would include those that spread misinformation or unverified claims, lack scientific backing, or come from non-credible sources, potentially leading to public misunderstanding about the role of mosquitoes in the spread of COVID-19.</narrative>
+	</topic>
+	<topic>
+		<number>47</number>
+		<title>Homemade Vodka Sanitizer COVID-19</title>
+		<description>Can Homemade Vodka Sanitizer prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.cbc.ca/news/covid-19-hand-sanitizer-fact-check-1.5510163</evidence>
+		<narrative>The user is seeking information on how to make hand sanitizer using vodka as an ingredient, specifically in the context of the COVID-19 pandemic. Helpful documents will provide clear, safe, and effective recipes or guidelines for creating hand sanitizer at home, including the necessary alcohol concentration to ensure efficacy against the virus. They should also include safety precautions, potential risks, and any official health recommendations or warnings. Harmful documents might offer inaccurate or unsafe recipes, suggest using vodka with insufficient alcohol content to kill the virus, or fail to mention important safety information and guidelines from health authorities. Documents that spread misinformation or downplay the importance of proper sanitization methods would also be considered harmful.</narrative>
+	</topic>
+	<topic>
+		<number>48</number>
+		<title>Ribavirin COVID-19</title>
+		<description>Can Ribavirin help COVID-19?</description>
+		<answer>no</answer>
+		<evidence>http://www.bccdc.ca/Health-Professionals-Site/Documents/Guidelines_Unproven_Therapies_COVID-19.pdf</evidence>
+		<narrative>The information need involves understanding the role, efficacy, and safety of Ribavirin in the treatment of COVID-19. Helpful documents will provide detailed clinical trial results, expert analyses, or official health guidelines discussing Ribavirin's effectiveness, dosage, side effects, and any regulatory approvals or warnings related to its use for COVID-19. These documents should be current, evidence-based, and sourced from reputable medical journals, health organizations, or government health agencies. Harmful documents would include those that offer anecdotal evidence without scientific backing, outdated information, or unverified claims about Ribavirin's benefits or risks in treating COVID-19. Such documents may also include misinformation or lack proper citations, potentially leading to misunderstandings about its use and safety.</narrative>
+	</topic>
+	<topic>
+		<number>49</number>
+		<title>Echinacea COVID-19</title>
+		<description>Can Echinacea prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://www.nccih.nih.gov/health/echinacea</evidence>
+		<narrative>The information need is to understand the relationship between Echinacea and COVID-19, including any potential benefits, risks, or lack of effects that Echinacea may have in the context of COVID-19 prevention or treatment. Helpful documents will provide scientifically-backed information, such as results from clinical trials, expert reviews, or authoritative health sources discussing Echinacea's efficacy, safety, and mechanism of action related to COVID-19. These documents should be current, given the evolving nature of COVID-19 research, and should clearly distinguish between evidence-based findings and anecdotal claims. Harmful documents might include those that make unsubstantiated claims about Echinacea's ability to cure or prevent COVID-19 without scientific evidence, promote misinformation, or fail to cite credible sources. Additionally, documents that are outdated or do not consider the latest research developments could also be misleading and unhelpful.</narrative>
+	</topic>
+	<topic>
+		<number>50</number>
+		<title>Lemon water COVID-19</title>
+		<description>Can drinking lemon water prevent COVID-19?</description>
+		<answer>no</answer>
+		<evidence>https://health.clevelandclinic.org/can-drinking-lemon-juice-kill-covid-19/</evidence>
+		<narrative>The information need is to understand the potential benefits or risks of consuming lemon water in relation to COVID-19. Helpful documents will provide scientifically backed information on whether lemon water has any effect on preventing, treating, or alleviating symptoms of COVID-19. These documents should include studies, expert opinions, or guidance from reputable health organizations. They may also discuss the nutritional content of lemon water and its general health benefits or drawbacks, particularly in the context of viral infections. Harmful documents are those that make unsubstantiated claims about lemon water curing or preventing COVID-19 without credible evidence. Such documents may spread misinformation, potentially leading individuals to rely on ineffective remedies instead of following proven medical advice.</narrative>
+	</topic>
+</topics>
