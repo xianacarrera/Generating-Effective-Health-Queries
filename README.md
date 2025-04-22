@@ -46,5 +46,5 @@ With the non-deterministic nature of LLMs in mind, for transparency and reproduc
 
 
 ## Contact
-For any questions or issues, feel free to reach out at [xiana.carrera.alonso@usc.es](mailto:xiana.carrera.alonso@usc.es).
+For any questions or issues, feel free to reach out at [xiana.carrera@rai.usc.es](mailto:xiana.carrera@rai.usc.es).
 

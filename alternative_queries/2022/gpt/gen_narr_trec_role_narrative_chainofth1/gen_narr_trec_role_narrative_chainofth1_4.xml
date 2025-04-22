@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<topics>
+	<topic>
+		<number>151</number>
+		<question>Using tea bags to manage bleeding after a tooth is pulled</question>
+		<query>tea bags clot blood pulled teeth</query>
+		<background>The user is seeking information on whether tea bags can be used to help stop bleeding after a tooth extraction. Helpful documents will provide evidence-based information on the use of tea bags for this purpose, including any scientific studies, dental professional recommendations, or anecdotal evidence supporting their effectiveness in clotting blood after dental procedures. These documents should also discuss the mechanism by which tea bags might aid in hemostasis, such as the presence of tannins, and provide guidance on how to properly use them in this context. Harmful documents would include those that provide inaccurate or misleading information, lack credible sources, or fail to address the specific use of tea bags for managing post-extraction bleeding. Additionally, documents that focus on unrelated uses of tea bags or discuss general dental care without addressing the specific need are not useful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.webmd.com/oral-health/wisdom-teeth</evidence>
+	</topic>
+	<topic>
+		<number>152</number>
+		<question>psychological effects of using crystals for healing</question>
+		<query>crystals heal</query>
+		<background>The information need is to explore the claims and evidence surrounding the use of crystals for healing purposes. Helpful documents will provide a balanced view, including scientific studies, expert opinions from medical professionals, and anecdotal evidence from individuals who use crystals for healing. These documents should discuss the mechanisms by which crystals are purported to work, any historical or cultural contexts, and potential psychological or placebo effects. Harmful documents are those that make unsubstantiated claims without evidence, promote crystals as a replacement for proven medical treatments, or contain misleading information that could endanger health by discouraging conventional medical care. Documents that are overly promotional or dismissive without consideration of the broader context are also less useful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.webmd.com/balance/news/20180116/can-crystals-heal-separating-facets-from-facts</evidence>
+	</topic>
+	<topic>
+		<number>153</number>
+		<question>Benefits and risks of collagen supplements in osteoarthritis management</question>
+		<query>collagen supplements osteoarthritis</query>
+		<background>The information need is to understand the efficacy, safety, and potential benefits or drawbacks of using collagen supplements for managing osteoarthritis. Helpful documents will provide scientific evidence from clinical trials or studies that evaluate the impact of collagen supplements on osteoarthritis symptoms, such as pain relief, joint function improvement, or cartilage preservation. These documents should include details on study design, sample size, dosage, duration, and any reported side effects. Additionally, expert opinions or reviews summarizing the current state of research on this topic are valuable. Harmful documents are those that lack scientific backing, such as anecdotal claims or promotional content from supplement manufacturers without credible references. Documents that misrepresent study findings or omit critical information about potential risks or contraindications are also considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://link.springer.com/article/10.1007/s40744-020-00240-5</evidence>
+	</topic>
+	<topic>
+		<number>154</number>
+		<question>Expert opinions on mobile phones and cancer</question>
+		<query>cell phone cancer</query>
+		<background>The user is seeking information on the potential link between mobile phone usage and cancer risk. Helpful documents will provide scientific studies, expert opinions, or authoritative health organization reports that discuss the relationship between electromagnetic radiation from mobile phones and cancer. These documents should include recent research findings, statistical data, and any consensus or ongoing debates within the scientific community. They should also address the methodologies used in studies and any limitations or uncertainties in the current understanding. Harmful documents are those that present unsubstantiated claims, rely on anecdotal evidence, or promote conspiracy theories without credible sources. Such documents may exaggerate risks or dismiss scientific research without valid reasoning, potentially misleading the user.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.cancer.gov/about-cancer/causes-prevention/risk/radiation/cell-phones-fact-sheet</evidence>
+	</topic>
+	<topic>
+		<number>155</number>
+		<question>Medical studies on WD-40 and joint health</question>
+		<query>WD-40 arthritis</query>
+		<background>The information need involves understanding whether a specific product is effective or recommended for alleviating symptoms associated with joint pain. Helpful documents will provide credible and scientifically-backed information regarding the use of this product in relation to joint health, including any medical studies, expert opinions, or official guidelines from health organizations. These documents should clearly outline the potential benefits, risks, and any side effects associated with its use for this purpose. Conversely, harmful documents may include anecdotal evidence without scientific support, misleading claims, or promotional content lacking medical validation. Such documents might exaggerate benefits or downplay risks, potentially leading to unsafe usage or false expectations.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://wd40.co.uk/tips-and-tricks/can-wd-40-help-arthritis-stiff-joints/</evidence>
+	</topic>
+	<topic>
+		<number>156</number>
+		<question>prevention and treatment of mosquito-borne diseases</question>
+		<query>mosquito bites sick</query>
+		<background>The user is seeking information on the health implications of being bitten by mosquitoes, specifically focusing on the potential for illness transmission. Helpful documents will provide detailed information on diseases that can be transmitted through mosquito bites, such as malaria, dengue fever, Zika virus, and West Nile virus. These documents should include symptoms, prevention methods, and treatment options for these diseases. Additionally, they may offer insights into the geographic regions where these diseases are prevalent and any recent outbreaks or public health advisories. Harmful documents would include those that provide inaccurate or misleading information about the risks associated with mosquito bites, such as downplaying the seriousness of mosquito-borne illnesses or promoting unproven or unsafe prevention and treatment methods. Documents that lack scientific backing or are overly anecdotal without credible sources would also be considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.mayoclinic.org/diseases-conditions/mosquito-bites/symptoms-causes/syc-20375310</evidence>
+	</topic>
+	<topic>
+		<number>157</number>
+		<question>BRCA1 BRCA2 cancer inheritance</question>
+		<query>cancer inherited</query>
+		<background>The user is seeking information on the genetic aspects of cancer, specifically how certain types of cancer may be inherited or passed down through family lines. Helpful documents will provide detailed explanations of the genetic mechanisms that contribute to the hereditary nature of cancer, including discussions on specific genes, such as BRCA1 and BRCA2, that are known to increase cancer risk. These documents should also offer insights into the likelihood of inheritance, potential genetic testing options, and implications for family members. Additionally, they should be authored by credible sources, such as medical institutions or peer-reviewed journals, ensuring the information is accurate and up-to-date. Harmful documents, on the other hand, might contain misleading or incorrect information about the hereditary nature of cancer, lack scientific backing, or promote unverified treatments. Such documents may also fail to differentiate between hereditary and non-hereditary cancer types, leading to confusion or unnecessary alarm.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.cancer.gov/about-cancer/causes-prevention/genetics</evidence>
+	</topic>
+	<topic>
+		<number>158</number>
+		<question>autism and vaccines scientific consensus</question>
+		<query>vaccines autism</query>
+		<background>The information need is to understand the relationship, if any, between vaccines and autism, including scientific evidence, expert opinions, and public health perspectives. Helpful documents will provide evidence-based information, such as peer-reviewed studies, systematic reviews, and statements from reputable health organizations like the CDC or WHO, which clarify the scientific consensus on the topic. These documents should present data, methodologies, and conclusions transparently, and address common misconceptions. Harmful documents may include those that spread misinformation, rely on anecdotal evidence, or present unverified claims without scientific backing. Such documents might use emotional language or conspiracy theories to mislead readers, potentially causing public health risks by discouraging vaccination.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://pubmed.ncbi.nlm.nih.gov/24814559/</evidence>
+	</topic>
+	<topic>
+		<number>159</number>
+		<question>medical journal articles on baking soda and cancer</question>
+		<query>baking soda cancer</query>
+		<background>The information need is to understand the relationship between a common household substance and its potential effects on a serious health condition. Helpful documents will provide scientifically backed information, including studies or expert opinions, on the efficacy or lack thereof of this substance in treating or preventing the health condition. They should include details from reputable sources such as medical journals, research institutions, or health organizations, and offer a balanced view that considers both potential benefits and risks. Harmful documents, on the other hand, may contain unverified claims, anecdotal evidence, or pseudoscientific information that could mislead individuals seeking legitimate medical advice. These documents might promote the substance as a miracle cure without evidence or fail to mention possible side effects or interactions with conventional treatments.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.webmd.com/a-to-z-guides/baking-soda-do-dont</evidence>
+	</topic>
+	<topic>
+		<number>160</number>
+		<question>how squats affect knee joints</question>
+		<query>squats knees</query>
+		<background>The user is seeking information on the relationship between knee health and the exercise in question. Helpful documents will provide insights into how this exercise affects the knees, including potential benefits, risks, and proper techniques to minimize injury. They may include expert opinions, scientific studies, or guidelines from reputable fitness organizations. Additionally, documents that offer advice on modifications for individuals with pre-existing knee conditions would be valuable. Harmful documents would include those that provide incorrect or misleading information about the exercise's impact on knee health, lack credible sources, or promote unsafe practices that could lead to injury. Documents that focus solely on unrelated aspects of the exercise, such as its impact on other body parts without mentioning the knees, would also be less useful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://pubmed.ncbi.nlm.nih.gov/23821469/</evidence>
+	</topic>
+	<topic>
+		<number>161</number>
+		<question>How ACE inhibitors affect erectile function</question>
+		<query>ace inhibitors erectile dysfunction</query>
+		<background>The information need is to understand the relationship between a specific class of medications used to treat high blood pressure and heart conditions, and their potential impact on sexual health, specifically erectile dysfunction. Helpful documents will provide detailed explanations of how these medications work, any known side effects related to sexual function, and any relevant clinical studies or expert opinions that discuss the prevalence and mechanisms of erectile dysfunction as a side effect. They may also offer guidance on managing or mitigating these side effects. Harmful documents would include those that provide inaccurate or misleading information, lack scientific backing, or fail to address the connection between the medications and erectile dysfunction, potentially leading to confusion or mismanagement of the condition.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.webmd.com/erectile-dysfunction/guide/blood-pressure-medication-and-ed</evidence>
+	</topic>
+	<topic>
+		<number>162</number>
+		<question>Evidence-based information on morphine addiction risks</question>
+		<query>morphine addictive</query>
+		<background>The information need involves understanding the addictive properties of a specific opioid medication, including its potential for dependence, withdrawal symptoms, and the risk factors associated with addiction. Helpful documents will provide detailed, evidence-based information from reputable sources such as medical journals, government health websites, or expert analyses. These documents should discuss the pharmacological aspects, clinical studies, and statistics related to addiction, as well as offer guidance on safe usage and alternative pain management options. Harmful documents might include anecdotal evidence lacking scientific backing, sensationalized media reports that exaggerate risks without context, or promotional content from unreliable sources that downplay the potential for addiction. Such documents could mislead individuals seeking factual information about the medication's risks and benefits.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.webmd.com/connect-to-care/addiction-treatment-recovery/prescription/why-is-morphine-addictive</evidence>
+	</topic>
+	<topic>
+		<number>163</number>
+		<question>scientific studies on fruit juice and diabetes</question>
+		<query>fruit juice diabetes</query>
+		<background>The information need is to understand the relationship between consuming fruit juice and managing diabetes, including potential benefits or risks. Helpful documents will provide evidence-based information on how fruit juice consumption affects blood sugar levels, insulin sensitivity, and overall diabetes management. They should include scientific studies, expert opinions from healthcare professionals, and guidelines from reputable health organizations. These documents should also discuss the nutritional content of various fruit juices and compare their effects to whole fruits. Harmful documents are those that offer anecdotal evidence without scientific backing, promote fruit juices as a cure for diabetes without credible evidence, or provide misleading information that could lead to poor diabetes management. Documents that lack citations, rely on outdated research, or are biased towards selling specific products are also considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3969361/</evidence>
+	</topic>
+	<topic>
+		<number>164</number>
+		<question>clinical evidence for using magnetic wristbands in arthritis</question>
+		<query>magnetic wrist straps arthritis</query>
+		<background>The information need is to determine the effectiveness, safety, and scientific basis of using wrist straps embedded with magnets as a treatment for arthritis symptoms. Helpful documents will provide evidence-based information, including clinical studies, expert reviews, or meta-analyses that evaluate the efficacy of magnetic wrist straps in alleviating arthritis pain or improving joint function. These documents should discuss the mechanism of action, if any, and compare the use of magnetic wrist straps to other treatment options. Additionally, helpful documents may include patient testimonials or case studies that offer insights into real-world experiences, provided they are balanced with scientific analysis. Harmful documents are those that make unsubstantiated claims, lack scientific backing, or are promotional in nature, focusing on selling products rather than providing objective information. Documents that dismiss alternative treatments without evidence or fail to consider potential placebo effects or psychological benefits may also be considered less helpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3774818/</evidence>
+	</topic>
+	<topic>
+		<number>165</number>
+		<question>correct form for sit ups and common mistakes</question>
+		<query>sit ups</query>
+		<background>The information need is to understand the proper technique, benefits, variations, and potential risks associated with a specific abdominal exercise. Helpful documents will provide clear, detailed instructions on how to perform the exercise correctly, including descriptions or illustrations of form and posture. They will also discuss the exercise's benefits, such as core strengthening and improved posture, and offer variations for different fitness levels. Additionally, they may address common mistakes and how to avoid injury. Harmful documents will lack detailed guidance, offer incorrect or unsafe advice, or fail to address the exercise's potential risks. They may also provide misleading information about the effectiveness of the exercise in achieving fitness goals.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.health.harvard.edu/staying-healthy/want-a-stronger-core-skip-the-sit-ups</evidence>
+	</topic>
+	<topic>
+		<number>166</number>
+		<question>speech problems in left-handers forced to use right hand</question>
+		<query>speech problems right handed left handed forced switch</query>
+		<background>The information need involves understanding the potential speech problems that may arise when an individual who is naturally left-handed is forced to switch to using their right hand. Helpful documents will provide insights into the neurological and psychological effects of handedness switching, particularly focusing on any speech-related issues. These documents should include studies or expert analyses on the correlation between handedness and speech development, historical or anecdotal evidence of forced hand switching, and any documented cases or research findings that explore the impact on speech. Additionally, helpful sources may discuss the broader implications of handedness on brain function and language processing. Harmful documents would be those that lack credible sources or scientific backing, offer anecdotal evidence without context, or focus on unrelated aspects of handedness that do not address the specific concern of speech problems. Documents that are overly technical without clear explanations or those that provide misleading or incorrect information about the relationship between handedness and speech would also be considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://pubmed.ncbi.nlm.nih.gov/22332811/</evidence>
+	</topic>
+	<topic>
+		<number>167</number>
+		<question>health effects of urine therapy according to studies</question>
+		<query>health benefits drinking your urine</query>
+		<background>The information need is to understand the purported health benefits and potential risks associated with the practice of consuming one's own urine. Helpful documents will provide evidence-based information, including scientific studies, expert opinions from medical professionals, and data on the physiological effects of urine consumption. They should also discuss the historical context and cultural practices related to this behavior, as well as any documented health outcomes, both positive and negative. Harmful documents, on the other hand, may include anecdotal claims without scientific backing, misinformation, or content that promotes urine consumption as a cure-all without acknowledging potential health risks or the lack of scientific consensus. Documents that fail to provide a balanced view or omit warnings about possible dangers would also be considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.healthline.com/health/drinking-urine</evidence>
+	</topic>
+	<topic>
+		<number>168</number>
+		<question>Scientific studies on pink salt nutrition</question>
+		<query>pink salt</query>
+		<background>The user is seeking comprehensive information about a type of salt that is often characterized by its distinctive color. Helpful documents will provide detailed descriptions of its composition, origins, and potential health benefits or risks. They may also include comparisons to other types of salt, culinary uses, and any cultural or historical significance. Additionally, scientific studies or expert opinions on its nutritional value and impact on health would be beneficial. Harmful documents are those that offer misleading or incorrect information, such as unsubstantiated health claims or conspiracy theories. Documents that focus solely on unrelated topics or fail to provide accurate and relevant details about this specific type of salt will not meet the user's information needs.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7603209/</evidence>
+	</topic>
+	<topic>
+		<number>169</number>
+		<question>expert opinions on massage for cellulite treatment</question>
+		<query>massage cellulite</query>
+		<background>The user is seeking information on the effectiveness of massage techniques in reducing or managing the appearance of cellulite. Helpful documents will provide evidence-based information on how massage may impact cellulite, including scientific studies, expert opinions, or detailed explanations of the mechanisms by which massage could affect cellulite. These documents may also include descriptions of specific massage techniques, their frequency, duration, and any associated benefits or limitations. Additionally, helpful sources might compare massage with other cellulite treatments, offering a balanced view of its efficacy. Harmful documents would include those that make unsubstantiated claims, lack credible sources, or promote massage as a guaranteed cure without evidence. Documents that focus solely on selling products or services without providing useful information or context about cellulite and massage would also be considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://pubmed.ncbi.nlm.nih.gov/26147372/</evidence>
+	</topic>
+	<topic>
+		<number>170</number>
+		<question>fish oil cholesterol clinical trials</question>
+		<query>fish oil cholesterol</query>
+		<background>The information need is to understand the relationship between fish oil and cholesterol levels, including any effects fish oil may have on cholesterol, the mechanisms behind these effects, and any relevant scientific studies or expert opinions. Helpful documents will provide evidence-based information, such as results from clinical trials, meta-analyses, or reviews from reputable medical journals that discuss how fish oil impacts cholesterol levels. They may also include expert opinions from recognized health organizations or professionals in the field of nutrition or cardiology. Additionally, helpful documents might offer insights into the biochemical mechanisms by which fish oil influences cholesterol. Harmful documents, on the other hand, may contain anecdotal evidence, lack scientific backing, or present misleading or inaccurate information. These could include articles from non-credible sources, those with conflicts of interest, or documents that make exaggerated claims without proper evidence.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://pubmed.ncbi.nlm.nih.gov/18774613/</evidence>
+	</topic>
+	<topic>
+		<number>171</number>
+		<question>risk factors for marijuana addiction</question>
+		<query>become addicted to weed</query>
+		<background>The information need involves understanding the potential for developing a dependency on cannabis, including the psychological and physiological aspects of addiction, risk factors, and signs of dependency. Helpful documents would provide evidence-based information on the nature of cannabis use disorder, including scientific studies, expert opinions, and statistics on prevalence and risk factors. They would also offer insights into the mechanisms of addiction, potential health impacts, and guidance on prevention and treatment options. Harmful documents would include those that downplay or dismiss the possibility of addiction without scientific backing, promote misinformation, or provide anecdotal evidence without credible sources. Additionally, documents that sensationalize or stigmatize users without offering constructive information would also be considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.cdc.gov/marijuana/health-effects/addiction.html</evidence>
+	</topic>
+	<topic>
+		<number>172</number>
+		<question>Nutritional considerations for maintaining a healthy vegan diet</question>
+		<query>vegan diets healthy</query>
+		<background>The information need is to determine the health implications of adopting a plant-based diet that excludes all animal products. Helpful documents will provide evidence-based information, including scientific studies, expert opinions, and nutritional analyses, that discuss the potential health benefits and risks associated with such diets. These documents should cover aspects like nutrient intake, long-term health outcomes, and comparisons with other dietary patterns. They should also address common concerns, such as protein, vitamin B12, iron, and calcium intake, and provide guidance on how to maintain a balanced and nutritionally adequate vegan diet. Harmful documents, on the other hand, may present biased or anecdotal information without scientific backing, make exaggerated claims about the benefits or dangers of vegan diets, or fail to consider the nutritional complexities involved. Such documents might also ignore the need for careful planning to ensure nutritional adequacy, leading to misinformation about the healthiness of vegan diets.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://pubmed.ncbi.nlm.nih.gov/26853923/</evidence>
+	</topic>
+	<topic>
+		<number>173</number>
+		<question>Why is hydroquinone banned in Europe?</question>
+		<query>hydroquinone banned europe</query>
+		<background>The information need is to determine whether a specific chemical compound has been prohibited in European countries, including details on the reasons for such a ban, the scope of the prohibition, and any relevant regulatory or legal frameworks involved. Helpful documents will provide authoritative and up-to-date information from credible sources such as government agencies, scientific studies, or reputable news outlets. These documents should clearly explain the regulatory status of the compound in Europe, including any specific countries where it is banned, the rationale behind the decision, and any exceptions or conditions associated with the ban. Harmful documents would include those that provide outdated, inaccurate, or misleading information, lack credible sources, or fail to address the regulatory context in Europe. Documents that are overly technical without offering clear explanations or that focus on unrelated regions or topics would also be less useful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.mcgill.ca/oss/article/aging-cancer-controversial-science-cosmetics-drugs-health-history/does-hydroquinone-have-dark-side</evidence>
+	</topic>
+	<topic>
+		<number>174</number>
+		<question>risk factors for UTIs in men and how to treat them</question>
+		<query>men uti infections</query>
+		<background>The information need is to understand the causes, symptoms, prevention, and treatment options for urinary tract infections in men. Helpful documents will provide comprehensive and accurate medical information, including explanations of how these infections occur in men, risk factors, diagnostic procedures, and effective treatment methods. They may also include advice on lifestyle changes or preventive measures to reduce the risk of infection. Documents that offer insights from medical professionals or cite reputable medical sources, such as peer-reviewed journals or official health organization guidelines, are particularly valuable. Harmful documents are those that contain inaccurate or misleading information, lack credible sources, or promote unproven remedies. Additionally, documents that focus solely on urinary tract infections in women without addressing the specific aspects related to men would not meet the information need.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.webmd.com/men/urinary-tract-infection-in-men</evidence>
+	</topic>
+	<topic>
+		<number>175</number>
+		<question>role of vitamin A in carrots for eye health</question>
+		<query>carrots eyes</query>
+		<background>The user is seeking information on the relationship between carrots and eye health, specifically looking for evidence or explanations of how carrots may benefit vision. Helpful documents will provide scientific studies, nutritional information, or expert opinions that explain the role of carrots in maintaining or improving eye health, such as their vitamin A content and its effects on vision. These documents should be credible, well-researched, and preferably from reputable sources like health organizations or peer-reviewed journals. Harmful documents would include those that offer anecdotal evidence without scientific backing, make exaggerated or false claims about the benefits of carrots for eyesight, or come from unreliable sources that lack authority in the field of nutrition or health.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.webmd.com/food-recipes/benefits-carrots</evidence>
+	</topic>
+	<topic>
+		<number>176</number>
+		<question>medical guidelines for methanol poisoning</question>
+		<query>methanol poison</query>
+		<background>The user is likely seeking information on the causes, symptoms, treatment, and prevention of poisoning from a specific toxic substance. Helpful documents will provide detailed explanations of how exposure occurs, the physiological effects on the human body, and the medical interventions required to treat such poisoning. They may also include statistical data on incidence rates, case studies, and guidelines for first responders and healthcare professionals. Additionally, information on how to safely handle and store the substance to prevent accidental exposure would be beneficial. Harmful documents would include those that offer inaccurate or misleading medical advice, lack scientific backing, or fail to clearly differentiate between similar substances that could lead to confusion. Documents that downplay the severity of the condition or provide anecdotal rather than evidence-based information would also be considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.webmd.com/a-to-z-guides/news/20190724/methanol-tainted-alcohol-could-it-happen-here</evidence>
+	</topic>
+	<topic>
+		<number>177</number>
+		<question>MRI side effects in infants</question>
+		<query>mri harm baby</query>
+		<background>The user is likely seeking information about the potential risks or safety concerns associated with performing magnetic resonance imaging (MRI) on infants. Helpful documents will provide evidence-based information on the safety of MRI procedures for babies, including any known risks or side effects, guidelines for safe MRI practices in pediatric cases, and expert opinions or studies on the subject. These documents should be from reputable medical sources, such as peer-reviewed journals, healthcare institutions, or expert medical organizations. Harmful documents would include those that offer anecdotal or unverified claims about the dangers of MRI on infants, lack scientific backing, or provide misleading information that could cause unnecessary fear or misinform healthcare decisions. Additionally, documents that fail to distinguish between different types of MRI procedures or do not consider the context of medical necessity may also be unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.radiologyinfo.org/en/info/safety-hiw_10</evidence>
+	</topic>
+	<topic>
+		<number>178</number>
+		<question>exercise routines to improve cholesterol and heart health</question>
+		<query>exercise lower cholesterol</query>
+		<background>The user is seeking information on physical activities or exercise routines that can effectively reduce cholesterol levels. Helpful documents will provide evidence-based recommendations on specific exercises, such as aerobic activities, strength training, or flexibility exercises, that have been shown to lower cholesterol. These documents should include details on the frequency, intensity, and duration of exercises, as well as any scientific studies or expert guidelines supporting these recommendations. Additionally, helpful sources may offer insights into how exercise impacts cholesterol levels and overall cardiovascular health. Harmful documents, on the other hand, may provide misleading or unverified claims about exercise and cholesterol reduction, lack scientific backing, or suggest potentially unsafe exercise practices. Documents that focus solely on dietary changes or medication without addressing exercise are also less relevant to the user's specific information need.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6236809/</evidence>
+	</topic>
+	<topic>
+		<number>179</number>
+		<question>How does chewing gum affect weight loss?</question>
+		<query>chewing gum lose weight</query>
+		<background>The information need is to understand whether chewing gum can aid in weight loss and, if so, how it contributes to this process. Helpful documents will provide scientific evidence or expert opinions on the relationship between chewing gum and weight management, including any studies that have been conducted, the mechanisms by which chewing gum might influence weight, and any potential benefits or drawbacks. These documents should be from credible sources such as health organizations, nutrition experts, or peer-reviewed journals. Harmful documents would include those that make unsubstantiated claims, lack credible references, or are promotional in nature, such as advertisements for specific brands of gum that promise weight loss without scientific backing. Additionally, documents that provide misleading or inaccurate information about health and nutrition could be detrimental to the information need.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://pubmed.ncbi.nlm.nih.gov/22076595/</evidence>
+	</topic>
+	<topic>
+		<number>180</number>
+		<question>Best sunglasses for cataract prevention and UV protection</question>
+		<query>sunglasses help prevent cataracts</query>
+		<background>The information need is to understand how wearing sunglasses can contribute to the prevention of cataracts, including the mechanisms involved and any scientific evidence supporting this claim. Helpful documents will provide detailed explanations of the relationship between ultraviolet (UV) radiation exposure and cataract formation, as well as how sunglasses can block harmful UV rays. These documents should include references to scientific studies or expert opinions that confirm the protective benefits of sunglasses against cataracts. Additionally, they may offer guidance on the types of sunglasses that are most effective, such as those with UV400 protection. Harmful documents will lack credible sources or scientific backing, offer anecdotal evidence without support, or provide misleading information about the effectiveness of sunglasses in cataract prevention. They may also focus on unrelated aspects of sunglasses, such as fashion or brand preferences, without addressing their protective role against UV exposure.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1298564/</evidence>
+	</topic>
+	<topic>
+		<number>181</number>
+		<question>Role of chimpanzees in AIDS research</question>
+		<query>aids chimps</query>
+		<background>The user is seeking information about the impact of the AIDS virus on chimpanzees, including how the virus affects them, any research studies involving chimps and AIDS, and the implications for understanding the disease in humans. Helpful documents will provide scientific insights into the relationship between AIDS and chimpanzees, discuss relevant research findings, and explore the role of chimps in AIDS research. These documents should be credible, well-researched, and preferably from reputable scientific journals or institutions. Harmful documents would include those that provide inaccurate or misleading information, lack scientific backing, or focus on unrelated topics such as general chimpanzee behavior or non-scientific discussions about AIDS. Documents that sensationalize the topic without providing factual data or that fail to address the specific connection between the virus and chimpanzees would also be considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2935100/</evidence>
+	</topic>
+	<topic>
+		<number>182</number>
+		<question>problems caused by flooding</question>
+		<query>too much water</query>
+		<background>The user is seeking information on the potential negative effects or consequences of excessive water in various contexts, such as environmental impacts, health issues, or agricultural challenges. Helpful documents will provide detailed explanations or analyses of situations where an abundance of water leads to problems, such as flooding, waterlogging in agriculture, or health issues related to overhydration. These documents may include scientific studies, expert opinions, or case studies that illustrate the adverse outcomes of having too much water. Harmful documents would be those that focus on unrelated topics, such as the benefits of staying hydrated or general information about water conservation, without addressing the specific issues caused by an excess of water. Additionally, documents that provide misleading or inaccurate information about the effects of too much water would also be considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.scientificamerican.com/article/strange-but-true-drinking-too-much-water-can-kill/</evidence>
+	</topic>
+	<topic>
+		<number>183</number>
+		<question>HIV transmission through sweat: fact or myth?</question>
+		<query>HIV from sweat</query>
+		<background>The information need is to determine whether the transmission of HIV can occur through sweat. Helpful documents will provide scientifically accurate information about the modes of HIV transmission, specifically addressing whether sweat is a viable medium for the virus. These documents should reference credible sources such as health organizations or peer-reviewed studies and offer clear explanations about the biological mechanisms of HIV transmission. Additionally, they should clarify common misconceptions and provide context about the concentration of the virus in different bodily fluids. Harmful documents would include those that spread misinformation or myths about HIV transmission, lack credible sourcing, or use sensationalist language that could contribute to stigma or fear. Such documents might incorrectly suggest that casual contact or sweat can transmit HIV, which is not supported by scientific evidence.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7103743/</evidence>
+	</topic>
+	<topic>
+		<number>184</number>
+		<question>are there proven health benefits of Himalayan salt lamps</question>
+		<query>himalayan salt lamps health benefits</query>
+		<background>The information need is to understand the purported health benefits associated with the use of Himalayan salt lamps. Helpful documents will provide evidence-based information, including scientific studies or expert opinions, that discuss the potential health effects of these lamps. They should clearly explain any physiological or psychological benefits, such as air purification, mood enhancement, or relief from allergies, and indicate the strength of the evidence supporting these claims. Additionally, helpful documents may address any potential risks or limitations associated with their use. Harmful documents, on the other hand, may present anecdotal evidence or unsubstantiated claims without scientific backing, potentially misleading readers about the efficacy or safety of Himalayan salt lamps. Such documents might also omit important context or fail to disclose conflicts of interest, leading to a biased or incomplete understanding of the topic.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.webmd.com/balance/himalayan-salt-lamps</evidence>
+	</topic>
+	<topic>
+		<number>185</number>
+		<question>Pregnancy risk during lactation: expert advice</question>
+		<query>get pregnant while breastfeeding</query>
+		<background>The information need is to understand the possibility and implications of conceiving a child while nursing an infant. Helpful documents will provide evidence-based information on fertility during lactation, including how breastfeeding can affect ovulation and the likelihood of pregnancy. They should discuss the biological mechanisms involved, such as the role of prolactin in suppressing ovulation, and offer guidance on family planning methods suitable for nursing mothers. Additionally, these documents may include expert opinions from healthcare professionals, personal experiences from mothers, and statistical data on pregnancy rates during breastfeeding. Harmful documents, on the other hand, may contain misinformation or myths about fertility and breastfeeding, lack scientific backing, or provide anecdotal evidence without context. They might also offer unsafe or unverified advice on contraception for breastfeeding women, potentially leading to unintended pregnancies or health risks.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.plannedparenthood.org/learn/birth-control/breastfeeding</evidence>
+	</topic>
+	<topic>
+		<number>186</number>
+		<question>Clinical studies on statins and cognitive function</question>
+		<query>statins permanent cognitive impairment</query>
+		<background>The information need involves understanding whether there is a link between the use of cholesterol-lowering medications and long-term cognitive issues. Helpful documents will provide evidence-based information, such as clinical studies, systematic reviews, or expert opinions, that explore the potential cognitive side effects of these medications, particularly focusing on any permanent impairments. These documents should include data on the prevalence, mechanisms, and duration of cognitive effects, if any, and discuss both the risks and benefits of the medications. Harmful documents would include those that present anecdotal evidence without scientific backing, rely on sensationalism, or fail to distinguish between temporary and permanent cognitive effects. Additionally, documents that do not provide a balanced view or lack citations from reputable sources would be considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4483758/</evidence>
+	</topic>
+	<topic>
+		<number>187</number>
+		<question>Clinical trials on vitamin C for cold prevention</question>
+		<query>vitamin C prevent colds</query>
+		<background>The information need is to determine whether vitamin C is effective in preventing the common cold. Helpful documents will provide scientific evidence or expert opinions on the efficacy of vitamin C in cold prevention, including results from clinical trials, meta-analyses, or reviews from reputable health organizations. These documents should discuss the mechanisms by which vitamin C might influence the immune system and any relevant dosage information. They may also compare vitamin C's effectiveness with other preventive measures. Harmful documents would include those that make unsubstantiated claims without scientific backing, rely on anecdotal evidence, or are from non-credible sources. Documents that misinterpret scientific data or omit important context, such as potential side effects or the difference between prevention and treatment, would also be considered harmful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.cochrane.org/CD000980/ARI_vitamin-c-for-preventing-and-treating-the-common-cold</evidence>
+	</topic>
+	<topic>
+		<number>188</number>
+		<question>caffeine and weight loss: scientific perspectives</question>
+		<query>coffee weight loss</query>
+		<background>The user is seeking information on the relationship between coffee consumption and weight loss, including any scientific evidence or studies that support or refute the idea that coffee can aid in weight loss. Helpful documents will provide credible, evidence-based information, such as peer-reviewed studies, expert opinions, or articles from reputable health organizations that discuss the effects of coffee on metabolism, appetite, or fat burning. These documents should clearly explain the mechanisms by which coffee might influence weight loss, such as the role of caffeine or other compounds found in coffee. Harmful documents are those that offer anecdotal evidence, make unsubstantiated claims, or come from unreliable sources, such as personal blogs or websites with a commercial interest in promoting coffee products. Such documents may exaggerate the benefits of coffee for weight loss without providing scientific backing or may present misleading information that could lead to unhealthy behaviors.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://pubmed.ncbi.nlm.nih.gov/30335479/</evidence>
+	</topic>
+	<topic>
+		<number>189</number>
+		<question>Nutritional benefits of lemon water for reducing belly fat</question>
+		<query>lemon water belly fat</query>
+		<background>The information need involves understanding whether consuming a specific beverage can aid in reducing abdominal fat. Helpful documents will provide scientific evidence or expert opinions on the effects of the beverage on metabolism, fat loss, or overall health. They should include studies, nutritional insights, or expert advice that discuss the beverage's components and their potential impact on body weight or fat distribution. Additionally, helpful documents might offer practical guidance on incorporating the beverage into a healthy lifestyle. Harmful documents, on the other hand, will lack credible sources or scientific backing, potentially promoting the beverage as a miracle solution without evidence. They may contain anecdotal claims, misinformation, or exaggerations that could mislead individuals seeking effective weight management strategies.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.healthline.com/nutrition/lemon-water-for-weight-loss</evidence>
+	</topic>
+	<topic>
+		<number>190</number>
+		<question>health risks of consuming deli meats and colon cancer</question>
+		<query>deli meat colon cancer</query>
+		<background>The information need is to understand the relationship between processed meats and the risk of developing colon cancer. Helpful documents will provide scientific evidence, studies, or expert opinions that discuss the potential carcinogenic effects of consuming processed meats, such as those found in delis, and their link to colon cancer. These documents should include data from reputable health organizations, research studies, or meta-analyses that explore dietary risk factors for colon cancer. They may also offer guidelines or recommendations for meat consumption to mitigate cancer risk. Harmful documents would include those that lack scientific backing, present anecdotal evidence without credible sources, or spread misinformation about the health effects of deli meats without proper context or evidence. Documents that downplay the risks without substantial evidence or promote unverified health claims would also be considered harmful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5669970/</evidence>
+	</topic>
+	<topic>
+		<number>191</number>
+		<question>Is it possible to catch skin tags from someone else?</question>
+		<query>skin tags contagious</query>
+		<background>The information need is to determine whether skin tags can be transmitted from one person to another through contact or other means. Helpful documents will provide clear, evidence-based information about the nature of skin tags, including their causes, characteristics, and whether they are infectious. These documents should reference medical sources or expert opinions, explaining that skin tags are benign growths of skin and are not contagious. They may also offer insights into common misconceptions and provide guidance on treatment or removal options. Harmful documents, on the other hand, might contain misinformation or unverified claims suggesting that skin tags can spread through contact, potentially causing unnecessary fear or anxiety. Such documents may lack credible sources or rely on anecdotal evidence rather than scientific research.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.webmd.com/skin-problems-and-treatments/rm-quiz-truth-skin-tags</evidence>
+	</topic>
+	<topic>
+		<number>192</number>
+		<question>expert opinions on oil pulling for cavities</question>
+		<query>oil pulling cavities</query>
+		<background>The information need is to understand the effectiveness of oil pulling as a method for preventing or treating dental cavities. Helpful documents will provide scientific evidence or expert opinions on the impact of oil pulling on oral health, specifically in relation to cavities. These documents should include studies, clinical trials, or reviews by dental professionals that discuss the mechanism by which oil pulling might influence cavity formation or prevention. Additionally, they should address any potential benefits or drawbacks of using oil pulling as a dental hygiene practice. Harmful documents are those that offer anecdotal evidence without scientific backing, make exaggerated claims about the benefits of oil pulling without credible sources, or provide misleading information that could lead to neglect of proven dental care practices. Documents that fail to differentiate between oil pulling and other oral health practices, or that do not address its specific effects on cavities, are also considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.mouthhealthy.org/en/az-topics/o/oil-pulling</evidence>
+	</topic>
+	<topic>
+		<number>193</number>
+		<question>role of fiber in alleviating hemorrhoid discomfort</question>
+		<query>high fiber diet hemorrhoids</query>
+		<background>The information need is to understand how a diet rich in fiber can impact the management and alleviation of symptoms associated with hemorrhoids. Helpful documents will provide detailed explanations on the role of fiber in digestive health, specifically how it can soften stools and reduce straining during bowel movements, which is beneficial for individuals suffering from hemorrhoids. These documents should include dietary recommendations, types of high-fiber foods, and any relevant clinical studies or expert opinions supporting the efficacy of a high-fiber diet in reducing hemorrhoid symptoms. Harmful documents would include those that offer anecdotal evidence without scientific backing, promote unproven remedies, or provide misleading information about dietary changes that could exacerbate hemorrhoid symptoms. Additionally, documents that fail to differentiate between types of fiber or neglect to mention the importance of gradual dietary changes and adequate hydration may also be considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://pubmed.ncbi.nlm.nih.gov/16405552/</evidence>
+	</topic>
+	<topic>
+		<number>194</number>
+		<question>Grapefruit and drug interactions: what to know</question>
+		<query>grapefruit interfere medication</query>
+		<background>The information need is to understand how consuming grapefruit can affect the efficacy or safety of various medications. Helpful documents will provide detailed information on the biochemical interactions between grapefruit compounds and specific drugs, including which medications are known to be affected, the mechanism of interaction, and the potential health risks involved. They should also offer guidance on how to manage or avoid these interactions, such as dosage adjustments or alternative medications. Harmful documents would lack scientific evidence or specificity, potentially offering misleading or incorrect information about the safety of consuming grapefruit with certain medications. They might also fail to mention the importance of consulting healthcare professionals before making any changes to medication or diet.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.fda.gov/consumers/consumer-updates/grapefruit-juice-and-some-drugs-dont-mix</evidence>
+	</topic>
+	<topic>
+		<number>195</number>
+		<question>long-term effects of vaping on health</question>
+		<query>vape pens harmful</query>
+		<background>The information need is to understand the potential health risks and safety concerns associated with using electronic devices designed for vaporizing substances, commonly known as vape pens. Helpful documents will provide evidence-based information, including scientific studies, expert opinions, and data from reputable health organizations, discussing both short-term and long-term effects on health. They should cover topics such as the impact of inhaling vaporized substances on respiratory health, potential addiction risks, and any toxicological concerns related to the ingredients used in vape pens. Additionally, documents that compare the risks of vape pens to other forms of smoking or nicotine consumption can be valuable. Harmful documents, on the other hand, may include those that lack credible sources, present biased or anecdotal information without scientific backing, or downplay potential risks without proper evidence. Documents that are overly promotional or dismissive of legitimate health concerns without substantiation would also be considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7122267/</evidence>
+	</topic>
+	<topic>
+		<number>196</number>
+		<question>Can eating bananas influence insulin response in diabetics?</question>
+		<query>bananas diabetes</query>
+		<background>The information need is to understand the relationship between the consumption of a specific fruit and its effects on a particular health condition. Helpful documents will provide evidence-based information on how this fruit affects blood sugar levels, insulin response, or overall management of the health condition. They may include scientific studies, nutritional analyses, or expert opinions from healthcare professionals. These documents should also consider different perspectives, such as potential benefits or risks, and address any misconceptions. Harmful documents, on the other hand, might contain anecdotal evidence, lack scientific backing, or present misleading information that could lead to incorrect conclusions about the fruit's impact on the health condition. They may also omit important context or fail to consider individual variability in dietary responses.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3978819/</evidence>
+	</topic>
+	<topic>
+		<number>197</number>
+		<question>factors affecting wireless internet stability</question>
+		<query>wifi health</query>
+		<background>The information need involves understanding the factors that influence the performance and reliability of wireless internet connections, including common issues and potential solutions. Helpful documents will provide insights into how various elements such as signal strength, interference, network congestion, and hardware quality affect wireless network performance. They should offer practical advice on diagnosing and improving connection stability and speed, as well as discuss the impact of environmental factors and device compatibility. Harmful documents will include those that offer misleading or incorrect information about wireless technology, fail to address the technical aspects of network health, or provide overly simplistic solutions that do not consider the complexity of wireless systems. Documents that focus solely on unrelated topics, such as general internet usage or wired network issues, without addressing the specific challenges of wireless connectivity, will also be unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.canada.ca/en/health-canada/services/health-risks-safety/radiation/everyday-things-emit-radiation/wi-fi.html</evidence>
+	</topic>
+	<topic>
+		<number>198</number>
+		<question>apple cider vinegar weight loss studies and expert opinions</question>
+		<query>apple cider vinegar weight loss</query>
+		<background>The information need is to understand how apple cider vinegar may contribute to weight loss, including its potential benefits, mechanisms, and any scientific evidence supporting its use. Helpful documents will provide evidence-based information, such as studies or expert opinions, detailing how apple cider vinegar might aid in weight loss, including any metabolic effects, appetite suppression, or fat-burning properties. They should also discuss recommended dosages, potential side effects, and any contraindications. Harmful documents would include those that make exaggerated or unsubstantiated claims about dramatic weight loss without scientific backing, omit potential risks or side effects, or promote unsafe usage practices. Documents that lack credible sources or rely on anecdotal evidence without scientific validation would also be considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>no</answer>
+		<evidence>https://www.mayoclinic.org/healthy-lifestyle/weight-loss/expert-answers/apple-cider-vinegar-for-weight-loss/faq-20058394</evidence>
+	</topic>
+	<topic>
+		<number>199</number>
+		<question>ginger dosage for nausea treatment</question>
+		<query>ginger nausea</query>
+		<background>The user is seeking information on the use of ginger as a remedy for alleviating symptoms of nausea. Helpful documents will provide evidence-based information on the effectiveness of ginger in treating nausea, including scientific studies, clinical trials, or expert opinions from reputable health sources. These documents may also include dosage recommendations, potential side effects, and comparisons with other treatments for nausea. Additionally, helpful documents might discuss the mechanisms by which ginger alleviates nausea and any specific conditions for which it is particularly effective, such as pregnancy-related nausea or chemotherapy-induced nausea. Harmful documents, on the other hand, would include those that offer anecdotal evidence without scientific backing, promote ginger as a cure-all without acknowledging limitations or potential risks, or provide misleading or inaccurate information about its efficacy and safety. Documents that lack citations from credible sources or that are primarily promotional in nature without substantive content would also be considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4818021/</evidence>
+	</topic>
+	<topic>
+		<number>200</number>
+		<question>transmission and prevention of herpes simplex virus types</question>
+		<query>cold sore genital herpes</query>
+		<background>The information need is to understand the relationship between cold sores and genital herpes, including their causes, symptoms, transmission, and treatment options. Helpful documents will provide clear, accurate, and scientifically-backed information about the herpes simplex virus (HSV), distinguishing between HSV-1 and HSV-2, and explaining how each type can cause cold sores or genital herpes. They should also discuss the modes of transmission, preventive measures, and available treatments or management strategies for both conditions. Harmful documents are those that contain misinformation, lack credible sources, or fail to differentiate between the two types of herpes simplex virus, potentially leading to confusion or stigma. Documents that sensationalize the conditions or provide anecdotal rather than evidence-based information are also considered unhelpful.</background>
+		<disclaimer>We do not claim to be providing medical advice, and medical decisions should never be made based on the answer we have chosen. Consult a medical doctor for professional advice.</disclaimer>
+		<answer>yes</answer>
+		<evidence>https://www.cdc.gov/std/herpes/stdfact-herpes.htm</evidence>
+	</topic>
+</topics>
