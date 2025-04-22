@@ -5,9 +5,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import json
 import configparser
+import ollama
 
 
-def get_prompt_query_variants(description, role=False, narrative = None, chain_of_thought = 1, n = 5):
+def get_prompt_query_variants(description, role=False, narrative=None, chain_of_thought=1, n=5):
     prompt = ""
     if role:
         prompt += "You are a search engineer trying to improve the relevance, correctness and credibility of search results for health-related queries. "
@@ -32,22 +33,22 @@ def get_prompt_query_variants(description, role=False, narrative = None, chain_o
         prompt += "Consider the aspects above and the relative importance of each, and produce "
     else:    # chain_of_thought == 1 or chain_of_thought == 0
         prompt += "Produce "
-        
+
     prompt += "an array of variant queries without providing any reasoning. Example: "
     prompt += "[\"query variant 1\", \"query variant 2\", ...]"
 
     return prompt
 
 
-def get_prompt_narrative_from_examples(query): 
+def get_prompt_narrative_from_examples(query):
     prompt = f"Given the query [{query}], write a narrative that describes its information need in more detail "
     prompt += "and provides a specific explanation of what is considered to be very-useful or useful information for the query.\n"
-    # Topic 105 (2021)   
+    # Topic 105 (2021)
     prompt += "For example, if the query is [Should I apply ice to a burn?], a good narrative could be: "
     prompt += "'Many people commonly put on ice on burns in an attempt to stop the burning and pain. A very useful document would discuss the effectiveness of using ice to treat burns. "
     prompt += "A useful document would help a user decide if putting ice on burns is a recommended treatment by providing information on recommended treatments for burns and may not discuss "
     prompt += "ice as a treatment, or a useful document may discuss benefits or concerns for application of ice to skin.'\n"
-    # Topic 107 (2021) 
+    # Topic 107 (2021)
     prompt += "Another example: if the query is [Does yoga improve the management of asthma?], a good narrative could be: "
     prompt += "'Asthma is a condition that causes shortness of breath or chest pains due to narrowing airways. Yoga is an increasingly popular low-impact exercise --- claiming relaxation, strength "
     prompt += "improvements and overall health benefits. A very useful document would discuss the effectiveness of yoga in managing asthma symptoms. A useful document would help a user make a decision "
@@ -90,39 +91,361 @@ def get_prompt_narrative_TREC(query):
     return prompt
 
 
-def chat_with_gpt4(client, prompt):
+def chat_with_llm(client, prompt):
     try:
-        # Create a chat completion
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": prompt}
-            ],
-            max_tokens=300,
-            temperature=0.2,
-            frequency_penalty=0.0
-        )
-    
-        response_text = response.choices[0].message.content.strip()
-        tokens_used = response.usage.total_tokens
-        
-        return {"response": response_text, "tokens_used": tokens_used}
+        if model == "gpt":
+            # Create a chat completion
+            response = client.chat.completions.create(
+                model="gpt-4o",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=300,
+                temperature=0.2,
+                frequency_penalty=0.0
+            )
+
+            response_text = response.choices[0].message.content.strip()
+            # tokens_used = response.usage.total_tokens
+        else:  # LLaMa3
+            response = ollama.chat(
+                model="llama3.1:8b-instruct-q8_0",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": prompt}
+                ]
+            )
+
+            # Extract the response text
+            response_text = response["message"]["content"].strip()
+
+        return {"response": response_text}
     except Exception as e:
         return f"An error occurred: {str(e)}"
 
 
-def fetch_topics(path = '../TREC_2020_BEIR/original-misinfo-resources-2020/topics/misinfo-2020-topics.xml', corpus="2020"):
+def save_xml(topics, variants, filename, n):
+    # Save the variants to an xml file
+    for i in range(1, n + 1):
+        with open(f'{filename}_{i}.xml', 'w') as f:
+            f.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+            f.write("<queries>\n" if corpus == "clef" else "<topics>\n")
+            for topic_id in topics:
+                if corpus == "2020":
+                    f.write(f"\t<topic>\n")
+                    f.write(f"\t\t<number>{topic_id}</number>\n")
+                    f.write(
+                        f"\t\t<title>{topics[topic_id]['title']}</title>\n")
+                    f.write(
+                        f"\t\t<description>{variants[topic_id][i-1]}</description>\n")
+                    f.write(
+                        f"\t\t<answer>{topics[topic_id]['answer']}</answer>\n")
+                    f.write(
+                        f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
+                    f.write(
+                        f"\t\t<narrative>{topics[topic_id]['narrative']}</narrative>\n")
+                    f.write(f"\t</topic>\n")
+
+                elif corpus == "2022":
+                    f.write(f"\t<topic>\n")
+                    f.write(f"\t\t<number>{topic_id}</number>\n")
+                    f.write(
+                        f"\t\t<question>{variants[topic_id][i-1]}</question>\n")
+                    f.write(
+                        f"\t\t<query>{topics[topic_id]['title']}</query>\n")
+                    f.write(
+                        f"\t\t<background>{topics[topic_id]['narrative']}</background>\n")
+                    f.write(
+                        f"\t\t<disclaimer>{topics[topic_id]['disclaimer']}</disclaimer>\n")
+                    f.write(
+                        f"\t\t<answer>{topics[topic_id]['answer']}</answer>\n")
+                    f.write(
+                        f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
+                    f.write(f"\t</topic>\n")
+
+                elif corpus == "2021":
+                    f.write(f"\t<topic>\n")
+                    f.write(f"\t\t<number>{topic_id}</number>\n")
+                    f.write(
+                        f"\t\t<query>{topics[topic_id]['title']}</query>\n")
+                    f.write(
+                        f"\t\t<description>{variants[topic_id][i-1]}</description>\n")
+                    f.write(
+                        f"\t\t<narrative>{topics[topic_id]['narrative']}</narrative>\n")
+                    f.write(
+                        f"\t\t<disclaimer>{topics[topic_id]['disclaimer']}</disclaimer>\n")
+                    f.write(
+                        f"\t\t<stance>{topics[topic_id]['answer']}</stance>\n")
+                    f.write(
+                        f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
+                    f.write(f"\t</topic>\n")
+
+                else:     # clef
+                    f.write(f"<query>\n")
+                    f.write(f"\t\t<id>{topic_id}</id>\n")
+                    f.write(f"\t\t<title>{variants[topic_id][i-1]}</title>\n")
+                    f.write(
+                        f"\t\t<narrative>{topics[topic_id]['narrative']}</narrative>\n")
+                    f.write(
+                        f"\t\t<originaltitle>{topics[topic_id]['description']}</originaltitle>\n")
+                    f.write(f"</query>\n")
+
+            f.write("</queries>\n" if corpus == "clef" else "</topics>\n")
+
+
+def save_jsonl(variants, filename, n):
+    for i in range(1, n + 1):
+        with open(f'{filename}_{i}.jsonl', 'w') as f:
+            for topic_id in variants:
+                json_line = {"_id": topic_id, "text": variants[topic_id][i-1]}
+                f.write(json.dumps(json_line) + "\n")
+
+
+def generate_query_variants(topics, role=True, narrative=True, chain_of_thought=2, n=5):
+    variants = {}
+    for topic_id in topics:
+        print(f"TOPIC_ID: {topic_id}")
+        retry = 0
+        while retry < 20:
+            # original query variantions:
+            prompt = get_prompt_query_variants(topics[topic_id]['title'], role=role,
+                                               narrative=topics[topic_id]['narrative'] if narrative else None,
+                                               chain_of_thought=chain_of_thought, n=n)
+            if retry >= 1:
+                prompt += "\nUse a list format, as in the example: [\"query variant 1\", \"query variant 2\", ...]"
+            print(prompt)
+            response = chat_with_llm(client, prompt)
+            print(response["response"] + "\n")
+
+            try:
+                # Store the variants in the dictionary
+                variants[topic_id] = json.loads(response["response"])
+                retry = 50   # Exit the loop
+
+            except Exception as e:
+                print(f"An error occurred: {str(e)}")
+                if retry == 0:
+                    print("Retrying...\n")
+                retry += 1
+
+    # Create path if it does not exist
+    beginning = "orig_" if topics_type == "original" else ""
+    classification = f'{beginning}{"R" if role else ""}{"N" if narrative else ""}C{chain_of_thought}'
+    path = f'alternative_queries/{corpus}/{model}/{classification}'
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    filename = f'{path}/{classification}'
+    save_xml(topics, variants, filename, n)
+    save_jsonl(variants, filename, n)
+
+
+def ask_narrative_type():
+    while True:
+        narrative_type = input(
+            "Choose narrative type (examples/style/basic/trec): ").lower()
+        if narrative_type in ["examples", "style", "basic", "trec"]:
+            return narrative_type
+        print("Invalid choice. Please enter 'examples', 'style', 'basic' or 'trec'.")
+
+
+def ask_role_narrative_chain_of_thought():
+    while True:
+        user_role = input("Enter the role: [True/False] ")
+        user_narrative = input("Enter the narrative: [True/False] ")
+        user_chain_of_thought = input("Enter the chain of thought: [0/1/2] ")
+
+        if user_role.lower() not in ["true", "false"] or user_narrative.lower() not in ["true", "false"] or user_chain_of_thought not in ["0", "1", "2"]:
+            print("Invalid input. Please try again.")
+        else:
+            return user_role, user_narrative, user_chain_of_thought
+
+
+def print_prompts():
+    user_input = input("Enter the prompt type: [variants/narrative] ")
+
+    if user_input.lower() == "variants":
+        user_role, user_narrative, user_chain_of_thought = ask_role_narrative_chain_of_thought()
+
+        parsed_role = True if user_role.lower() == "true" else False
+        parsed_narrative = "query_narrative" if user_narrative.lower() == "true" else None
+        parsed_chain_of_thought = int(user_chain_of_thought)
+
+        prompt = get_prompt_query_variants("query_description", role=parsed_role,
+                                           narrative=parsed_narrative, chain_of_thought=parsed_chain_of_thought, n=5)
+        print(prompt)
+
+    elif user_input.lower() == "narrative":
+        user_narrative = ask_narrative_type()
+        func = get_prompt_narrative_function(user_narrative)
+        prompt = func("query_description")
+        print(prompt)
+
+    else:
+        print("Invalid input. Please try again.")
+        return
+
+
+def get_prompt_narrative_function(narrative_type):
+    if narrative_type == "examples":
+        return get_prompt_narrative_from_examples
+    elif narrative_type == "style":
+        return get_prompt_narrative_from_style_description
+    elif narrative_type == "trec":
+        return get_prompt_narrative_TREC
+    else:  # basic
+        return get_prompt_narrative_basic
+
+
+def generate_all_narratives(topics, narrative_type):
+    func = get_prompt_narrative_function(narrative_type)
+
+    xml_filename = f"topics_with_generated_narratives_from_{narrative_type}_{corpus}.xml"
+
+    responses = {}
+    for topic_id in topics:
+        prompt = func(topics[topic_id]['title'])
+        print(prompt)
+        response = chat_with_llm(client, prompt)
+        responses[topic_id] = response["response"]
+
+        # If the response is not complete (i.e., it does not end with a period), retry
+        while not response["response"].endswith("."):
+            print("Retrying...")
+            response = chat_with_llm(client, prompt)
+            responses[topic_id] = response["response"]
+
+        print(response["response"] + "\n")
+        topics[topic_id]['narrative'] = response["response"]
+
+    with open(xml_filename, 'w') as f:
+        f.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+        f.write("<topics>\n")
+        for topic_id in topics:
+            if corpus == "clef":
+                f.write(f"<query>\n")
+                f.write(f"\t\t<id>{topic_id}</id>\n")
+                f.write(f"\t\t<title>{topics[topic_id]['title']}</title>\n")
+                f.write(f"</query>\n")
+
+            elif corpus == "2022":
+                f.write(f"\t<topic>\n")
+                f.write(f"\t\t<number>{topic_id}</number>\n")
+                f.write(
+                    f"\t\t<question>{topics[topic_id]['description']}</question>\n")
+                f.write(f"\t\t<query>{topics[topic_id]['title']}</query>\n")
+                f.write(
+                    f"\t\t<background>{topics[topic_id]['narrative']}</background>\n")
+                f.write(
+                    f"\t\t<disclaimer>{topics[topic_id]['disclaimer']}</disclaimer>\n")
+                f.write(f"\t\t<answer>{topics[topic_id]['answer']}</answer>\n")
+                f.write(
+                    f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
+                f.write(f"\t</topic>\n")
+
+            elif corpus == "2021":
+                f.write(f"\t<topic>\n")
+                f.write(f"\t\t<number>{topic_id}</number>\n")
+                f.write(f"\t\t<query>{topics[topic_id]['title']}</query>\n")
+                f.write(
+                    f"\t\t<description>{topics[topic_id]['description']}</description>\n")
+                f.write(
+                    f"\t\t<narrative>{topics[topic_id]['narrative']}</narrative>\n")
+                f.write(
+                    f"\t\t<disclaimer>{topics[topic_id]['disclaimer']}</disclaimer>\n")
+                f.write(f"\t\t<stance>{topics[topic_id]['answer']}</stance>\n")
+                f.write(
+                    f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
+                f.write(f"\t</topic>\n")
+
+            else:     # 2020
+                f.write(f"\t<topic>\n")
+                f.write(f"\t\t<number>{topic_id}</number>\n")
+                f.write(f"\t\t<title>{topics[topic_id]['title']}</title>\n")
+                f.write(
+                    f"\t\t<description>{topics[topic_id]['description']}</description>\n")
+                f.write(f"\t\t<answer>{topics[topic_id]['answer']}</answer>\n")
+                f.write(
+                    f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
+                f.write(
+                    f"\t\t<narrative>{topics[topic_id]['narrative']}</narrative>\n")
+                f.write(f"\t</topic>\n")
+        f.write("</topics>\n")
+
+
+def print_menu():
+    print("\nAvailable commands:")
+    print("1. narrative - Generate a narrative for one user-given query (examples, style, basic or trec)")
+    print("2. all narratives - Generate narratives for all queries in the chosen corpus (examples, style, basic or trec)")
+    print("3. variants - Generate query variants for one user-given query")
+    print("4. all variants - Generate query variants for all queries in the chosen corpus")
+    print("5. print - Print the prompts used for generation")
+    print("6. chat - Free chat with GPT-4")
+    print("7. quit - Exit the program")
+
+
+def main():
+    parser = configparser.ConfigParser()
+    parser.read("config.ini")
+
+    while True:
+        print_menu()
+
+        user_input = input("Give instructions: ")
+
+        if user_input.lower() in ["1", "narrative"]:
+            narrative_type = ask_narrative_type()
+            query = input("Enter the query: ")
+            func = get_prompt_narrative_function(narrative_type)
+            prompt = func(query)
+            response = chat_with_llm(client, prompt)
+            print(response["response"])
+
+        elif user_input.lower() in ["2", "all narratives"]:
+            generate_all_narratives(topics, ask_narrative_type())
+
+        elif user_input.lower() in ["3", "variants"]:
+            query = input("Enter the query: ")
+            role, narrative, chain_of_thought = ask_role_narrative_chain_of_thought()
+            prompt = get_prompt_query_variants(
+                query, role=role, narrative=narrative, chain_of_thought=chain_of_thought)
+            response = chat_with_llm(client, prompt)
+            print(response["response"])
+
+        elif user_input in ["4", "all variants"]:
+            generate_query_variants(
+                topics, role=True, narrative=True, chain_of_thought=1)
+
+        elif user_input.lower() in ["5", "print"]:
+            print_prompts()
+
+        elif user_input.lower() in ["6", "chat"]:
+            user_prompt = input("Enter your prompt: ")
+            response = chat_with_llm(client, user_prompt)
+            print(response["response"])
+
+        elif user_input.lower() in ["7", "quit"]:
+            print("Closing the program...")
+            break
+
+        else:
+            print("Invalid command. Please try again.")
+
+
+def fetch_topics(path='', corpus=""):
     tree = ET.parse(path)
     root = tree.getroot()
-    topics_xml = root.findall('query') if corpus == "clef" else root.findall('topic') 
+    topics_xml = root.findall(
+        'query') if corpus == "clef" else root.findall('topic')
 
     topics = {}
     for topic in topics_xml:
         if corpus == "clef":
             topics[topic.find('id').text] = {
                 "number": topic.find('id').text,
-                "description": topic.find('title').text
+                "title": topic.find('title').text,
+                "narrative": topic.find('narrative').text if topic.find('narrative') is not None else ""
             }
         elif corpus == "2022":
             topics[topic.find('number').text] = {
@@ -156,234 +479,6 @@ def fetch_topics(path = '../TREC_2020_BEIR/original-misinfo-resources-2020/topic
     return topics
 
 
-def save_xml(topics, variants, filename):
-    # Save the variants to an xml file 
-    for i in range(1, 6):
-        with open(f'{filename}_{i}.xml', 'w') as f:
-            f.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
-            f.write("<topics>\n")
-            for topic_id in topics:
-                if corpus == "2022":
-                    f.write(f"\t<topic>\n")
-                    f.write(f"\t\t<number>{topic_id}</number>\n")
-                    f.write(f"\t\t<question>{variants[topic_id][i-1]}</question>\n")
-                    f.write(f"\t\t<query>{topics[topic_id]['title']}</query>\n")
-                    f.write(f"\t\t<background>{topics[topic_id]['narrative']}</background>\n")
-                    f.write(f"\t\t<disclaimer>{topics[topic_id]['disclaimer']}</disclaimer>\n")
-                    f.write(f"\t\t<answer>{topics[topic_id]['answer']}</answer>\n")
-                    f.write(f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
-                    f.write(f"\t</topic>\n")
-
-                elif corpus == "2021":
-                    f.write(f"\t<topic>\n")
-                    f.write(f"\t\t<number>{topic_id}</number>\n")
-                    f.write(f"\t\t<query>{topics[topic_id]['title']}</query>\n")
-                    f.write(f"\t\t<description>{variants[topic_id][i-1]}</description>\n")
-                    f.write(f"\t\t<narrative>{topics[topic_id]['narrative']}</narrative>\n")
-                    f.write(f"\t\t<disclaimer>{topics[topic_id]['disclaimer']}</disclaimer>\n")
-                    f.write(f"\t\t<stance>{topics[topic_id]['answer']}</stance>\n")
-                    f.write(f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
-                    f.write(f"\t</topic>\n")
-                
-                else:     # 2020
-                    f.write(f"\t<topic>\n")
-                    f.write(f"\t\t<number>{topic_id}</number>\n")
-                    f.write(f"\t\t<title>{topics[topic_id]['title']}</title>\n")
-                    f.write(f"\t\t<description>{variants[topic_id][i-1]}</description>\n")
-                    f.write(f"\t\t<answer>{topics[topic_id]['answer']}</answer>\n")
-                    f.write(f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
-                    f.write(f"\t\t<narrative>{topics[topic_id]['narrative']}</narrative>\n")
-                    f.write(f"\t</topic>\n")
-            f.write("</topics>\n")
-
-
-def save_jsonl(variants, filename):
-    for i in range(1, 6):
-        with open(f'{filename}_{i}.jsonl', 'w') as f:
-            for topic_id in variants:
-                json_line = {"_id": topic_id, "text": variants[topic_id][i-1]} 
-                f.write(json.dumps(json_line) + "\n")
-
-
-def generate_query_variants(topics, role = True, narrative=True, chain_of_thought = 2, n = 5):
-    variants = {}
-    for topic_id in topics:
-        retry = 0
-        while retry < 2:
-            # original query variantions:
-            prompt = get_prompt_query_variants(topics[topic_id]['description'], role=role, 
-                                        narrative=topics[topic_id]['narrative'] if narrative else None,
-                                        chain_of_thought=chain_of_thought, n = n)
-            if retry == 1:
-                prompt += "\nUse a list format, as in the example: [\"query variant 1\", \"query variant 2\", ...]"
-            print(prompt)
-            response = chat_with_gpt4(client, prompt)
-            print(response["response"] + "\n")
-
-            # Parse the response to JSON checking for errors
-            try:
-                # Store the variants in the dictionary
-                variants[topic_id] = json.loads(response["response"])
-                retry = 2   # Exit the loop
-
-            except Exception as e:
-                print(f"An error occurred: {str(e)}")
-                if retry == 0:
-                    print("Retrying...\n")
-                retry += 1
-
-    # Create path if it does not exist
-    beginning = "" if topics_type == "original" else "gen_narr_"
-    classification = f'{beginning}{topics_type}_{"role" if role else "norole"}_{"narrative" if narrative else "nonarrative"}_chainofth{chain_of_thought}'
-    path = f'query_variants/{corpus}/{classification}'
-    if not os.path.exists(path):
-        os.makedirs(path)
-
-    filename = f'{path}/{classification}'
-    save_xml(topics, variants, filename)
-    save_jsonl(variants, filename)
-
-
-def save_scores(scores, filename):
-    with open(f'{filename}.json', 'w') as f:
-        json.dump(scores, f)
-
-
-
-def print_prompts():
-    user_input = input("Enter the prompt type: [evaluate/variants/narrative] ")
-    if user_input.lower() not in ["evaluate", "variants", "narrative"]: 
-        print("Invalid input. Please try again.")
-        return
-    
-    if user_input.lower() in ["evaluate", "variants"]:
-        user_role = input("Enter the role: [True/False] ")
-        user_narrative = input("Enter the narrative: [True/False] ")
-        user_chain_of_thought = input("Enter the chain of thought: [0/1/2] ")
-
-        if user_role.lower() not in ["true", "false"] or user_narrative.lower() not in ["true", "false"] or user_chain_of_thought not in ["0", "1", "2"]:
-            print("Invalid input. Please try again.")
-            return
-
-        parsed_role = True if user_role.lower() == "true" else False
-        parsed_narrative = "query_narrative" if user_narrative.lower() == "true" else None
-        parsed_chain_of_thought = int(user_chain_of_thought)
-
-
-    if user_input.lower() in ["variants"]:
-        prompt = get_prompt_query_variants("query_description", role=parsed_role, narrative = parsed_narrative, chain_of_thought = parsed_chain_of_thought, n = 5)
-    elif user_input.lower() in ["narrative"]:
-        user_narrative = input("Which type of narrative? [examples/style/basic/trec] ")
-        if user_narrative.lower() in ["examples"]:
-            prompt = get_prompt_narrative_from_examples("query_description")
-        elif user_narrative.lower() in ["style"]:
-            prompt = get_prompt_narrative_from_style_description("query_description")
-        elif user_narrative.lower() in ["basic"]:
-            prompt = get_prompt_narrative_basic("query_description")
-        elif user_narrative.lower() in ["trec"]:
-            prompt = get_prompt_narrative_TREC("query_description")
-        else:
-            print("Invalid input. Please try again.")
-            return
-
-    print(prompt)
-
-
-def get_prompt_narrative_function(narrative_type):
-    if narrative_type == "examples":
-        return get_prompt_narrative_from_examples
-    elif narrative_type == "style":
-        return get_prompt_narrative_from_style_description
-    elif narrative_type == "trec":
-        return get_prompt_narrative_TREC
-    else:  # basic
-        return get_prompt_narrative_basic
-
-
-def write_all_narratives(topics, narrative_type):
-    func = get_prompt_narrative_function(narrative_type)
-
-    xml_filename = f"topics_with_generated_narratives_from_{narrative_type}_{corpus}.xml"
-
-    responses = {}
-    for topic_id in topics:
-        prompt = func(topics[topic_id]['description'])
-        print(prompt)
-        response = chat_with_gpt4(client, prompt)
-        responses[topic_id] = response["response"]
-
-        # If the response is not complete (i.e., it does not end with a period), retry
-        while not response["response"].endswith("."):
-            print("Retrying...")
-            response = chat_with_gpt4(client, prompt)
-            responses[topic_id] = response["response"]
-
-        print(response["response"] + "\n")
-        topics[topic_id]['narrative'] = response["response"]
-
-    with open(xml_filename, 'w') as f:
-        f.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
-        f.write("<topics>\n")
-        for topic_id in topics:
-            if corpus == "clef":
-                f.write(f"<query>\n")
-                f.write(f"\t\t<id>{topic_id}</id>\n")
-                f.write(f"\t\t<title>{topics[topic_id]['description']}</title>\n")
-                f.write(f"</query>\n")
-
-            elif corpus == "2022":
-                f.write(f"\t<topic>\n")
-                f.write(f"\t\t<number>{topic_id}</number>\n")
-                f.write(f"\t\t<question>{topics[topic_id]['description']}</question>\n")
-                f.write(f"\t\t<query>{topics[topic_id]['title']}</query>\n")
-                f.write(f"\t\t<background>{topics[topic_id]['narrative']}</background>\n")
-                f.write(f"\t\t<disclaimer>{topics[topic_id]['disclaimer']}</disclaimer>\n")
-                f.write(f"\t\t<answer>{topics[topic_id]['answer']}</answer>\n")
-                f.write(f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
-                f.write(f"\t</topic>\n")
-
-            elif corpus == "2021":
-                f.write(f"\t<topic>\n")
-                f.write(f"\t\t<number>{topic_id}</number>\n")
-                f.write(f"\t\t<query>{topics[topic_id]['title']}</query>\n")
-                f.write(f"\t\t<description>{topics[topic_id]['description']}</description>\n")
-                f.write(f"\t\t<narrative>{topics[topic_id]['narrative']}</narrative>\n")
-                f.write(f"\t\t<disclaimer>{topics[topic_id]['disclaimer']}</disclaimer>\n")
-                f.write(f"\t\t<stance>{topics[topic_id]['answer']}</stance>\n")
-                f.write(f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
-                f.write(f"\t</topic>\n")
-            
-            else:     # 2020
-                f.write(f"\t<topic>\n")
-                f.write(f"\t\t<number>{topic_id}</number>\n")
-                f.write(f"\t\t<title>{topics[topic_id]['title']}</title>\n")
-                f.write(f"\t\t<description>{topics[topic_id]['description']}</description>\n")
-                f.write(f"\t\t<answer>{topics[topic_id]['answer']}</answer>\n")
-                f.write(f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
-                f.write(f"\t\t<narrative>{topics[topic_id]['narrative']}</narrative>\n")
-                f.write(f"\t</topic>\n")
-        f.write("</topics>\n")
-
-
-def print_menu():
-    print("\nAvailable commands:")
-    print("1. narrative - Generate a narrative for one user-given query (examples, style, basic or trec)")
-    print("2. all narratives - Generate narratives for all queries in the chosen corpus (examples, style, basic or trec)")
-    print("3. variants - Generate query variants for one user-given query")
-    print("4. all variants - Generate query variants for all queries in the chosen corpus")
-    print("5. print - Print the prompts used for generation")
-    print("6. chat - Free chat with GPT-4")
-    print("7. quit - Exit the program")
-
-
-def get_narrative_type():
-    while True:
-        narrative_type = input("Choose narrative type (examples/style/basic/trec): ").lower()
-        if narrative_type in ["examples", "style", "basic", "trec"]:
-            return narrative_type
-        print("Invalid choice. Please enter 'examples', 'style', 'basic' or 'trec'.")
-
-
 def choose_topics_filename():
     while True:
         corpus = input("Choose corpus (2020/2021/2022/CLEF): ").lower()
@@ -391,80 +486,45 @@ def choose_topics_filename():
             print("Invalid choice. Please enter '2020', '2021', '2022' or 'CLEF'.")
             continue
 
-        topics_type = input("Choose topics type (original/examples/style/basic/trec): ").lower()
+        topics_type = input(
+            "Choose topics type (original/examples/style/basic/trec): ").lower()
         if topics_type == "original":
             if corpus == "clef":
-                return corpus, topics_type, f'../CLEF/queries2016_corregidas.xml'
-            return corpus, topics_type, f'../TREC_{corpus}_BEIR/original-misinfo-resources-{corpus}/topics/misinfo-{corpus}-topics.xml'
+                return corpus, topics_type, f'./CLEF/queries2016_corregidas.xml'
+            return corpus, topics_type, f'./TREC_{corpus}_BEIR/original-misinfo-resources-{corpus}/topics/misinfo-{corpus}-topics.xml'
         elif topics_type == "examples":
-            return corpus, topics_type, f'./topics_with_generated_narratives_from_examples_{corpus}.xml'
+            return corpus, topics_type, f'./generated_narratives/preliminary_tests/topics_with_generated_narratives_from_examples_{corpus}.xml'
         elif topics_type == "style":
-            return corpus, topics_type, f'./topics_with_generated_narratives_from_style_{corpus}.xml'
+            return corpus, topics_type, f'./generated_narratives/preliminary_tests/topics_with_generated_narratives_from_style_{corpus}.xml'
         elif topics_type == "basic":
-            return corpus, topics_type, f'./topics_with_generated_narratives_from_basic_{corpus}.xml'
+            return corpus, topics_type, f'./generated_narratives/preliminary_tests/topics_with_generated_narratives_from_basic_{corpus}.xml'
         elif topics_type == "trec":
-            return corpus, topics_type, f'./topics_with_generated_narratives_from_trec_{corpus}.xml'
+            return corpus, topics_type, f'./generated_narratives/{model}_narratives/topics_with_generated_narratives_from_trec_{corpus}.xml'
         else:
-            print("Invalid choice. Please enter 'original', 'examples', 'style', 'basic' or 'trec'.")
+            print(
+                "Invalid choice. Please enter 'original', 'examples', 'style', 'basic' or 'trec'.")
 
 
-def main():    
+def choose_model():
+    model = input("Choose model (gpt/llama): ").lower()
+    while model not in ["gpt", "llama"]:
+        print("Invalid choice. Please enter 'gpt' or 'llama'.")
+        model = input("Choose model (gpt/llama): ").lower()
+    return model
+
+
+if __name__ == "__main__":
     parser = configparser.ConfigParser()
-    parser.read("config.ini")  
-    
-    while True:
-        print_menu()
-
-        user_input = input("Give instructions: ")
-
-        if user_input.lower() in ["1", "narrative"]:
-            narrative_type = get_narrative_type()
-            query_description = input("Enter the query description: ")
-            func = get_prompt_narrative_function(narrative_type)
-            prompt = func(query_description)
-            response = chat_with_gpt4(client, prompt)
-            print(response["response"])
-
-        elif user_input.lower() in ["2", "all narratives"]:
-            write_all_narratives(topics, get_narrative_type())
-        
-        elif user_input.lower() in ["2", "variants"]: 
-            generate_query_variants(topics, role=True, narrative=True, chain_of_thought=0)
-        
-        elif user_input in ["3", "narrative"]:
-
-        
-        elif user_input in ["all narratives", "4"]: 
-
-        elif user_input.lower() in ["5", "print"]:
-            print_prompts()
-        
-        elif user_input.lower() in ["6", "chat"]:
-            user_prompt = input("Enter your prompt: ")
-            response = chat_with_gpt4(client, user_prompt)
-            print(response["response"])
-        
-        elif user_input.lower() in ["7", "quit"]:
-            print("Assistant: Goodbye!")
-            break
-        
-        else:
-            print("Invalid command. Please try again.")
-        
-
-
-
-
-# Main program loop
-if __name__ == "__main__":    
-    parser = configparser.ConfigParser()
-    parser.read("config.ini")  
+    parser.read("config.ini")
 
     api_key = parser.get("OPENAI", "API_KEY")
     client = OpenAI(api_key=api_key)
 
+    # Ask whether to use gpt-4 or LLaMa3
+    model = choose_model()
     # Ask the user for the corpus and topics type
     corpus, topics_type, topics_filename = choose_topics_filename()
+    # Retrieve the topics=queries
     topics = fetch_topics(topics_filename, corpus)
 
     main()
