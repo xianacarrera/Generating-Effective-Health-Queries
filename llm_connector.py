@@ -493,7 +493,7 @@ def choose_topics_filename():
             "Choose topics type (original/examples/style/basic/trec): ").lower()
         if topics_type == "original":
             if corpus == "clef":
-                return corpus, topics_type, f'./CLEF/queries2016_corregidas.xml'
+                return corpus, topics_type, f'./CLEF/queries2016_corrected.xml'
             return corpus, topics_type, f'./TREC_{corpus}_BEIR/original-misinfo-resources-{corpus}/topics/misinfo-{corpus}-topics.xml'
         elif topics_type == "examples":
             return corpus, topics_type, f'./generated_narratives/preliminary_tests/topics_with_generated_narratives_from_examples_{corpus}.xml'
