@@ -122,7 +122,8 @@ def chat_with_llm(client, prompt):
 
         return {"response": response_text}
     except Exception as e:
-        return f"An error occurred: {str(e)}"
+        print(f"An error occurred: {str(e)}")
+        return {"response": "Error"}
 
 
 def save_xml(topics, variants, filename, n):
@@ -147,23 +148,6 @@ def save_xml(topics, variants, filename, n):
                         f"\t\t<narrative>{topics[topic_id]['narrative']}</narrative>\n")
                     f.write(f"\t</topic>\n")
 
-                elif corpus == "2022":
-                    f.write(f"\t<topic>\n")
-                    f.write(f"\t\t<number>{topic_id}</number>\n")
-                    f.write(
-                        f"\t\t<question>{variants[topic_id][i-1]}</question>\n")
-                    f.write(
-                        f"\t\t<query>{topics[topic_id]['title']}</query>\n")
-                    f.write(
-                        f"\t\t<background>{topics[topic_id]['narrative']}</background>\n")
-                    f.write(
-                        f"\t\t<disclaimer>{topics[topic_id]['disclaimer']}</disclaimer>\n")
-                    f.write(
-                        f"\t\t<answer>{topics[topic_id]['answer']}</answer>\n")
-                    f.write(
-                        f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
-                    f.write(f"\t</topic>\n")
-
                 elif corpus == "2021":
                     f.write(f"\t<topic>\n")
                     f.write(f"\t\t<number>{topic_id}</number>\n")
@@ -181,6 +165,23 @@ def save_xml(topics, variants, filename, n):
                         f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
                     f.write(f"\t</topic>\n")
 
+                elif corpus == "2022":
+                    f.write(f"\t<topic>\n")
+                    f.write(f"\t\t<number>{topic_id}</number>\n")
+                    f.write(
+                        f"\t\t<question>{variants[topic_id][i-1]}</question>\n")
+                    f.write(
+                        f"\t\t<query>{topics[topic_id]['title']}</query>\n")
+                    f.write(
+                        f"\t\t<background>{topics[topic_id]['narrative']}</background>\n")
+                    f.write(
+                        f"\t\t<disclaimer>{topics[topic_id]['disclaimer']}</disclaimer>\n")
+                    f.write(
+                        f"\t\t<answer>{topics[topic_id]['answer']}</answer>\n")
+                    f.write(
+                        f"\t\t<evidence>{topics[topic_id]['evidence']}</evidence>\n")
+                    f.write(f"\t</topic>\n")
+
                 else:     # clef
                     f.write(f"<query>\n")
                     f.write(f"\t\t<id>{topic_id}</id>\n")
@@ -188,7 +189,7 @@ def save_xml(topics, variants, filename, n):
                     f.write(
                         f"\t\t<narrative>{topics[topic_id]['narrative']}</narrative>\n")
                     f.write(
-                        f"\t\t<originaltitle>{topics[topic_id]['description']}</originaltitle>\n")
+                        f"\t\t<originaltitle>{topics[topic_id]['title']}</originaltitle>\n")
                     f.write(f"</query>\n")
 
             f.write("</queries>\n" if corpus == "clef" else "</topics>\n")
@@ -259,7 +260,7 @@ def ask_role_narrative_chain_of_thought():
         if user_role.lower() not in ["true", "false"] or user_narrative.lower() not in ["true", "false"] or user_chain_of_thought not in ["0", "1", "2"]:
             print("Invalid input. Please try again.")
         else:
-            return user_role, user_narrative, user_chain_of_thought
+            return user_role, user_narrative, int(user_chain_of_thought)
 
 
 def print_prompts():
@@ -381,7 +382,7 @@ def print_menu():
     print("3. variants - Generate query variants for one user-given query")
     print("4. all variants - Generate query variants for all queries in the chosen corpus")
     print("5. print - Print the prompts used for generation")
-    print("6. chat - Free chat with GPT-4")
+    print(f"6. chat - Free chat with {'GPT-4' if model=='gpt' else 'LLaMa3'}")
     print("7. quit - Exit the program")
 
 
@@ -399,6 +400,7 @@ def main():
             query = input("Enter the query: ")
             func = get_prompt_narrative_function(narrative_type)
             prompt = func(query)
+            print(prompt)
             response = chat_with_llm(client, prompt)
             print(response["response"])
 
@@ -410,6 +412,7 @@ def main():
             role, narrative, chain_of_thought = ask_role_narrative_chain_of_thought()
             prompt = get_prompt_query_variants(
                 query, role=role, narrative=narrative, chain_of_thought=chain_of_thought)
+            print(prompt)
             response = chat_with_llm(client, prompt)
             print(response["response"])
 
