@@ -38,11 +38,14 @@ def main():
     output_path = config["output_path"]
     dataset_name = config["dataset_name"]
     topics_file = config["topics_path"]
-    field = "question" if dataset_name == "C4-2022" else "description"
+    if dataset_name == "C4-2021" or dataset_name=="C4-2022":
+        field = "query"
+    else: 
+        field = "title"
 
     start_time = time.time()
     
-    searcher = SimpleSearcher(config["input_path"] + "/lucene_index")
+    searcher = SimpleSearcher(config["index_path"])
     print("Index loaded")
     print("=============")
 

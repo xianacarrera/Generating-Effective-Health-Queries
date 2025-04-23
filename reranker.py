@@ -39,11 +39,12 @@ def rerank(
         raise ValueError("Invalid reranker model")
     reranker = Rerank(model, batch_size=128)
 
-    # Re-rank the top 100 results using the reranker
+    # Re-rank the top 100 results
     print(f"Reranking top {top_k} results")
     reranked_results = reranker.rerank(corpus, queries, results, top_k=top_k)
     sorted_reranked_results = order_results(reranked_results)
     final_results = {}
+
     # Concatenate the reranked results with the full rank to get a list of 1000 results
     for qid, res in sorted_reranked_results.items():
         full_rank = list(results[qid].items())[top_k:]
@@ -79,6 +80,9 @@ if __name__ == "__main__":
     conf = bh.load_config(args.index, "RERANKER")
     rerank_model = conf["model_name"]
     rerank_model_training = conf["model_training"]    
+    llm_model = conf["llm_model"]          # gpt, llama 
+    dataset_name = conf["dataset_name"]    # misinfo-2020, C4-2021, C4-2022, CLEF
+    method = conf["method"]                # e.g., "orig_RC1"
 
     start = time.time()
 
@@ -103,10 +107,11 @@ if __name__ == "__main__":
     end = time.time()
     time_taken = end - start
 
-    full_name = f"rerank_bm25+{rerank_model}_{rerank_model_training}_top100"
-    if conf["clean"]:
-        full_name += "_cleanhtml"
-        conf["abbrev"] += "-clean"
+    model_name = rerank_model_training
+    if model_name.startswith("cross-encoder/ms-marco-"):
+        model_name = model_name[len("cross-encoder/ms-marco-"):]
+
+    full_name = f"{llm_model}_{dataset_name}_{model_name}_{method}"
 
     print(f"Logging results for {full_name}")
     print(f"Time taken: {timedelta(seconds=time_taken)}")

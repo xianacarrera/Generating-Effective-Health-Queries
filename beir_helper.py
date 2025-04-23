@@ -7,6 +7,7 @@ from datetime import timedelta
 from pathlib import Path
 
 
+
 def load_custom_data(
     corpus_path: str = "",
     query_path: str = "",
@@ -64,10 +65,8 @@ def clean_html_page(
 ):
     # Parse the content of the document
     soup = BeautifulSoup(text, "html.parser")
-    # Get the title of the document
     title = soup.title.string if soup.title else " "
 
-    # Check if the type of title is NoneType
     if type(title) == type(None):
         title = " "
 
@@ -77,10 +76,7 @@ def clean_html_page(
                                     "footer", "nav", "noscript", "link"]):
         script_or_style.decompose()
 
-    # Get the text of the document
     text = soup.get_text(separator="\n")
-
-    # Concatenate the title and text
     text = str(title + " " + text)
 
     # Encode the text to utf-8 and ignore any errors
@@ -110,6 +106,7 @@ def clean_html(
     print("HTML cleaned")
 
 
+
 def load_config(
     file_path: str = "config.ini",
     pr: str = "reranker"
@@ -136,23 +133,29 @@ def load_config(
         conf["model_name"] = parser[program]["MODEL_NAME"]
         conf["abbrev"] = parser[program]["MODEL_NAME"]
         conf["use_title"] = parser["SPARSE"]["USE_TITLE"]
-        conf["use_rm3"] = True if parser["SPARSE"]["USE_RM3"].upper() == "TRUE" else False
         if conf["use_title"] not in ["empty", "repeat", "none"]:
             print("Use_title not recognized")
             exit()
         conf["splade_training"] = parser["SPARSE"]["SPLADE_TRAINING"]
         conf["abbrev"] += f"_{parser['SPARSE']['SPLADE_TRAINING']}"
     elif program == "CORPUS_CREATOR":
-        conf["method"] = parser["CORPUS_CREATOR"]["METHOD"]
         conf["index_path"] = parser["CORPUS_CREATOR"]["INDEX_PATH"]
-        conf["use_rm3"] = True if parser["CORPUS_CREATOR"]["USE_RM3"].upper() == "TRUE" else False
     else:
         print("Type of program not recognized")
         exit()
 
+    conf["method"] = parser["META"]["METHOD"]
     conf["dataset_name"] = parser["META"]["DATASET_NAME"]
+    if conf["dataset_name"] not in ["misinfo-2020", "C4-2021", "C4-2022", "CLEF"]:
+        print("Dataset name not recognized")
+        exit()
+    
     conf["output_path"] = parser["META"]["OUTPUT_PATH"]
     conf["clean"] = True if parser["META"]["CLEAN_HTML"].upper() == "TRUE" else False
+    conf["llm_model"] = parser["META"]["LLM_MODEL"]
+    if conf["llm_model"] not in ["gpt", "llama"]:
+        print("LLM model not recognized")
+        exit()
 
     conf["query_path"] = parser["INDEX"]["QUERY_PATH"]
     conf["qrels_path"] = parser["INDEX"]["QRELS_PATH"]
@@ -186,6 +189,7 @@ def save_final_ranking(
     print("Final ranking saved")
 
 
+
 def log_results(
     conf: object,
     full_name: str,
@@ -208,7 +212,7 @@ def log_results(
            recall["Recall@10"], recall["Recall@100"], recall["Recall@1000"],
            ndcg["NDCG@10"], ndcg["NDCG@100"], ndcg["NDCG@1000"]]
 
-    with open("../beir_raw_stats_output.csv", 'a+', newline='') as f:
+    with open("./beir_stats_ouput.csv", 'a+', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(row)
         f.close()

@@ -108,7 +108,7 @@ def chat_with_llm(client, prompt):
 
             response_text = response.choices[0].message.content.strip()
             # tokens_used = response.usage.total_tokens
-        else:  # LLaMa3
+        else:  # LLaMA3
             response = ollama.chat(
                 model="llama3.1:8b-instruct-q8_0",
                 messages=[
@@ -382,7 +382,7 @@ def print_menu():
     print("3. variants - Generate query variants for one user-given query")
     print("4. all variants - Generate query variants for all queries in the chosen corpus")
     print("5. print - Print the prompts used for generation")
-    print(f"6. chat - Free chat with {'GPT-4' if model=='gpt' else 'LLaMa3'}")
+    print(f"6. chat - Free chat with {'GPT-4' if model=='gpt' else 'LLaMA3'}")
     print("7. quit - Exit the program")
 
 
@@ -523,7 +523,7 @@ if __name__ == "__main__":
     api_key = parser.get("OPENAI", "API_KEY")
     client = OpenAI(api_key=api_key)
 
-    # Ask whether to use gpt-4 or LLaMa3
+    # Ask whether to use gpt-4 or LLaMA3
     model = choose_model()
     # Ask the user for the corpus and topics type
     corpus, topics_type, topics_filename = choose_topics_filename()

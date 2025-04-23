@@ -11,20 +11,9 @@ import beir_helper as bh
 import time
 from datetime import timedelta
 
-def create_corpus(qid, query, searcher, write_dir, use_rm3 = False, tag = "BM25"):
-    # text = topic.find(field).text
-    # number = topic.find("number").text
-    # stance = topic.find("stance").text
-    if use_rm3:
-        searcher.set_rm3(10, 10, 0.5)
 
-        # Check that rm3 is being used
-        is_using_rm3 = searcher.is_using_rm3()
-        print(f'Using RM3: {is_using_rm3}')
-        if not is_using_rm3:
-            # Cancel the program
-            exit()
 
+def create_corpus(qid, query, searcher, write_dir, tag = "BM25"):
     print(query)
     hits = searcher.search(query, 1000)
 
@@ -44,7 +33,7 @@ def create_corpus(qid, query, searcher, write_dir, use_rm3 = False, tag = "BM25"
             f.write(hits[i].raw)
 
         print(f'Wrote doc_{count}.txt')
-        count +=1
+        count += 1
 
     return results
 
@@ -56,42 +45,59 @@ def main():
 
     config = bh.load_config(args.index, "CORPUS_CREATOR")
 
-    method = config["method"]
-    use_rm3 = config["use_rm3"]
+    method = config["method"]     # e.g., "orig_RC1"
 
     output_path = config["output_path"]
     topics_path = config["topics_path"]
-    dataset_name = config["dataset_name"]
-    field = "question" if dataset_name == "C4-2022" else "description"
+    dataset_name = config["dataset_name"]    # misinfo-2020, C4-2021, C4-2022, CLEF
+    llm_model = config["llm_model"]          # gpt, llama
+
+    # We will read the variants from the xml file, which are stored in the fields "description", "question" or "title"
+    if dataset_name == "C4-2022":
+        field = "question"
+    elif dataset_name == "CLEF":
+        field = "title"
+    else: 
+        field = "description"
+    
+    # To generate a top 1000 filter using BM25 and the original queries, use instead:
+    # if dataset_name == "C4-2021" or dataset_name=="C4-2022":
+    #     field = "query"
+    # else: 
+    #     field = "originaltitle"
+    
 
     start_time = time.time()
 
     searcher = SimpleSearcher(config["index_path"])
     print("Index loaded")
     print("=============")
+    
 
-    write_dir = f'{output_path}/index_{dataset_name}/field_{field}/method_{method}'
+    write_dir = f'{output_path}/index_{dataset_name}/method_{method}'
 
     all_results = []    
     with open(topics_path) as f:
         root = ET.parse(topics_path).getroot()
-        for topic in root.findall('topic'):
-            qid = topic.find("number").text
+        topic_tag = 'query' if dataset_name == "CLEF" else 'topic'
+        for topic in root.findall(topic_tag):
+            qid_tag = 'id' if dataset_name == "CLEF" else "number"
+            qid = topic.find(qid_tag).text
             query = topic.find(field).text
             Path(f'{write_dir}/query_{qid}').mkdir(parents=True, exist_ok=True)
 
-            results = create_corpus(qid, query, searcher, write_dir, use_rm3, method)
+            results = create_corpus(qid, query, searcher, write_dir, method)
             all_results.extend(results)
 
             df = pd.DataFrame(results)
             df.set_index('qid', inplace=True)
-            df.to_csv(f'{write_dir}/query_{qid}/res_{dataset_name}_{method}_{field}.csv', sep=' ', header=False)
+            df.to_csv(f'{write_dir}/query_{qid}/res_{dataset_name}_{method}.csv', sep=' ', header=False)
             print(f'Query {qid}: finished. Wrote res_{dataset_name}_{method}_{field}.csv')
 
     df_all = pd.DataFrame(all_results)
     df_all.set_index('qid', inplace=True)
-    df_all.to_csv(f'{write_dir}/all_res_{dataset_name}_{method}_{field}.csv', sep=' ', header=False)
-    print(f'Wrote combined results as all_res_{dataset_name}_{method}_{field}.csv')
+    df_all.to_csv(f'{write_dir}/{llm_model}_{dataset_name}_{method}.csv', sep=' ', header=False)
+    print(f'Wrote combined results as {llm_model}_{dataset_name}_{method}.csv')
 
     end_time = time.time()
     time_taken = end_time - start_time

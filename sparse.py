@@ -158,12 +158,11 @@ if __name__ == "__main__":
     print(f"Use_title before loading: {conf['use_title']}")
     # Load the pre-built corpus and BM25 results
     corpus, results = bh.load_BM25_corpus(queries, conf["input_path"], conf["res_file"])
-    #corpus, results = load_sparse_BM25_corpus(queries, conf["input_path"], conf["res_file"],
-    #                                            use_title=conf["use_title"])
 
+    
     if conf["clean"]:
-        bh.clean_html(corpus, conf["use_title"])
-        
+        bh.clean_html(corpus, conf['use_title'])
+
     # Evaluate using a dense model on top of the BM25 results
     ndcg, _map, recall, precision, results = evaluate_sparse(
         queries, corpus, results, model_name, conf["splade_training"])
@@ -171,7 +170,13 @@ if __name__ == "__main__":
     end = time.time()
     time_taken = end - start
 
-    full_name = f"sparse_bm25+{model_name}"
+    #full_name = f"sparse_bm25+{model_name}"
+    full_name = f"sparse_bm25+{model_name}_title"
+    
+    if model_name == "SPLADE":
+        full_name += f"_{conf['splade_training']}"
+
+
     if conf["clean"]:
         full_name += "_cleanhtml"
         conf["abbrev"] += "-clean"

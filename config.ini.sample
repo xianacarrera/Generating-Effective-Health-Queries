@@ -1,25 +1,32 @@
 [META]
-DATASET_NAME = misinfo-2020                               # Dataset to use: c4, misinfo-2020
-OUTPUT_PATH = /path_to_output/                            # Path to save the results
-CLEAN_HTML = True                                         # Remove HTML tags from the documents (True/False)
+DATASET_NAME = misinfo-2020
+OUTPUT_PATH = /mnt/beegfs/home/xiana.carrera/misinfo-2020
+CLEAN_HTML = True
+LLM_MODEL = gpt
+METHOD = bm25_RNC1_1
 
-[INDEX]    # Question - full, Query - keywords
-QUERY_PATH = /query_path/queries.jsonl                                   # Path to the queries
-QRELS_PATH = /qrels_path/misinfo-qrels.binary-useful-correct.tsv         # Path to the qrels
-INPUT_PATH = /path_to_bm25_top1k/method_bm25                             # Path to the folder with the files of the top 1K documents for each query
-RES_FILE = res_misinfo-2020_bm25_description.csv                         # Name of the files that contain the top 1K documents for each query (retrieved by BM25, BM25+RM3, etc.)
-INDEX_PATH = /path_to_index/misinfo-2020                                 # Path to the index (used for direct search in the full index)
+[INDEX]
+INPUT_PATH = /custom_indexes/index_misinfo-2020/method_bm25
+QUERY_PATH = /mnt/beegfs/home/xiana.carrera/misinfo-2020/TREC_2020_BEIR/query_vars_T07/title/gen_narr_trec_role_narrative_chainofth1/gen_narr_trec_role_narrative_chainofth1_1.jsonl 
+QRELS_PATH = /mnt/beegfs/home/xiana.carrera/misinfo-2020/TREC_2020_BEIR/qrels/misinfo-qrels-binary.useful.tsv
+TOPICS_PATH = /mnt/beegfs/home/xiana.carrera/misinfo-2020/TREC_2020_BEIR/query_vars_T07/title/gen_narr_trec_role_narrative_chainofth1/gen_narr_trec_role_narrative_chainofth1_1.xml
+RES_FILE = res_misinfo-2020_bm25_title.csv 
+
+[CORPUS_CREATOR]
+INDEX_PATH = /indexes/misinfo-2020
 
 [SPARSE]
-MODEL_NAME = SPARTA                                                     # Name of the model
-SPLADE_TRAINING = naver/splade_v2_distil                                # Training data if the model is SPLADE (try naver/splade_v2_distil, naver/splade_v2_max)
-USE_TITLE = empty                                                       # repeat - extract the title and add it separately, empty - add an empty title, none - do not add a title
+MODEL_NAME = SPLADE
+SPLADE_TRAINING = naver/splade_v2_distil
+USE_TITLE = empty
 
 [DENSE]
-MODEL_NAME = msmarco-roberta-base-ance-firstp                           # Name of the model
-SCORE_FUNCTION = dot                                                    # cosine or dot
+MODEL_NAME = msmarco-roberta-base-ance-firstp
+SCORE_FUNCTION = dot
 
 [RERANKER]
-MODEL_NAME = MonoT5                                                     # Name of the model             
-TRAINING = castorini/monot5-base-msmarco                                # Training data
+MODEL_NAME = cross-encoder
+TRAINING = cross-encoder/ms-marco-MiniLM-L-12-v2
 
+[OPENAI]
+API_KEY = openaikey

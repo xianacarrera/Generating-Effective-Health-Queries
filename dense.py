@@ -98,7 +98,8 @@ if __name__ == "__main__":
     end = time.time()
     time_taken = end - start
 
-    full_name = f"dense_bm25+{model_name}_{score_function}"
+    #full_name = f"dense_bm25+{model_name}_{score_function}"
+    full_name = f"dense_bm25+{model_name}_{score_function}_title"
     if conf["clean"]:
         full_name += "_cleanhtml"
         conf["abbrev"] += "-clean"
