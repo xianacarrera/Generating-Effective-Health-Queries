@@ -76,6 +76,7 @@ if __name__ == "__main__":
     conf = bh.load_config(args.index, "DENSE")
     model_name = conf["model_name"]
     score_function = conf["score_function"]    
+    dataset_name = conf["dataset_name"]    # misinfo-2020, C4-2021, C4-2022, CLEF
 
     start = time.time()
 
@@ -98,11 +99,7 @@ if __name__ == "__main__":
     end = time.time()
     time_taken = end - start
 
-    #full_name = f"dense_bm25+{model_name}_{score_function}"
-    full_name = f"dense_bm25+{model_name}_{score_function}_title"
-    if conf["clean"]:
-        full_name += "_cleanhtml"
-        conf["abbrev"] += "-clean"
+    full_name = f"dense_{dataset_name}_{model_name}_{score_function}"
 
     print(f"Logging results for {full_name}")
     print(f"Time taken: {timedelta(seconds=time_taken)}")

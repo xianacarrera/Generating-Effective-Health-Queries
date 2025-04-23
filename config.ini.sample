@@ -1,16 +1,16 @@
 [META]
 DATASET_NAME = misinfo-2020
-OUTPUT_PATH = /mnt/beegfs/home/xiana.carrera/misinfo-2020
+OUTPUT_PATH = ./outputs
 CLEAN_HTML = True
 LLM_MODEL = gpt
 METHOD = bm25_RNC1_1
 
 [INDEX]
 INPUT_PATH = /custom_indexes/index_misinfo-2020/method_bm25
-QUERY_PATH = /mnt/beegfs/home/xiana.carrera/misinfo-2020/TREC_2020_BEIR/query_vars_T07/title/gen_narr_trec_role_narrative_chainofth1/gen_narr_trec_role_narrative_chainofth1_1.jsonl 
-QRELS_PATH = /mnt/beegfs/home/xiana.carrera/misinfo-2020/TREC_2020_BEIR/qrels/misinfo-qrels-binary.useful.tsv
-TOPICS_PATH = /mnt/beegfs/home/xiana.carrera/misinfo-2020/TREC_2020_BEIR/query_vars_T07/title/gen_narr_trec_role_narrative_chainofth1/gen_narr_trec_role_narrative_chainofth1_1.xml
-RES_FILE = res_misinfo-2020_bm25_title.csv 
+QUERY_PATH = ./TREC_2020_BEIR/query_vars_T07/title/gen_narr_trec_role_narrative_chainofth1/gen_narr_trec_role_narrative_chainofth1_1.jsonl 
+QRELS_PATH = ./TREC_2020_BEIR/qrels/misinfo-qrels-binary.useful.tsv
+TOPICS_PATH = ./TREC_2020_BEIR/query_vars_T07/title/gen_narr_trec_role_narrative_chainofth1/gen_narr_trec_role_narrative_chainofth1_1.xml
+RES_FILE = misinfo-2020_bm25.csv 
 
 [CORPUS_CREATOR]
 INDEX_PATH = /indexes/misinfo-2020

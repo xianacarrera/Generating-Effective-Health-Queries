@@ -32,7 +32,8 @@ def main():
     parser.add_argument("index", type=str, help="Index to load configuration from")
     args = parser.parse_args()
 
-    config = bh.load_config(args.index, "SPARSE")
+    # Reuse the same config as in the corpus creator
+    config = bh.load_config(args.index, "CORPUS_CREATOR")
 
     method = "bm25"
     output_path = config["output_path"]

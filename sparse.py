@@ -120,7 +120,6 @@ def evaluate_sparse(
         retriever = EvaluateRetrieval(sparse_model, score_function="dot")
         results = retriever.retrieve(corpus, queries, query_weights=True)
     elif model_name == "SPLADE":
-        # Only works with agg="max"
         model = DRES(models.SPLADE(splade_path), batch_size=128)
         retriever = EvaluateRetrieval(model, score_function="dot")
         results = retriever.retrieve(corpus, queries)
@@ -176,11 +175,6 @@ if __name__ == "__main__":
     if model_name == "SPLADE":
         full_name += f"_{conf['splade_training']}"
 
-
-    if conf["clean"]:
-        full_name += "_cleanhtml"
-        conf["abbrev"] += "-clean"
-    
 
     print(f"Use_title after loading: {conf['use_title']}")
     if conf["use_title"] == "empty" or conf["use_title"] == "repeat":

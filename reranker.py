@@ -111,7 +111,10 @@ if __name__ == "__main__":
     if model_name.startswith("cross-encoder/ms-marco-"):
         model_name = model_name[len("cross-encoder/ms-marco-"):]
 
-    full_name = f"{llm_model}_{dataset_name}_{model_name}_{method}"
+    if llm_model != "":
+        full_name = f"{llm_model}_{dataset_name}_{model_name}_{method}"
+    else:
+        full_name = f"{dataset_name}_{model_name}_{method}"
 
     print(f"Logging results for {full_name}")
     print(f"Time taken: {timedelta(seconds=time_taken)}")

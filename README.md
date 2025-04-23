@@ -29,9 +29,29 @@ conda activate healquery
 # conda activate new-env-name
 ```
 
-
-
 This project runs on a modified version of the [BEIR](https://github.com/beir-cellar/beir/) library, in order to be able to evaluate different models on custom datasets without the need of explicitely providing a corpus file. This both streamlines the evaluation process and allows to test models on corpus of big size such as the ones used in this project.
+
+### LLMs
+
+The `llm_connector.py` script can be run using one of two LLMs: GPT-4 (more precisely, GPT-4o) or LLaMA3 (llama3.1:8b-instruct-q8_0). 
+
+To use GPT-4, a valid OpenAI API key must be provided in the configuration file.
+
+To use LLaMA3, a local installation of Ollama is required. On Linux systems, Ollama may be installed by running the following command:
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+Installation instructions for other operating systems are available on the [official download page](https://ollama.com/download).
+
+Once installed, the [llama3.1:8b-instruct-q8_0](https://ollama.com/library/llama3:8b-instruct-q8_0) model can be downloaded and tested from the command line using:
+
+```bash
+ollama pull llama3:8b-instruct-q8_0
+ollama run llama3:8b-instruct-q8_0
+```
+
 
 ## Generation resources
 
@@ -54,3 +74,7 @@ With the non-deterministic nature of LLMs in mind, for transparency and reproduc
 
 ## Contact
 For any questions or issues, feel free to reach out at [xiana.carrera@rai.usc.es](mailto:xiana.carrera@rai.usc.es).
+
+
+## Acknowledgements
+This project was funded by MICIU/AEI/10.13039/501100011033 (PID2022-137061OB-C22, supported by ERDF) and Xunta de Galicia-Consellería de Cultura, Educación, Formación Profesional e Universidades (ED431G 2023/04, ED431C 2022/19, supported by ERDF).

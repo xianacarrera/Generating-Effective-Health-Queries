@@ -153,9 +153,6 @@ def load_config(
     conf["output_path"] = parser["META"]["OUTPUT_PATH"]
     conf["clean"] = True if parser["META"]["CLEAN_HTML"].upper() == "TRUE" else False
     conf["llm_model"] = parser["META"]["LLM_MODEL"]
-    if conf["llm_model"] not in ["gpt", "llama"]:
-        print("LLM model not recognized")
-        exit()
 
     conf["query_path"] = parser["INDEX"]["QUERY_PATH"]
     conf["qrels_path"] = parser["INDEX"]["QRELS_PATH"]
@@ -212,7 +209,7 @@ def log_results(
            recall["Recall@10"], recall["Recall@100"], recall["Recall@1000"],
            ndcg["NDCG@10"], ndcg["NDCG@100"], ndcg["NDCG@1000"]]
 
-    with open("./beir_stats_ouput.csv", 'a+', newline='') as f:
+    with open("./beir_stats_output.csv", 'a+', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(row)
         f.close()
