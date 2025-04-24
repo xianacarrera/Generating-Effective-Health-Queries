@@ -1,32 +1,51 @@
 [META]
+# Name of the dataset being used
 DATASET_NAME = misinfo-2020
+# Directory where output files such as document rankings will be stored
 OUTPUT_PATH = ./outputs
+# Whether to remove headers and other extra tags from documents, using only the main text, or not
 CLEAN_HTML = True
+# Llm used for prompt generation (gpt, llama)
 LLM_MODEL = gpt
+# Descriptive tag that will be used to identify results such as the output files
 METHOD = bm25_RNC1_1
 
 [INDEX]
+# Path to the filtered corpus with 1000 documents for each query
 INPUT_PATH = /custom_indexes/index_misinfo-2020/method_bm25
+# Path to the queries in jsonl format
 QUERY_PATH = ./TREC_2020_BEIR/query_vars_T07/title/gen_narr_trec_role_narrative_chainofth1/gen_narr_trec_role_narrative_chainofth1_1.jsonl 
+# Path to the relevance judgments file
 QRELS_PATH = ./TREC_2020_BEIR/qrels/misinfo-qrels-binary.useful.tsv
+# Path to the queries in xml format
 TOPICS_PATH = ./TREC_2020_BEIR/query_vars_T07/title/gen_narr_trec_role_narrative_chainofth1/gen_narr_trec_role_narrative_chainofth1_1.xml
+# Filename of the ranking produced by bm25_corpus_creator.py or docT5query_corpus_creator.py for each query
 RES_FILE = misinfo-2020_bm25.csv 
 
 [CORPUS_CREATOR]
+# Path to the lucene index of the full corpus
 INDEX_PATH = /indexes/misinfo-2020
 
 [SPARSE]
+# SPLADE/uniCOIL/SPARTA
 MODEL_NAME = SPLADE
+# Identifier of the SPLADE model checkpoint to select (only used when MODEL_NAME = SPLADE)
 SPLADE_TRAINING = naver/splade_v2_distil
+# none/repeat/empty -> when cleaning the HTML, whether to use once, twice or eliminate the title of the document
 USE_TITLE = empty
 
 [DENSE]
+# msmarco-distilbert-base-tas-b/msmarco-roberta-base-ance-firstp/DPR
 MODEL_NAME = msmarco-roberta-base-ance-firstp
+# dot/cosine (note that some dense models should be used with a specific score function)
 SCORE_FUNCTION = dot
 
 [RERANKER]
+# cross-encoder or MonoT5
 MODEL_NAME = cross-encoder
+# Specific reranker model
 TRAINING = cross-encoder/ms-marco-MiniLM-L-12-v2
 
 [OPENAI]
+# OpenAI key
 API_KEY = openaikey

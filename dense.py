@@ -33,8 +33,6 @@ def evaluate_dense(
             "facebook-dpr-question_encoder-multiset-base",
             "facebook-dpr-ctx_encoder-multiset-base",
             " [SEP] "), batch_size=128))
-    elif model_name == "use-qa":
-        model = DRES(models.UseQA("https://tfhub.dev/google/universal-sentence-encoder-qa/3"))
     else:
         raise ValueError("Invalid model name")
 

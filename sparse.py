@@ -123,7 +123,8 @@ def evaluate_sparse(
         model = DRES(models.SPLADE(splade_path), batch_size=128)
         retriever = EvaluateRetrieval(model, score_function="dot")
         results = retriever.retrieve(corpus, queries)
-
+    else:
+        raise ValueError("Invalid model name")
 
     logging.info("Retriever evaluation for k in: {}".format(
         retriever.k_values))
